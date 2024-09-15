@@ -112,4 +112,4 @@ test = [[1,2,3,4],[3,4,5,6],[4,5,6,7], [5,6,7,8]]
 
 test1 = [[1 for col in range(4)] for row in range(3)]
 
-print(test1)
+#print(test1)
