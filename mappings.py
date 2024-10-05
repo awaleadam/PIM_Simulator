@@ -107,9 +107,53 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
 
 
 
-test = [[1,2,3,4],[3,4,5,6],[4,5,6,7], [5,6,7,8]]
+
+def makeMatrix(x,y):
+    return [[1 for col in range(x)] for row in range(y)] #generating matrix of data
 
 
-test1 = [[1 for col in range(4)] for row in range(3)]
+test1 = makeMatrix(11,4)
+print(test1)
 
-#print(test1)
+def transpose(list_of_lists):
+    # Use zip and unpacking (*) to transpose the list of lists
+    return [list(row) for row in zip(*list_of_lists)]
+
+# Sample list of lists (matrix)
+list_of_lists = [
+    [1, 2, 3,10,11,12],
+    [4, 5, 6,13,14,15],
+    [7, 8, 9,16,17,18]
+]
+
+# Transpose the matrix
+transposed_matrix = transpose(list_of_lists)
+
+# Display the result
+print(transposed_matrix)
+
+
+def partition_each_row_grouped(list_of_lists, tile_width):
+    # Create a list to store the grouped row tiles
+    grouped_tiles = []
+    
+    # Iterate through each row and partition it into tiles of width `tile_width`
+    for row in list_of_lists:
+        # Partition the row into sublists (tiles)
+        row_tiles = [row[i:i + tile_width] for i in range(0, len(row), tile_width)]
+        # Append the tiles for this row as a grouped sublist
+        grouped_tiles.append(row_tiles)
+    
+    return grouped_tiles
+
+# Sample list of lists (matrix) with dimensions 2x3
+list_of_lists = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+# Partition each row into tiles of width 2
+grouped_tiles = partition_each_row_grouped(test1, 3)
+
+# Display the result
+print(grouped_tiles)
