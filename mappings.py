@@ -109,7 +109,7 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
 
 
 def makeMatrix(x,y):
-    return [[1 for col in range(x)] for row in range(y)] #generating matrix of data
+    return [[0 for col in range(x)] for row in range(y)] #generating matrix of data
 
 
 test1 = makeMatrix(11,4)
@@ -130,7 +130,7 @@ list_of_lists = [
 transposed_matrix = transpose(list_of_lists)
 
 # Display the result
-print(transposed_matrix)
+#print(transposed_matrix)
 
 
 def partition_each_row_grouped(list_of_lists, tile_width):
@@ -153,7 +153,12 @@ list_of_lists = [
 ]
 
 # Partition each row into tiles of width 2
-grouped_tiles = partition_each_row_grouped(test1, 3)
+grouped_tiles = partition_each_row_grouped(test1, 8)
 
 # Display the result
-print(grouped_tiles)
+print(grouped_tiles , "here")
+
+for rows in grouped_tiles:
+    print(rows,"ROW")
+    for tiles in rows:
+        print(tiles,"Tile")
