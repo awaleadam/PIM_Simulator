@@ -10,7 +10,7 @@ def analyticalDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     r2_map = math.ceil(r2/pu_width)
     c2_map  = math.ceil(c2/pu_width)
 
-    
+    print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
     activates = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
     gb_latencies = math.ceil(r1_map/banks)*math.ceil(r2_map/(min(gb_map,dram_map)))*c2_map
     gb_writes = math.ceil(r1/banks)*r2*c2
@@ -59,6 +59,8 @@ def analyticalGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     c2_map  = math.ceil(c2/pu_width)
 
     
+    print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
+
     activates = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
     gb_latencies = math.ceil(r2_map/gb_map)*c2_map
     gb_writes = r2*c2
