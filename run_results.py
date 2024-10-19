@@ -32,25 +32,29 @@ def newton_software():
     #iterate through software params
 
 
-    m1_r1 = [1,20,50,1000,5000,10000,50000,100000,500000]
-    c1__r2 = [1,20,50,1000,5000,10000,50000,100000,500000]
-    m2_c2 = [1,20,50,1000,5000,10000,50000,100000,500000]
+    m1_r1 = [1,20,50,1000,5000,10000]#,50000,100000,500000]
+    c1__r2 = [1,20,50,1000,5000,10000]#,50000,100000,500000]
+    m2_c2 = [1,20,50,1000,5000,10000]#,50000,100000,500000]
 
     ls_set = []
 
     for i in m1_r1:
         for j in c1__r2:
             for k in m2_c2:
-                #a = mappings.analyticalDramReuseCol(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
+                a = mappings.analyticalDramReuseCol(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
                 b = mappings.analyticalDramReuseRow(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
                 c = mappings.analyticalGBReuseCol(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
-                #d = mappings.analyticalGBReuseRow(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
-                ls_set.append([b,c])
-                #ls_set.append([a,b,c,d])
-                if b > c:
-                    print("LOOK:",i,j,k)
-                else:
-                    print("Here",i,j,k)
+                d = mappings.analyticalGBReuseRow(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
+                #ls_set.append([b,c])
+                ls_set.append([a,b,c,d])
+                if max(a,b,c,d) == a:
+                    print("DRAM COL:",i,j,k)
+                elif max(a,b,c,d) == b:
+                    print("DRAM ROW",i,j,k)
+                elif max(a,b,c,d) == c:
+                    print("GB COL",i,j,k)
+                elif max(a,b,c,d) == d:
+                    print("GB ROW",i,j,k)
 
     count_index_0 = 0
     count_index_1 = 0
