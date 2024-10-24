@@ -38,6 +38,7 @@ def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     r2_map = math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
+    #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
     
     activates = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
     gb_latencies = math.ceil(c2_map/banks)*math.ceil(c1_map/(min(gb_map,dram_map)))*r1_map
@@ -46,6 +47,8 @@ def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     dram_latencies = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
     compute_pus = math.ceil(c2_map/banks)*r1_map*c1_map
     read_dram = math.ceil(c2_map/banks)*math.ceil(c1_map/(min(gb_map,dram_map)))*r1_map
+
+    #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
 
@@ -88,7 +91,7 @@ def analyticalGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     r2_map = math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
-    print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
+    #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
 
 
     activates = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)*r1_map
@@ -101,7 +104,7 @@ def analyticalGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
 
-    print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
+    #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 
 
     return total_cycles
@@ -112,13 +115,15 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
-    r1_map = math.ceil(r1/pu_width)
+    r1_map = r1#math.ceil(r1/pu_width)
     c1_map = math.ceil(c1/pu_width)
     r2_map = math.ceil(r2/pu_width)
-    c2_map  = math.ceil(c2/pu_width)
+    c2_map  = c2#math.ceil(c2/pu_width)
     commandsLs = []
 
+    m1 = makeMatrix(r1,c1)
 
+    m2 = makeMatrix(r2,c2)
 
 
 def makeMatrix(x,y):
@@ -166,12 +171,13 @@ list_of_lists = [
 ]
 
 # Partition each row into tiles of width 2
-grouped_tiles = partition_each_row_grouped(test1, 8)
+grouped_tiles = partition_each_row_grouped(test1, 2)
 
 # Display the result
 print(grouped_tiles , "here")
 
-for rows in grouped_tiles:
-    print(rows,"ROW")
-    for tiles in rows:
-        print(tiles,"Tile")
+for row in range(len(grouped_tiles)):
+    #print(rows,"ROW")
+    print(grouped_tiles[row],"Row")
+    for tile in range(len(grouped_tiles[row])):
+        print(grouped_tiles[row][tile],"Tile")

@@ -17,7 +17,7 @@ def newton_software():
 
     newton_t_read_mac = 10
 
-    newton_t_act = 30
+    newton_t_act = 100
 
     newton_t_write = 2
 
@@ -32,9 +32,25 @@ def newton_software():
     #iterate through software params
 
 
-    m1_r1 = [1,20,50,1000,5000,10000]#,50000,100000,500000]
-    c1__r2 = [1,20,50,1000,5000,10000]#,50000,100000,500000]
-    m2_c2 = [1,20,50,1000,5000,10000]#,50000,100000,500000]
+    m1_r1 = [1,20,50,1000,5000,10000,50000,100000,500000]
+    c1__r2 = [1,20,50,1000,5000,10000,50000,100000,500000]
+    m2_c2 = [1,20,50,1000,5000,10000,50000,100000,500000]
+
+
+    #m1_r1 = list(range(5000,10001,100))
+    #c1__r2 = list(range(5000,10001,100))
+    #m2_c2  = list(range(5000,10001,100))
+
+
+    #m1_r1 = list(range(1,4001,100))
+    #c1__r2 = list(range(1,4001,100))
+    #m2_c2  = list(range(1,4001,100))
+
+    total_count=0
+    count_a=0
+    count_b=0
+    count_c=0
+    count_d=0
 
     ls_set = []
 
@@ -47,6 +63,7 @@ def newton_software():
                 d = mappings.analyticalGBReuseRow(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
                 #ls_set.append([b,c])
                 ls_set.append([a,b,c,d])
+                '''
                 if max(a,b,c,d) == a:
                     print("DRAM COL:",i,j,k)
                 elif max(a,b,c,d) == b:
@@ -56,6 +73,38 @@ def newton_software():
                 elif max(a,b,c,d) == d:
                     print("GB ROW",i,j,k)
 
+                if a == b:
+                    print(i,j,k,"SAME DRAM")
+                if c == d:
+                    print(i,j,k,"SAME GB")
+
+                if a and b > 10000000000:
+                    print(i,j,k,"VALUES")
+                    print(a,b,"DRAM cycles")
+                    print(c,d,"GB cycles")
+'''             
+
+                if max(a,b,c,d) == a:
+                    print("DRAM COL:",i,j,k)
+                    count_a+=1
+                elif max(a,b,c,d) == b:
+                    print("DRAM ROW",i,j,k)
+                    count_b+=1
+                elif max(a,b,c,d) == c:
+                    print("GB COL",i,j,k)
+                    count_c+=1
+                elif max(a,b,c,d) == d:
+                    print("GB ROW",i,j,k)
+                    count_d+=1
+
+                total_count+=1
+
+    
+    print("Count of DRAM Col is: ",count_a, "Percentage is: ", count_a/total_count)
+    print("Count of DRAM Row is: ",count_b, "Percentage is: ", count_b/total_count)
+    print("Count of GB Col is: ",count_c, "Percentage is: ", count_c/total_count)
+    print("Count of GB Row is: ",count_d, "Percentage is: ", count_d/total_count)
+    print("Total Count is: ",total_count)
     count_index_0 = 0
     count_index_1 = 0
     count_index_2 = 0
@@ -79,6 +128,7 @@ def newton_software():
     print(f"DRAM Reuse Row Best Mapping Rate: {count_index_1/len(ls_set)}")
     print(f"GB Reuse Col Best Mapping Rate: {count_index_2/len(ls_set)}")
     print(f"GB Reuse Row Best Mapping Rate: {count_index_3/len(ls_set)}")
+    print("Total length: ",len(ls_set))
 
 
 
