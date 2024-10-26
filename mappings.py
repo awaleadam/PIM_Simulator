@@ -153,8 +153,22 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
 
     for m1_row in range(len(m1_tiled)):
         print(m1_row)
+        
+        
+        for dram_tile in range(len(m1_dram_write_tiled)[m1_row]):
+            if(m1_dram_write_tiled[m1_row][dram_tile][0] == 0):
+                dram_write_latency_count+=1
+
+                for dram_value in range(len(m1_dram_write_tiled)):
+                    m1_dram_write_tiled[m1_row][dram_tile][dram_value] = 1
+                    dram_write_count+=1
+
         for m1_tile in range(len(m1_tiled[m1_row])):
+            activate_count+=1
             print(m1_tile)
+
+            for m2_row in range(len(m2_tiled)):
+                print(m2_row)
 
 def makeMatrix(x,y):
     return [[0 for col in range(y)] for row in range(x)] #generating matrix of data
