@@ -131,7 +131,7 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
     c2_map  = c2#math.ceil(c2/pu_width)
     commandsLs = []
 
-
+    print("DRAM Map: ", dram_map, "GB Map: ", gb_map)
 
     assert c1 == r2, "Incompatabile dimensions for matrix multiplication"
 
@@ -151,24 +151,46 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
 
     assert len(m1_tiled) == len(m1_dram_write_tiled), "# of Rows of different tilings of same Matrix are not the same"
 
-    for m1_row in range(len(m1_tiled)):
-        print(m1_row)
-        
-        
-        for dram_tile in range(len(m1_dram_write_tiled)[m1_row]):
-            if(m1_dram_write_tiled[m1_row][dram_tile][0] == 0):
-                dram_write_latency_count+=1
 
-                for dram_value in range(len(m1_dram_write_tiled)):
+    #Idea for every tile we will calculate all the values for it for every row 
+
+    #get the number of writes 
+
+    for m1_row in range(0,len(m1_tiled),banks):#Going through all the rows in DRAM in parallel with the number of banks
+        #print(m1_row)
+        
+        print(m1_tiled[m1_row],"Row")
+        rows_grouped = m1_tiled[m1_row:m1_row+banks]
+        print("Grouped rows",rows_grouped)
+
+        for dram_tile in range(len(m1_dram_write_tiled[m1_row])):#Writing the values into DRAM
+            if(m1_dram_write_tiled[m1_row][dram_tile][0] == 0):#If the value is not written to yet
+                dram_write_latency_count+=1#Write latency for writing the row
+
+                for dram_value in range(len(m1_dram_write_tiled[m1_row][dram_tile])):#Write the entire row with values
                     m1_dram_write_tiled[m1_row][dram_tile][dram_value] = 1
                     dram_write_count+=1
+                    commandsLs.append("DRAM Write all Activated")#Generating Write Command
 
-        for m1_tile in range(len(m1_tiled[m1_row])):
-            activate_count+=1
+        for m1_tile in range(len(m1_tiled[m1_row])):#After writing iterate through matrix on MIN size of DRAM and GB
+            activate_count+=1#activation of row
             print(m1_tile)
 
             for m2_row in range(len(m2_tiled)):
-                print(m2_row)
+                assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
+                assert len(m1_tile[m1_row][m1_tile]) == len(m2_tiled[m2_row][m1_tile]), "Dimensions of tiles are not matching"
+                print("Tiles of M2", m2_tiled[m2_row][m1_tile])
+                pu_count = 0
+                for value in range(len(m2_tiled[m2_row][m1_tile])):
+                    if pu_count == pu_width:
+                        compute_pu_count+=1 
+                        pu_count = 0
+                if pu_count != 0:
+                    compute_pu_count+=1
+
+
+    print("# Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
+
 
 def makeMatrix(x,y):
     return [[0 for col in range(y)] for row in range(x)] #generating matrix of data
@@ -253,25 +275,28 @@ gb_write_count = 0
 
 compute_pu_count = 0
 
-for row in range(len(grouped_tiles)):
-    #print(rows,"ROW")
+for row in range(0,len(grouped_tiles),3):
+    print(row,"ROW")
     print(grouped_tiles[row],"Row")
-
+    rows_grouped = grouped_tiles[row:row+3]
+    print("Grouped rows",rows_grouped)
     #write values into the DRAM row after activated 
 
 
     for tile in range(len(grouped_tiles[row])):
         activate_count+=1 
         dram_write_latency_count+=1        
-        print(grouped_tiles[row][tile],"Tile")
+        print(grouped_tiles[row][tile],"Tile of M1")
         tile_length = len(grouped_tiles[row][tile])
 
         for row2 in range(len(grouped_2)):
-            print(grouped_2[row2]," Row of 2nd Mat")
-
-        for value in range(len(grouped_tiles[row][tile])):
-            print(grouped_tiles[row][tile][value],"VALUE")
-            if(grouped_tiles[row][tile][value] == 0):
-                grouped_tiles[row][tile][value] = 1
-                print(grouped_tiles[row][tile][value],"VALUE WRITE")
+            #print(grouped_2[row2]," Row of 2nd Mat")
+            assert len(grouped_tiles[row]) == len(grouped_2[row2]), "Number of tiles of matrices are not matching"
+            assert len(grouped_tiles[row][tile]) == len(grouped_2[row2][tile]), "Dimensions of Tiles are not matching"
+            print("Tiles of M2", grouped_2[row2][tile])
+            for value in range(len(grouped_tiles[row][tile])):
+                print(grouped_2[row2][tile][value],"VALUE")
+                if(grouped_tiles[row][tile][value] == 0):
+                    grouped_tiles[row][tile][value] = 1
+                    #print(grouped_tiles[row][tile][value],"VALUE WRITE")
 
