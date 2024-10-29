@@ -159,9 +159,9 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
     for m1_row in range(0,len(m1_tiled),banks):#Going through all the rows in DRAM in parallel with the number of banks
         #print(m1_row)
         
-        print(m1_tiled[m1_row],"Row")
+        #print(m1_tiled[m1_row],"Row")
         rows_grouped = m1_tiled[m1_row:m1_row+banks]
-        print("Grouped rows",rows_grouped)
+        #print("Grouped rows",rows_grouped)
 
         for dram_tile in range(len(m1_dram_write_tiled[m1_row])):#Writing the values into DRAM
             if(m1_dram_write_tiled[m1_row][dram_tile][0] == 0):#If the value is not written to yet
@@ -174,19 +174,33 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
 
         for m1_tile in range(len(m1_tiled[m1_row])):#After writing iterate through matrix on MIN size of DRAM and GB
             activate_count+=1#activation of row
-            print(m1_tile)
+            commandsLs.append("Activate Row ALL")
+            #print(m1_tile)
 
-            for m2_row in range(len(m2_tiled)):
+            for m2_row in range(len(m2_tiled)):#for every tile iterate through all the rows in M2 for that tile
                 assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
-                assert len(m1_tile[m1_row][m1_tile]) == len(m2_tiled[m2_row][m1_tile]), "Dimensions of tiles are not matching"
-                print("Tiles of M2", m2_tiled[m2_row][m1_tile])
+                assert len(m1_tiled[m1_row][m1_tile]) == len(m2_tiled[m2_row][m1_tile]), "Dimensions of tiles are not matching"
+                #print("Tiles of M2", m2_tiled[m2_row][m1_tile])
                 pu_count = 0
-                for value in range(len(m2_tiled[m2_row][m1_tile])):
+
+                #Start the writing to a GB
+                gb_write_latency_count += 1
+
+                for value in range(len(m2_tiled[m2_row][m1_tile])):#For every value in the tile 
+                    m2_tiled[m2_row][m1_tile][value] = 1#Write the value to GB
+                    gb_write_count +=1#Increment count
+                    commandsLs.append("Write GB")
                     if pu_count == pu_width:
-                        compute_pu_count+=1 
+                        compute_pu_count+=1 #Once the values are equal to width of the PU Send them into the compute unit
                         pu_count = 0
+                        commandsLs.append("Compute PU ALL")
                 if pu_count != 0:
                     compute_pu_count+=1
+                    pu_count = 0 
+                    commandsLs.append("Compute PU ALL")#
+
+                dram_read_count+=1 #Read the accumulated values from DRAM
+                commandsLs.append("Read DRAM ALL")
 
 
     print("# Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
