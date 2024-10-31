@@ -5,18 +5,26 @@ def analyticalDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
+    #dram_map = math.ceil(dram_size/(bitwidth))
+    #gb_map = math.ceil(gb_size/(bitwidth))
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
-    activates = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
+    
+    
+    activates = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)#Optimisitc assumptions for this
+
+    #activates = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks) #Updated assumption
+
     gb_latencies = math.ceil(r1_map/banks)*math.ceil(r2_map/(min(gb_map,dram_map)))*c2_map
     gb_writes = math.ceil(r1/banks)*r2*c2
     dram_writes = math.ceil(r1/banks)*c1 
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
-    compute_pus = math.ceil(r1_map/banks)*c1_map*c2_map
+    compute_pus = math.ceil(r1_map/banks)*math.ceil(c1_map/pu_width)*c2_map
     read_dram = math.ceil(r1_map/banks)*c2_map*math.ceil(r2_map/(min(gb_map,dram_map)))
     #read_dram = math.ceil(r1_map/banks)*math.ceil(r2_map/(min(gb_map,dram_map)))
 
@@ -33,9 +41,12 @@ def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
     
+    #dram_map = math.ceil(dram_size/(bitwidth))
+    #gb_map = math.ceil(gb_size/(bitwidth))
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
@@ -45,7 +56,7 @@ def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     gb_writes = math.ceil(c2/banks)*r1*c1
     dram_writes = math.ceil(c2/banks)*r2
     dram_latencies = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
-    compute_pus = math.ceil(c2_map/banks)*r1_map*c1_map
+    compute_pus = math.ceil(c2_map/banks)*r1_map*math.ceil(c1_map/pu_width)
     read_dram = math.ceil(c2_map/banks)*math.ceil(c1_map/(min(gb_map,dram_map)))*r1_map
 
     #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
@@ -60,9 +71,13 @@ def analyticalGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
+
+    #dram_map = math.ceil(dram_size/(bitwidth))
+    #gb_map = math.ceil(gb_size/(bitwidth))
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     
@@ -73,7 +88,7 @@ def analyticalGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     gb_writes = r2*c2
     dram_writes = math.ceil(r1/banks)*c1
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
-    compute_pus = math.ceil(r1_map/banks)*c2_map*c1_map
+    compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
     read_dram = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
@@ -86,9 +101,12 @@ def analyticalGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
+    #dram_map = math.ceil(dram_size/(bitwidth))
+    #gb_map = math.ceil(gb_size/(bitwidth))
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
@@ -99,7 +117,7 @@ def analyticalGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     gb_writes = r1*c1
     dram_writes = math.ceil(c2/banks)*r2
     dram_latencies = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
-    compute_pus = math.ceil(c2_map/banks)*r1_map*c1_map
+    compute_pus = math.ceil(c2_map/banks)*r1_map*math.ceil(c1_map/pu_width)
     read_dram = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)*r1_map
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
@@ -278,7 +296,7 @@ print(grouped_2,"Mat 2")
 print(len(grouped_tiles),"Total Rows")
 #assert len(matrix_a[0]) == len(matrix_b), "Row 2 != Col 1. Cant MatMul"
 
-
+'''
 activate_count = 0 
 dram_write_count = 0
 dram_write_latency_count = 0
@@ -314,3 +332,4 @@ for row in range(0,len(grouped_tiles),3):
                     grouped_tiles[row][tile][value] = 1
                     #print(grouped_tiles[row][tile][value],"VALUE WRITE")
 
+'''

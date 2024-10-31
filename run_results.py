@@ -132,7 +132,7 @@ def newton_software():
 
 
 
-    a = mappings.loopDramReuseRow(10000,1000,1000,5000,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
+    #a = mappings.loopDramReuseRow(10000,1000,1000,5000,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
 
     #print(ls_set)
     
