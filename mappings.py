@@ -88,7 +88,11 @@ def analyticalGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     gb_writes = r2*c2
     dram_writes = math.ceil(r1/banks)*c1
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
-    compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
+    
+    #compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
+    pu_calculate = math.ceil(c1_map/(min(dram_map,gb_map)))*math.ceil((min(dram_map,gb_map))/pu_width)
+    compute_pus = math.ceil(r1_map/banks)*c2_map*pu_calculate
+
     read_dram = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time

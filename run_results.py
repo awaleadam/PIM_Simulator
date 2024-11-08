@@ -293,6 +293,6 @@ def software_timing_sweep():
 
 
 
-#software_timing_sweep()
+software_timing_sweep()
 
-newton_software()
+#newton_software()
