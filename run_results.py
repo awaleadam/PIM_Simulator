@@ -62,7 +62,7 @@ def newton_software():
                 c = mappings.analyticalGBReuseCol(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
                 d = mappings.analyticalGBReuseRow(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
                 #ls_set.append([b,c])
-                ls_set.append([a,b,c,d])
+                ls_set.append([a,b,c,d])        
                 '''
                 if max(a,b,c,d) == a:
                     print("DRAM COL:",i,j,k)
@@ -85,16 +85,16 @@ def newton_software():
 '''             
 
                 if max(a,b,c,d) == a:
-                    print("DRAM COL:",i,j,k)
+                    #print("DRAM COL:",i,j,k)
                     count_a+=1
                 elif max(a,b,c,d) == b:
-                    print("DRAM ROW",i,j,k)
+                    #print("DRAM ROW",i,j,k)
                     count_b+=1
                 elif max(a,b,c,d) == c:
-                    print("GB COL",i,j,k)
+                    #print("GB COL",i,j,k)
                     count_c+=1
                 elif max(a,b,c,d) == d:
-                    print("GB ROW",i,j,k)
+                    #print("GB ROW",i,j,k)
                     count_d+=1
 
                 total_count+=1
@@ -130,6 +130,8 @@ def newton_software():
     print(f"GB Reuse Row Best Mapping Rate: {count_index_3/len(ls_set)}")
     print("Total length: ",len(ls_set))
 
+    a = mappings.loopDramReuseRow(10000,1000,1000,5000,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
+    b = mappings.analyticalDramReuseRow(10000,1000,1000,5000,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
 
 
     #print(ls_set)
@@ -161,6 +163,8 @@ def newton_software():
     plt.ylabel('Number of Cycles')
     plt.title('Software Sweep Of Sk Hynix AIM')
     plt.legend()
+
+    plt.savefig("Updated_Software_Sweep.png")
 
     # Show the plot
     plt.show()

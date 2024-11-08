@@ -1,0 +1,205 @@
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+[[[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]]] Mat 1
+[[[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]]] Mat 2
+4 Total Rows
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  1
+# Activates: 1 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  1 #DRAM Latencies:  1 #Compute PUs:  1 #DRAM Reads:  1
+ LOOP FORM # Activates: 1 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  1 #DRAM Latencies:  1 #Compute PUs:  1 #DRAM Reads:  1
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  20
+# Activates: 2 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  2 #DRAM Latencies:  2 #Compute PUs:  20 #DRAM Reads:  2
+ LOOP FORM # Activates: 2 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  2 #DRAM Latencies:  2 #Compute PUs:  2 #DRAM Reads:  2
+1 1 20 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  50
+# Activates: 4 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  4 #DRAM Latencies:  4 #Compute PUs:  50 #DRAM Reads:  4
+ LOOP FORM # Activates: 4 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  4 #DRAM Latencies:  4 #Compute PUs:  4 #DRAM Reads:  4
+1 1 50 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  1000
+# Activates: 63 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  63 #DRAM Latencies:  63 #Compute PUs:  1000 #DRAM Reads:  63
+ LOOP FORM # Activates: 63 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  63 #DRAM Latencies:  63 #Compute PUs:  63 #DRAM Reads:  63
+1 1 1000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  5000
+# Activates: 313 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  313 #DRAM Latencies:  313 #Compute PUs:  5000 #DRAM Reads:  313
+ LOOP FORM # Activates: 313 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  313 #DRAM Latencies:  313 #Compute PUs:  313 #DRAM Reads:  313
+1 1 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  10000
+# Activates: 625 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  625 #DRAM Latencies:  625 #Compute PUs:  10000 #DRAM Reads:  625
+ LOOP FORM # Activates: 625 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  625 #DRAM Latencies:  625 #Compute PUs:  625 #DRAM Reads:  625
+1 1 10000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  50000
+# Activates: 3125 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  3125 #DRAM Latencies:  3125 #Compute PUs:  50000 #DRAM Reads:  3125
+ LOOP FORM # Activates: 3125 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  3125 #DRAM Latencies:  3125 #Compute PUs:  3125 #DRAM Reads:  3125
+1 1 50000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  100000
+# Activates: 6250 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  6250 #DRAM Latencies:  6250 #Compute PUs:  100000 #DRAM Reads:  6250
+ LOOP FORM # Activates: 6250 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  6250 #DRAM Latencies:  6250 #Compute PUs:  6250 #DRAM Reads:  6250
+1 1 100000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1  R2 Map:  1  C2 Map:  500000
+# Activates: 31250 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  31250 #DRAM Latencies:  31250 #Compute PUs:  500000 #DRAM Reads:  31250
+ LOOP FORM # Activates: 31250 #GB Latencies:  1 #Gb Writes:  1 #DRAM Writes:  31250 #DRAM Latencies:  31250 #Compute PUs:  31250 #DRAM Reads:  31250
+1 1 500000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  1
+# Activates: 1 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  20 #DRAM Latencies:  1 #Compute PUs:  2 #DRAM Reads:  1
+ LOOP FORM # Activates: 1 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  20 #DRAM Latencies:  1 #Compute PUs:  2 #DRAM Reads:  1
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  20
+# Activates: 2 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  40 #DRAM Latencies:  2 #Compute PUs:  40 #DRAM Reads:  2
+ LOOP FORM # Activates: 2 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  40 #DRAM Latencies:  2 #Compute PUs:  4 #DRAM Reads:  2
+1 20 20 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  50
+# Activates: 4 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  80 #DRAM Latencies:  4 #Compute PUs:  100 #DRAM Reads:  4
+ LOOP FORM # Activates: 4 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  80 #DRAM Latencies:  4 #Compute PUs:  8 #DRAM Reads:  4
+1 20 50 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  1000
+# Activates: 63 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  1260 #DRAM Latencies:  63 #Compute PUs:  2000 #DRAM Reads:  63
+ LOOP FORM # Activates: 63 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  1260 #DRAM Latencies:  63 #Compute PUs:  126 #DRAM Reads:  63
+1 20 1000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  5000
+# Activates: 313 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  6260 #DRAM Latencies:  313 #Compute PUs:  10000 #DRAM Reads:  313
+ LOOP FORM # Activates: 313 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  6260 #DRAM Latencies:  313 #Compute PUs:  626 #DRAM Reads:  313
+1 20 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  10000
+# Activates: 625 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  12500 #DRAM Latencies:  625 #Compute PUs:  20000 #DRAM Reads:  625
+ LOOP FORM # Activates: 625 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  12500 #DRAM Latencies:  625 #Compute PUs:  1250 #DRAM Reads:  625
+1 20 10000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  50000
+# Activates: 3125 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  62500 #DRAM Latencies:  3125 #Compute PUs:  100000 #DRAM Reads:  3125
+ LOOP FORM # Activates: 3125 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  62500 #DRAM Latencies:  3125 #Compute PUs:  6250 #DRAM Reads:  3125
+1 20 50000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  100000
+# Activates: 6250 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  125000 #DRAM Latencies:  6250 #Compute PUs:  200000 #DRAM Reads:  6250
+ LOOP FORM # Activates: 6250 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  125000 #DRAM Latencies:  6250 #Compute PUs:  12500 #DRAM Reads:  6250
+1 20 100000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  20  R2 Map:  20  C2 Map:  500000
+# Activates: 31250 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  625000 #DRAM Latencies:  31250 #Compute PUs:  1000000 #DRAM Reads:  31250
+ LOOP FORM # Activates: 31250 #GB Latencies:  1 #Gb Writes:  20 #DRAM Writes:  625000 #DRAM Latencies:  31250 #Compute PUs:  62500 #DRAM Reads:  31250
+1 20 500000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  1
+# Activates: 1 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  50 #DRAM Latencies:  1 #Compute PUs:  4 #DRAM Reads:  1
+ LOOP FORM # Activates: 1 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  50 #DRAM Latencies:  1 #Compute PUs:  4 #DRAM Reads:  1
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  20
+# Activates: 2 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  100 #DRAM Latencies:  2 #Compute PUs:  80 #DRAM Reads:  2
+ LOOP FORM # Activates: 2 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  100 #DRAM Latencies:  2 #Compute PUs:  8 #DRAM Reads:  2
+1 50 20 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  50
+# Activates: 4 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  200 #DRAM Latencies:  4 #Compute PUs:  200 #DRAM Reads:  4
+ LOOP FORM # Activates: 4 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  200 #DRAM Latencies:  4 #Compute PUs:  16 #DRAM Reads:  4
+1 50 50 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  1000
+# Activates: 63 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  3150 #DRAM Latencies:  63 #Compute PUs:  4000 #DRAM Reads:  63
+ LOOP FORM # Activates: 63 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  3150 #DRAM Latencies:  63 #Compute PUs:  252 #DRAM Reads:  63
+1 50 1000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  5000
+# Activates: 313 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  15650 #DRAM Latencies:  313 #Compute PUs:  20000 #DRAM Reads:  313
+ LOOP FORM # Activates: 313 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  15650 #DRAM Latencies:  313 #Compute PUs:  1252 #DRAM Reads:  313
+1 50 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  10000
+# Activates: 625 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  31250 #DRAM Latencies:  625 #Compute PUs:  40000 #DRAM Reads:  625
+ LOOP FORM # Activates: 625 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  31250 #DRAM Latencies:  625 #Compute PUs:  2500 #DRAM Reads:  625
+1 50 10000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  50000
+# Activates: 3125 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  156250 #DRAM Latencies:  3125 #Compute PUs:  200000 #DRAM Reads:  3125
+ LOOP FORM # Activates: 3125 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  156250 #DRAM Latencies:  3125 #Compute PUs:  12500 #DRAM Reads:  3125
+1 50 50000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  100000
+# Activates: 6250 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  312500 #DRAM Latencies:  6250 #Compute PUs:  400000 #DRAM Reads:  6250
+ LOOP FORM # Activates: 6250 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  312500 #DRAM Latencies:  6250 #Compute PUs:  25000 #DRAM Reads:  6250
+1 50 100000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  50  R2 Map:  50  C2 Map:  500000
+# Activates: 31250 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  1562500 #DRAM Latencies:  31250 #Compute PUs:  2000000 #DRAM Reads:  31250
+ LOOP FORM # Activates: 31250 #GB Latencies:  1 #Gb Writes:  50 #DRAM Writes:  1562500 #DRAM Latencies:  31250 #Compute PUs:  125000 #DRAM Reads:  31250
+1 50 500000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  1
+# Activates: 2 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  1000 #DRAM Latencies:  2 #Compute PUs:  63 #DRAM Reads:  2
+ LOOP FORM # Activates: 2 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  1000 #DRAM Latencies:  2 #Compute PUs:  63 #DRAM Reads:  2
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  20
+# Activates: 4 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  2000 #DRAM Latencies:  4 #Compute PUs:  1260 #DRAM Reads:  4
+ LOOP FORM # Activates: 4 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  2000 #DRAM Latencies:  4 #Compute PUs:  126 #DRAM Reads:  4
+1 1000 20 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  50
+# Activates: 8 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  4000 #DRAM Latencies:  8 #Compute PUs:  3150 #DRAM Reads:  8
+ LOOP FORM # Activates: 8 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  4000 #DRAM Latencies:  8 #Compute PUs:  252 #DRAM Reads:  8
+1 1000 50 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  1000
+# Activates: 126 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  63000 #DRAM Latencies:  126 #Compute PUs:  63000 #DRAM Reads:  126
+ LOOP FORM # Activates: 126 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  63000 #DRAM Latencies:  126 #Compute PUs:  3969 #DRAM Reads:  126
+1 1000 1000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  5000
+# Activates: 626 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  315000 #DRAM Reads:  626
+ LOOP FORM # Activates: 626 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  19719 #DRAM Reads:  626
+1 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  10000
+# Activates: 1250 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  630000 #DRAM Reads:  1250
+ LOOP FORM # Activates: 1250 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  39375 #DRAM Reads:  1250
+1 1000 10000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  50000
+# Activates: 6250 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  3125000 #DRAM Latencies:  6250 #Compute PUs:  3150000 #DRAM Reads:  6250
+ LOOP FORM # Activates: 6250 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  3125000 #DRAM Latencies:  6250 #Compute PUs:  196875 #DRAM Reads:  6250
+1 1000 50000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  100000
+# Activates: 12500 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  6250000 #DRAM Latencies:  12500 #Compute PUs:  6300000 #DRAM Reads:  12500
+ LOOP FORM # Activates: 12500 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  6250000 #DRAM Latencies:  12500 #Compute PUs:  393750 #DRAM Reads:  12500
+1 1000 100000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  1000  R2 Map:  1000  C2 Map:  500000
+# Activates: 62500 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  31250000 #DRAM Latencies:  62500 #Compute PUs:  31500000 #DRAM Reads:  62500
+ LOOP FORM # Activates: 62500 #GB Latencies:  2 #Gb Writes:  1000 #DRAM Writes:  31250000 #DRAM Latencies:  62500 #Compute PUs:  1968750 #DRAM Reads:  62500
+1 1000 500000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  1
+# Activates: 10 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  5000 #DRAM Latencies:  10 #Compute PUs:  313 #DRAM Reads:  10
+ LOOP FORM # Activates: 10 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  5000 #DRAM Latencies:  10 #Compute PUs:  313 #DRAM Reads:  10
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  20
+# Activates: 20 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  10000 #DRAM Latencies:  20 #Compute PUs:  6260 #DRAM Reads:  20
+ LOOP FORM # Activates: 20 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  10000 #DRAM Latencies:  20 #Compute PUs:  626 #DRAM Reads:  20
+1 5000 20 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  50
+# Activates: 40 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  20000 #DRAM Latencies:  40 #Compute PUs:  15650 #DRAM Reads:  40
+ LOOP FORM # Activates: 40 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  20000 #DRAM Latencies:  40 #Compute PUs:  1252 #DRAM Reads:  40
+1 5000 50 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  1000
+# Activates: 630 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  315000 #DRAM Latencies:  630 #Compute PUs:  313000 #DRAM Reads:  630
+ LOOP FORM # Activates: 630 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  315000 #DRAM Latencies:  630 #Compute PUs:  19719 #DRAM Reads:  630
+1 5000 1000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  5000
+# Activates: 3130 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  1565000 #DRAM Latencies:  3130 #Compute PUs:  1565000 #DRAM Reads:  3130
+ LOOP FORM # Activates: 3130 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  1565000 #DRAM Latencies:  3130 #Compute PUs:  97969 #DRAM Reads:  3130
+1 5000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  10000
+# Activates: 6250 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  3125000 #DRAM Latencies:  6250 #Compute PUs:  3130000 #DRAM Reads:  6250
+ LOOP FORM # Activates: 6250 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  3125000 #DRAM Latencies:  6250 #Compute PUs:  195625 #DRAM Reads:  6250
+1 5000 10000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  50000
+# Activates: 31250 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  15625000 #DRAM Latencies:  31250 #Compute PUs:  15650000 #DRAM Reads:  31250
+ LOOP FORM # Activates: 31250 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  15625000 #DRAM Latencies:  31250 #Compute PUs:  978125 #DRAM Reads:  31250
+1 5000 50000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  100000
+# Activates: 62500 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  31250000 #DRAM Latencies:  62500 #Compute PUs:  31300000 #DRAM Reads:  62500
+ LOOP FORM # Activates: 62500 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  31250000 #DRAM Latencies:  62500 #Compute PUs:  1956250 #DRAM Reads:  62500
+1 5000 100000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  5000  R2 Map:  5000  C2 Map:  500000
+# Activates: 312500 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  156250000 #DRAM Latencies:  312500 #Compute PUs:  156500000 #DRAM Reads:  312500
+ LOOP FORM # Activates: 312500 #GB Latencies:  10 #Gb Writes:  5000 #DRAM Writes:  156250000 #DRAM Latencies:  312500 #Compute PUs:  9781250 #DRAM Reads:  312500
+1 5000 500000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  1
+# Activates: 20 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  10000 #DRAM Latencies:  20 #Compute PUs:  625 #DRAM Reads:  20
+ LOOP FORM # Activates: 20 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  10000 #DRAM Latencies:  20 #Compute PUs:  625 #DRAM Reads:  20
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  20
+# Activates: 40 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  20000 #DRAM Latencies:  40 #Compute PUs:  12500 #DRAM Reads:  40
+ LOOP FORM # Activates: 40 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  20000 #DRAM Latencies:  40 #Compute PUs:  1250 #DRAM Reads:  40
+1 10000 20 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  50
+# Activates: 80 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  40000 #DRAM Latencies:  80 #Compute PUs:  31250 #DRAM Reads:  80
+ LOOP FORM # Activates: 80 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  40000 #DRAM Latencies:  80 #Compute PUs:  2500 #DRAM Reads:  80
+1 10000 50 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  1000
+# Activates: 1260 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  630000 #DRAM Latencies:  1260 #Compute PUs:  625000 #DRAM Reads:  1260
+ LOOP FORM # Activates: 1260 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  630000 #DRAM Latencies:  1260 #Compute PUs:  39375 #DRAM Reads:  1260
+1 10000 1000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  5000
+# Activates: 6260 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  3130000 #DRAM Latencies:  6260 #Compute PUs:  3125000 #DRAM Reads:  6260
+ LOOP FORM # Activates: 6260 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  3130000 #DRAM Latencies:  6260 #Compute PUs:  195625 #DRAM Reads:  6260
+1 10000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  10000
+# Activates: 12500 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  6250000 #DRAM Latencies:  12500 #Compute PUs:  6250000 #DRAM Reads:  12500
+ LOOP FORM # Activates: 12500 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  6250000 #DRAM Latencies:  12500 #Compute PUs:  390625 #DRAM Reads:  12500
+1 10000 10000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+DRAM Map:  512  GB MAP:  512 )# R1 Map:  1  C1 Map:  10000  R2 Map:  10000  C2 Map:  50000
+# Activates: 62500 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  31250000 #DRAM Latencies:  62500 #Compute PUs:  31250000 #DRAM Reads:  62500
+ LOOP FORM # Activates: 62500 #GB Latencies:  20 #Gb Writes:  10000 #DRAM Writes:  31250000 #DRAM Latencies:  62500 #Compute PUs:  1953125 #DRAM Reads: 

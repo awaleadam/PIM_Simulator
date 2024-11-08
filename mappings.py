@@ -5,22 +5,34 @@ def analyticalDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
+
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
-    #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
-    activates = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
+    print("DRAM Map: ",dram_map," GB MAP: ",gb_map,")# R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
+    #activates = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)#Optimisitc assumptions for this
+
+    activates = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks) #Updated assumption
+    
     gb_latencies = math.ceil(r1_map/banks)*math.ceil(r2_map/(min(gb_map,dram_map)))*c2_map
     gb_writes = math.ceil(r1/banks)*r2*c2
     dram_writes = math.ceil(r1/banks)*c1 
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
-    compute_pus = math.ceil(r1_map/banks)*c1_map*c2_map
+
+    compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
+    #pu_calculate = math.ceil(c1_map/(min(dram_map,gb_map)))*math.ceil((min(dram_map,gb_map))/pu_width)
+    #compute_pus = math.ceil(r1_map/banks)*c2_map*pu_calculate
+
     read_dram = math.ceil(r1_map/banks)*c2_map*math.ceil(r2_map/(min(gb_map,dram_map)))
     #read_dram = math.ceil(r1_map/banks)*math.ceil(r2_map/(min(gb_map,dram_map)))
 
-    #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
+    #print(" ANALYTICAL # Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
@@ -30,22 +42,33 @@ def analyticalDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
 
 
 def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
-    dram_map = math.ceil(dram_size/(bitwidth*pu_width))
-    gb_map = math.ceil(gb_size/(bitwidth*pu_width))
+    #dram_map = math.ceil(dram_size/(bitwidth*pu_width))
+    #gb_map = math.ceil(gb_size/(bitwidth*pu_width))
     
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
     
-    activates = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
+    #activates = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)#Optimisitc assumptions for this
+    activates = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)#Optimisitc assumptions for this
+
     gb_latencies = math.ceil(c2_map/banks)*math.ceil(c1_map/(min(gb_map,dram_map)))*r1_map
     gb_writes = math.ceil(c2/banks)*r1*c1
     dram_writes = math.ceil(c2/banks)*r2
     dram_latencies = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
-    compute_pus = math.ceil(c2_map/banks)*r1_map*c1_map
+    
+    compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
+    
+    #pu_calculate = math.ceil(c1_map/(min(dram_map,gb_map)))*math.ceil((min(dram_map,gb_map))/pu_width)
+    #compute_pus = math.ceil(r1_map/banks)*c2_map*pu_calculate
+
+
     read_dram = math.ceil(c2_map/banks)*math.ceil(c1_map/(min(gb_map,dram_map)))*r1_map
 
     #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
@@ -59,21 +82,36 @@ def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
 def analyticalGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
+    
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
+    #print(gb_map,"GB",dram_map,"dram")
 
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
-
+    #print(math.ceil(c1_map/(min(gb_map,dram_map))),"Row")
+    #print(math.ceil(r1_map/banks),"  Value Banks")
     activates = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
-    gb_latencies = math.ceil(r2_map/gb_map)*c2_map
+    
+    #gb_latencies = math.ceil(r2_map/gb_map)*c2_map#Optimistic assumptions
+    gb_latencies = math.ceil(r2_map/(min(gb_map,dram_map)))*c2_map
+    
+
     gb_writes = r2*c2
     dram_writes = math.ceil(r1/banks)*c1
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
-    compute_pus = math.ceil(r1_map/banks)*c2_map*c1_map
+    
+    compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
+    
+    #pu_calculate = math.ceil(c1_map/(min(dram_map,gb_map)))*math.ceil((min(dram_map,gb_map))/pu_width)
+    #compute_pus = math.ceil(r1_map/banks)*c2_map*pu_calculate
+
     read_dram = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
@@ -86,25 +124,35 @@ def analyticalGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
 
 
     activates = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)*r1_map
-    gb_latencies = math.ceil(c1_map/gb_map)*r1_map
+    #gb_latencies = math.ceil(c1_map/gb_map)*r1_map
+    gb_latencies = math.ceil(c1_map/(min(gb_map,dram_map)))*r1_map
+    
     gb_writes = r1*c1
     dram_writes = math.ceil(c2/banks)*r2
     dram_latencies = math.ceil(r2_map/dram_map)*math.ceil(c2_map/banks)
-    compute_pus = math.ceil(c2_map/banks)*r1_map*c1_map
+
+    compute_pus = math.ceil(r1_map/banks)*c2_map*math.ceil(c1_map/pu_width)
+    
+    #pu_calculate = math.ceil(c1_map/(min(dram_map,gb_map)))*math.ceil((min(dram_map,gb_map))/pu_width)
+    #compute_pus = math.ceil(r1_map/banks)*c2_map*pu_calculate
+
     read_dram = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)*r1_map
 
     total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
 
-    #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
+    print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 
 
     return total_cycles
@@ -115,6 +163,9 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
     
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
     activate_count = 0 
     dram_write_count = 0
     dram_write_latency_count = 0
@@ -126,12 +177,12 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
     compute_pu_count = 0
 
     r1_map = r1#math.ceil(r1/pu_width)
-    c1_map = math.ceil(c1/pu_width)
-    r2_map = math.ceil(r2/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
     commandsLs = []
 
-    print("DRAM Map: ", dram_map, "GB Map: ", gb_map)
+    #print("DRAM Map: ", dram_map, "GB Map: ", gb_map)
 
     assert c1 == r2, "Incompatabile dimensions for matrix multiplication"
 
@@ -151,17 +202,24 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
 
     assert len(m1_tiled) == len(m1_dram_write_tiled), "# of Rows of different tilings of same Matrix are not the same"
 
-
+    '''
+    print(len(m1_tiled), "M1 Number of rows")#should be intiial number of Rows
+    print(len(m1_tiled[0]), "M1 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m1_tiled[0][0]), "M1 Number of Values Per Tiles per Row")#should be 32
+    print(len(m2_tiled), "M2 Number of rows")#should be intiial number of Rows
+    print(len(m2_tiled[0]), "M2 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m2_tiled[0][0]), "M2 Number of Values Per Tiles per Row")#should be 32
     #Idea for every tile we will calculate all the values for it for every row 
-
+    '''
     #get the number of writes 
-
+    count_rows = 0
+    count_tiles =0 
     for m1_row in range(0,len(m1_tiled),banks):#Going through all the rows in DRAM in parallel with the number of banks
         #print(m1_row)
-        
-        print(m1_tiled[m1_row],"Row")
+        count_rows +=1
+        #print(m1_tiled[m1_row],"Row")
         rows_grouped = m1_tiled[m1_row:m1_row+banks]
-        print("Grouped rows",rows_grouped)
+        #print("Grouped rows",rows_grouped)
 
         for dram_tile in range(len(m1_dram_write_tiled[m1_row])):#Writing the values into DRAM
             if(m1_dram_write_tiled[m1_row][dram_tile][0] == 0):#If the value is not written to yet
@@ -171,25 +229,416 @@ def loopDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwid
                     m1_dram_write_tiled[m1_row][dram_tile][dram_value] = 1
                     dram_write_count+=1
                     commandsLs.append("DRAM Write all Activated")#Generating Write Command
-
+        loop_tile_count = 0
         for m1_tile in range(len(m1_tiled[m1_row])):#After writing iterate through matrix on MIN size of DRAM and GB
             activate_count+=1#activation of row
-            print(m1_tile)
+            loop_tile_count+=1
+            count_tiles+=1
+            commandsLs.append("Activate Row ALL")
+            #print(m1_tile)
 
-            for m2_row in range(len(m2_tiled)):
+            for m2_row in range(len(m2_tiled)):#for every tile iterate through all the rows in M2 for that tile
                 assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
-                assert len(m1_tile[m1_row][m1_tile]) == len(m2_tiled[m2_row][m1_tile]), "Dimensions of tiles are not matching"
-                print("Tiles of M2", m2_tiled[m2_row][m1_tile])
+                assert len(m1_tiled[m1_row][m1_tile]) == len(m2_tiled[m2_row][m1_tile]), "Dimensions of tiles are not matching"
+                #print("Tiles of M2", m2_tiled[m2_row][m1_tile])
                 pu_count = 0
-                for value in range(len(m2_tiled[m2_row][m1_tile])):
+
+                #Start the writing to a GB
+                gb_write_latency_count += 1
+
+                for value in range(len(m2_tiled[m2_row][m1_tile])):#For every value in the tile 
+                    m2_tiled[m2_row][m1_tile][value] = 1#Write the value to GB
+                    gb_write_count +=1#Increment count
+                    commandsLs.append("Write GB")
+                    pu_count+=1
                     if pu_count == pu_width:
-                        compute_pu_count+=1 
+                        compute_pu_count+=1 #Once the values are equal to width of the PU Send them into the compute unit
                         pu_count = 0
+                        commandsLs.append("Compute PU ALL")
                 if pu_count != 0:
                     compute_pu_count+=1
+                    pu_count = 0 
+                    commandsLs.append("Compute PU ALL")#
+
+                dram_read_count+=1 #Read the accumulated values from DRAM
+                commandsLs.append("Read DRAM ALL")
+        #print("Count loop", loop_tile_count)
+
+    print(" LOOP FORM # Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
+    #print("Rows went through: ",count_rows," Tiles total",count_tiles)
+
+    total_cycles = activate_count*activate_time + gb_write_latency_count*gb_write_latency + gb_write_count*gb_write_time + dram_write_count*dram_write_time + dram_write_latency_count*dram_write_latency + compute_pu_count*pu_time + dram_read_count*dram_read_time
+
+    return total_cycles
+
+def loopDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
+    dram_map = math.ceil(dram_size/(bitwidth*pu_width))
+    gb_map = math.ceil(gb_size/(bitwidth*pu_width))
+    
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
+    activate_count = 0 
+    dram_write_count = 0
+    dram_write_latency_count = 0
+    dram_read_count = 0
+
+    gb_write_latency_count = 0
+    gb_write_count = 0 
+
+    compute_pu_count = 0
+
+    r1_map = r1#math.ceil(r1/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
+    c2_map  = c2#math.ceil(c2/pu_width)
+    commandsLs = []
+
+    #print("DRAM Map: ", dram_map, "GB Map: ", gb_map)
+
+    assert c1 == r2, "Incompatabile dimensions for matrix multiplication"
+
+    m1 = makeMatrix(r1,c1)
+
+    m2 = makeMatrix(r2,c2)
+
+    m2_trans = transpose(m2)
+
+    min_tiling = min(dram_map,gb_map)
+
+    m2_dram_write_tiled = partition_each_row_grouped(m2_trans,dram_map)
+
+    m1_tiled = partition_each_row_grouped(m1,min_tiling)
+    m2_tiled = partition_each_row_grouped(m2_trans,min_tiling)
 
 
-    print("# Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
+    assert len(m2_tiled) == len(m2_dram_write_tiled), "# of Rows of different tilings of same Matrix are not the same"
+
+    '''
+    print(len(m1_tiled), "M1 Number of rows")#should be intiial number of Rows
+    print(len(m1_tiled[0]), "M1 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m1_tiled[0][0]), "M1 Number of Values Per Tiles per Row")#should be 32
+    print(len(m2_tiled), "M2 Number of rows")#should be intiial number of Rows
+    print(len(m2_tiled[0]), "M2 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m2_tiled[0][0]), "M2 Number of Values Per Tiles per Row")#should be 32
+    #Idea for every tile we will calculate all the values for it for every row 
+    '''
+    #get the number of writes 
+    count_rows = 0
+    count_tiles =0 
+    for m2_row in range(0,len(m2_tiled),banks):#Going through all the rows in DRAM in parallel with the number of banks
+        #print(m1_row)
+        count_rows +=1
+        #print(m1_tiled[m1_row],"Row")
+        rows_grouped = m2_tiled[m2_row:m2_row+banks]
+        #print("Grouped rows",rows_grouped)
+
+        for dram_tile in range(len(m2_dram_write_tiled[m2_row])):#Writing the values into DRAM
+            if(m2_dram_write_tiled[m2_row][dram_tile][0] == 0):#If the value is not written to yet
+                dram_write_latency_count+=1#Write latency for writing the row
+
+                for dram_value in range(len(m2_dram_write_tiled[m2_row][dram_tile])):#Write the entire row with values
+                    m2_dram_write_tiled[m2_row][dram_tile][dram_value] = 1
+                    dram_write_count+=1
+                    commandsLs.append("DRAM Write all Activated")#Generating Write Command
+        loop_tile_count = 0
+        for m2_tile in range(len(m2_tiled[m2_row])):#After writing iterate through matrix on MIN size of DRAM and GB
+            activate_count+=1#activation of row
+            loop_tile_count+=1
+            count_tiles+=1
+            commandsLs.append("Activate Row ALL")
+            #print(m1_tile)
+
+            for m1_row in range(len(m1_tiled)):#for every tile iterate through all the rows in M2 for that tile
+                assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
+                assert len(m1_tiled[m1_row][m2_tile]) == len(m2_tiled[m2_row][m2_tile]), "Dimensions of tiles are not matching"
+                #print("Tiles of M2", m2_tiled[m2_row][m1_tile])
+                pu_count = 0
+
+                #Start the writing to a GB
+                gb_write_latency_count += 1
+
+                for value in range(len(m1_tiled[m1_row][m2_tile])):#For every value in the tile 
+                    m1_tiled[m1_row][m2_tile][value] = 1#Write the value to GB
+                    gb_write_count +=1#Increment count
+                    commandsLs.append("Write GB")
+                    pu_count+=1
+                    if pu_count == pu_width:
+                        compute_pu_count+=1 #Once the values are equal to width of the PU Send them into the compute unit
+                        pu_count = 0
+                        commandsLs.append("Compute PU ALL")
+                if pu_count != 0:
+                    compute_pu_count+=1
+                    pu_count = 0 
+                    commandsLs.append("Compute PU ALL")#
+
+                dram_read_count+=1 #Read the accumulated values from DRAM
+                commandsLs.append("Read DRAM ALL")
+        #print("Count loop", loop_tile_count)
+
+    print(" LOOP FORM # Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
+    #print("Rows went through: ",count_rows," Tiles total",count_tiles)
+
+    total_cycles = activate_count*activate_time + gb_write_latency_count*gb_write_latency + gb_write_count*gb_write_time + dram_write_count*dram_write_time + dram_write_latency_count*dram_write_latency + compute_pu_count*pu_time + dram_read_count*dram_read_time
+
+    return total_cycles
+
+def loopGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
+    dram_map = math.ceil(dram_size/(bitwidth*pu_width))
+    gb_map = math.ceil(gb_size/(bitwidth*pu_width))
+    
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
+    activate_count = 0 
+    dram_write_count = 0
+    dram_write_latency_count = 0
+    dram_read_count = 0
+
+    gb_write_latency_count = 0
+    gb_write_count = 0 
+
+    compute_pu_count = 0
+
+    r1_map = r1#math.ceil(r1/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
+    c2_map  = c2#math.ceil(c2/pu_width)
+    commandsLs = []
+
+    #print("DRAM Map: ", dram_map, "GB Map: ", gb_map)
+
+    assert c1 == r2, "Incompatabile dimensions for matrix multiplication"
+
+    m1 = makeMatrix(r1,c1)
+
+    m2 = makeMatrix(r2,c2)
+
+    m2_trans = transpose(m2)
+
+    min_tiling = min(dram_map,gb_map)
+
+    m1_dram_write_tiled = partition_each_row_grouped(m1,dram_map)
+
+    m1_tiled = partition_each_row_grouped(m1,min_tiling)
+    m2_tiled = partition_each_row_grouped(m2_trans,min_tiling)
+
+
+    assert len(m1_tiled) == len(m1_dram_write_tiled), "# of Rows of different tilings of same Matrix are not the same"
+
+    '''
+    print(len(m1_tiled), "M1 Number of rows")#should be intiial number of Rows
+    print(len(m1_tiled[0]), "M1 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m1_tiled[0][0]), "M1 Number of Values Per Tiles per Row")#should be 32
+    print(len(m2_tiled), "M2 Number of rows")#should be intiial number of Rows
+    print(len(m2_tiled[0]), "M2 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m2_tiled[0][0]), "M2 Number of Values Per Tiles per Row")#should be 32
+    #Idea for every tile we will calculate all the values for it for every row 
+    '''
+    #get the number of writes 
+    count_rows = 0
+    count_tiles =0 
+
+
+    for m2_row in range(len(m2_tiled)):
+        #print(m1_row)
+        count_rows +=1
+        #print(m1_tiled[m1_row],"Row")
+        #rows_grouped = m1_tiled[m2_row:m2_row+banks]
+        #print("Grouped rows",rows_grouped)
+        
+        loop_tile_count_m2 = 0
+        for m2_tile in range(len(m2_tiled[m2_row])):#for every GB Tile
+            gb_write_latency_count += 1
+            loop_tile_count_m2 += 1
+            for value in range(len(m2_tiled[m2_row][m2_tile])):#For every value in the tile 
+                m2_tiled[m2_row][m2_tile][value] = 1#Write the value to GB
+                gb_write_count +=1#Increment count
+                commandsLs.append("Write GB")
+            
+            loop_tile_count = 0
+            for m1_row in range(0,len(m1_tiled),banks):#Going through all the rows in DRAM in parallel with the number of banks
+                
+                #print(m1_row)
+                #count_rows +=1
+                #print(m1_tiled[m1_row],"Row")
+                #rows_grouped = m1_tiled[m1_row:m1_row+banks]
+                #print("Grouped rows",rows_grouped)
+                activate_count+=1#activation of row
+                loop_tile_count+=1
+                count_tiles+=1
+                commandsLs.append("Activate Row ALL")
+
+                assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
+                assert len(m1_tiled[m1_row][m2_tile]) == len(m2_tiled[m2_row][m2_tile]), "Dimensions of tiles are not matching"
+
+                for dram_tile in range(len(m1_dram_write_tiled[m1_row])):#Writing the values into DRAM
+                    #assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
+                    #assert len(m1_tiled[m1_row][m2_tile]) == len(m2_tiled[m2_row][m2_tile]), "Dimensions of tiles are not matching"
+
+                    if(m1_dram_write_tiled[m1_row][dram_tile][0] == 0):#If the value is not written to yet
+                        dram_write_latency_count+=1#Write latency for writing the row
+
+                        for dram_value in range(len(m1_dram_write_tiled[m1_row][dram_tile])):#Write the entire row with values
+                            m1_dram_write_tiled[m1_row][dram_tile][dram_value] = 1
+                            m1_dram_write_tiled[m1_row][dram_tile][0] = 1
+                            dram_write_count+=1
+                            commandsLs.append("DRAM Write all Activated")#Generating Write Command
+
+                pu_count = 0
+                for value in range(len(m1_tiled[m1_row][m2_tile])):#After writing iterate through matrix on MIN size of DRAM and GB
+                    pu_count+=1
+                    if pu_count == pu_width:
+                        compute_pu_count+=1 #Once the values are equal to width of the PU Send them into the compute unit
+                        pu_count = 0
+                        commandsLs.append("Compute PU ALL")
+                if pu_count != 0:
+                    compute_pu_count+=1
+                    pu_count = 0 
+                    commandsLs.append("Compute PU ALL")#
+
+                dram_read_count+=1 #Read the accumulated values from DRAM
+                commandsLs.append("Read DRAM ALL")
+
+            #print(m1_tile)
+
+        #print("Count loop", loop_tile_count)
+
+    print(" LOOP FORM # Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
+    #print("Rows went through: ",count_rows," Tiles total",count_tiles, "Tiles of M2",loop_tile_count_m2, "Tiles of M1",loop_tile_count)
+
+    total_cycles = activate_count*activate_time + gb_write_latency_count*gb_write_latency + gb_write_count*gb_write_time + dram_write_count*dram_write_time + dram_write_latency_count*dram_write_latency + compute_pu_count*pu_time + dram_read_count*dram_read_time
+
+    return total_cycles
+
+def loopGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
+    dram_map = math.ceil(dram_size/(bitwidth*pu_width))
+    gb_map = math.ceil(gb_size/(bitwidth*pu_width))
+    
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
+
+    activate_count = 0 
+    dram_write_count = 0
+    dram_write_latency_count = 0
+    dram_read_count = 0
+
+    gb_write_latency_count = 0
+    gb_write_count = 0 
+
+    compute_pu_count = 0
+
+    r1_map = r1#math.ceil(r1/pu_width)
+    c1_map = c1#math.ceil(c1/pu_width)
+    r2_map = r2#math.ceil(r2/pu_width)
+    c2_map  = c2#math.ceil(c2/pu_width)
+    commandsLs = []
+
+    #print("DRAM Map: ", dram_map, "GB Map: ", gb_map)
+
+    assert c1 == r2, "Incompatabile dimensions for matrix multiplication"
+
+    m1 = makeMatrix(r1,c1)
+
+    m2 = makeMatrix(r2,c2)
+
+    m2_trans = transpose(m2)
+
+    min_tiling = min(dram_map,gb_map)
+
+    m2_dram_write_tiled = partition_each_row_grouped(m2_trans,dram_map)
+
+    m1_tiled = partition_each_row_grouped(m1,min_tiling)
+    m2_tiled = partition_each_row_grouped(m2_trans,min_tiling)
+
+
+    assert len(m2_tiled) == len(m2_dram_write_tiled), "# of Rows of different tilings of same Matrix are not the same"
+
+    '''
+    print(len(m1_tiled), "M1 Number of rows")#should be intiial number of Rows
+    print(len(m1_tiled[0]), "M1 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m1_tiled[0][0]), "M1 Number of Values Per Tiles per Row")#should be 32
+    print(len(m2_tiled), "M2 Number of rows")#should be intiial number of Rows
+    print(len(m2_tiled[0]), "M2 Number of Tiles per Row")#Should be Ceiling of Columns/Tile Size 
+    print(len(m2_tiled[0][0]), "M2 Number of Values Per Tiles per Row")#should be 32
+    #Idea for every tile we will calculate all the values for it for every row 
+    '''
+    #get the number of writes 
+    count_rows = 0
+    count_tiles =0 
+
+
+    for m1_row in range(len(m1_tiled)):
+        #print(m1_row)
+        count_rows +=1
+        #print(m1_tiled[m1_row],"Row")
+        #rows_grouped = m1_tiled[m2_row:m2_row+banks]
+        #print("Grouped rows",rows_grouped)
+        
+        loop_tile_count_m1 = 0
+        for m1_tile in range(len(m1_tiled[m1_row])):#for every GB Tile
+            gb_write_latency_count += 1
+            loop_tile_count_m1 += 1
+            for value in range(len(m1_tiled[m1_row][m1_tile])):#For every value in the tile 
+                m1_tiled[m1_row][m1_tile][value] = 1#Write the value to GB
+                gb_write_count +=1#Increment count
+                commandsLs.append("Write GB")
+            
+            loop_tile_count = 0
+            for m2_row in range(0,len(m2_tiled),banks):#Going through all the rows in DRAM in parallel with the number of banks
+                
+                #print(m1_row)
+                #count_rows +=1
+                #print(m1_tiled[m1_row],"Row")
+                #rows_grouped = m1_tiled[m1_row:m1_row+banks]
+                #print("Grouped rows",rows_grouped)
+                activate_count+=1#activation of row
+                loop_tile_count+=1
+                count_tiles+=1
+                commandsLs.append("Activate Row ALL")
+
+                assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
+                assert len(m1_tiled[m1_row][m1_tile]) == len(m2_tiled[m2_row][m1_tile]), "Dimensions of tiles are not matching"
+
+                for dram_tile in range(len(m2_dram_write_tiled[m2_row])):#Writing the values into DRAM
+                    #assert len(m1_tiled[m1_row]) == len(m2_tiled[m2_row]), "Number of tiles of matrices are not matching"
+                    #assert len(m1_tiled[m1_row][m2_tile]) == len(m2_tiled[m2_row][m2_tile]), "Dimensions of tiles are not matching"
+
+                    if(m2_dram_write_tiled[m2_row][dram_tile][0] == 0):#If the value is not written to yet
+                        dram_write_latency_count+=1#Write latency for writing the row
+
+                        for dram_value in range(len(m2_dram_write_tiled[m2_row][dram_tile])):#Write the entire row with values
+                            m2_dram_write_tiled[m2_row][dram_tile][dram_value] = 1
+                            m2_dram_write_tiled[m2_row][dram_tile][0] = 1
+                            dram_write_count+=1
+                            commandsLs.append("DRAM Write all Activated")#Generating Write Command
+
+                pu_count = 0
+                for value in range(len(m2_tiled[m2_row][m1_tile])):#After writing iterate through matrix on MIN size of DRAM and GB
+                    pu_count+=1
+                    if pu_count == pu_width:
+                        compute_pu_count+=1 #Once the values are equal to width of the PU Send them into the compute unit
+                        pu_count = 0
+                        commandsLs.append("Compute PU ALL")
+                if pu_count != 0:
+                    compute_pu_count+=1
+                    pu_count = 0 
+                    commandsLs.append("Compute PU ALL")#
+
+                dram_read_count+=1 #Read the accumulated values from DRAM
+                commandsLs.append("Read DRAM ALL")
+
+            #print(m1_tile)
+
+        #print("Count loop", loop_tile_count)
+
+    print(" LOOP FORM # Activates:", activate_count, "#GB Latencies: ", gb_write_latency_count, "#Gb Writes: ", gb_write_count, "#DRAM Writes: ", dram_write_count, "#DRAM Latencies: ", dram_write_latency_count, "#Compute PUs: ", compute_pu_count, "#DRAM Reads: ",dram_read_count)
+    #print("Rows went through: ",count_rows," Tiles total",count_tiles, "Tiles of M2",loop_tile_count_m2, "Tiles of M1",loop_tile_count)
+
+    total_cycles = activate_count*activate_time + gb_write_latency_count*gb_write_latency + gb_write_count*gb_write_time + dram_write_count*dram_write_time + dram_write_latency_count*dram_write_latency + compute_pu_count*pu_time + dram_read_count*dram_read_time
+
+    return total_cycles
+
 
 
 def makeMatrix(x,y):
@@ -274,7 +723,7 @@ gb_write_latency_count = 0
 gb_write_count = 0 
 
 compute_pu_count = 0
-
+'''
 for row in range(0,len(grouped_tiles),3):
     print(row,"ROW")
     print(grouped_tiles[row],"Row")
@@ -300,3 +749,4 @@ for row in range(0,len(grouped_tiles),3):
                     grouped_tiles[row][tile][value] = 1
                     #print(grouped_tiles[row][tile][value],"VALUE WRITE")
 
+'''

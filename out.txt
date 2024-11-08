@@ -1,0 +1,869 @@
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+[[[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]]] Mat 1
+[[[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]], [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0]]] Mat 2
+4 Total Rows
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+On count iteration of:  1
+ ANALYTICAL # Activates: 1252 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  12520000
+On count iteration of:  2
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  3
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  4
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  12520000
+On count iteration of:  5
+ ANALYTICAL # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  12520000
+On count iteration of:  6
+ ANALYTICAL # Activates: 2504 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  7
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2504 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  8
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  9
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  10
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  11
+ ANALYTICAL # Activates: 5008 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  12
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  13
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  14
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  15
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  50080000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  16
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  17
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  18
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  6260000
+On count iteration of:  19
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  20
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  21
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  22
+ ANALYTICAL # Activates: 626 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  6260000
+On count iteration of:  23
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  24
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+On count iteration of:  25
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+On count iteration of:  26
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  6260000
+On count iteration of:  27
+ ANALYTICAL # Activates: 1252 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  28
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  29
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  30
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  31
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  50080000 #DRAM Reads:  25040000
+On count iteration of:  32
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  33
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  34
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  35
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  36
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  37
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  38
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  39
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  40
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  41
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  42
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  1565000
+On count iteration of:  43
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  44
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  45
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  46
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  47
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  50080000 #DRAM Reads:  3130000
+On count iteration of:  48
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+On count iteration of:  49
+ ANALYTICAL # Activates: 1252 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  12520000
+On count iteration of:  50
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  51
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  52
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  12520000
+On count iteration of:  53
+ ANALYTICAL # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  12520000
+On count iteration of:  54
+ ANALYTICAL # Activates: 2504 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  55
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2504 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  56
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  57
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  58
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  59
+ ANALYTICAL # Activates: 5008 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  60
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  61
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  62
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  63
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  98595000 #DRAM Reads:  98595000
+On count iteration of:  64
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  65
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  66
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  6260000
+On count iteration of:  67
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  68
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  69
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  70
+ ANALYTICAL # Activates: 626 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  6260000
+On count iteration of:  71
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  72
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+On count iteration of:  73
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+On count iteration of:  74
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  6260000
+On count iteration of:  75
+ ANALYTICAL # Activates: 1252 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  76
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  77
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  78
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  79
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  98595000 #DRAM Reads:  25040000
+On count iteration of:  80
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  81
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  82
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  83
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  84
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  85
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  86
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  87
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  88
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  89
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  90
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  1565000
+On count iteration of:  91
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  92
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  93
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  94
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  95
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  98595000 #DRAM Reads:  3130000
+On count iteration of:  96
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+On count iteration of:  97
+ ANALYTICAL # Activates: 1252 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  12520000
+On count iteration of:  98
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  99
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  100
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  12520000
+On count iteration of:  101
+ ANALYTICAL # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  12520000
+ LOOP FORM # Activates: 2504 #GB Latencies:  12520000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  12520000
+On count iteration of:  102
+ ANALYTICAL # Activates: 2504 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  103
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2504 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  2504 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  104
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  105
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  106
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  107
+ ANALYTICAL # Activates: 5008 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  108
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  109
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  110
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  111
+ ANALYTICAL # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+ LOOP FORM # Activates: 19719 #GB Latencies:  98595000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  19719 #Compute PUs:  782500000 #DRAM Reads:  98595000
+On count iteration of:  112
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  113
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  114
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  6260000
+On count iteration of:  115
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  116
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  117
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  118
+ ANALYTICAL # Activates: 626 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  6260000
+On count iteration of:  119
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  120
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+On count iteration of:  121
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+On count iteration of:  122
+ ANALYTICAL # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+ LOOP FORM # Activates: 1252 #GB Latencies:  6260000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  6260000
+On count iteration of:  123
+ ANALYTICAL # Activates: 1252 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  1252 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  124
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  125
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  126
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  127
+ ANALYTICAL # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+ LOOP FORM # Activates: 5008 #GB Latencies:  25040000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  5008 #Compute PUs:  782500000 #DRAM Reads:  25040000
+On count iteration of:  128
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  129
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  130
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  131
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  132
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  133
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  134
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  135
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  136
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  137
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  138
+ ANALYTICAL # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+ LOOP FORM # Activates: 313 #GB Latencies:  1565000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  1565000
+On count iteration of:  139
+ ANALYTICAL # Activates: 313 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  313 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  140
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  141
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  142
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  143
+ ANALYTICAL # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+ LOOP FORM # Activates: 626 #GB Latencies:  3130000 #Gb Writes:  1565000000 #DRAM Writes:  313000 #DRAM Latencies:  626 #Compute PUs:  782500000 #DRAM Reads:  3130000
+On count iteration of:  144
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+On count iteration of:  145
+ ANALYTICAL # Activates: 2500 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  25000000
+On count iteration of:  146
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  147
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  148
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  25000000
+On count iteration of:  149
+ ANALYTICAL # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  25000000
+On count iteration of:  150
+ ANALYTICAL # Activates: 5000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  151
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5000 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  152
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  153
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  154
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  155
+ ANALYTICAL # Activates: 10000 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  156
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  157
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  158
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  159
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  100000000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  160
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  161
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  162
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  12500000
+On count iteration of:  163
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  164
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  165
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  166
+ ANALYTICAL # Activates: 1250 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  12500000
+On count iteration of:  167
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1250 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  168
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+On count iteration of:  169
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+On count iteration of:  170
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  12500000
+On count iteration of:  171
+ ANALYTICAL # Activates: 2500 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  172
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  173
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  174
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  175
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  100000000 #DRAM Reads:  50000000
+On count iteration of:  176
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  177
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  178
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  179
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  180
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  181
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  182
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  183
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  184
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  185
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  186
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  3125000
+On count iteration of:  187
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  188
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  189
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  190
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  191
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  100000000 #DRAM Reads:  6250000
+On count iteration of:  192
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+On count iteration of:  193
+ ANALYTICAL # Activates: 2500 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  25000000
+On count iteration of:  194
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  195
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  196
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  25000000
+On count iteration of:  197
+ ANALYTICAL # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  25000000
+On count iteration of:  198
+ ANALYTICAL # Activates: 5000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  199
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5000 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  200
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  201
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  202
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  203
+ ANALYTICAL # Activates: 10000 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  204
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  205
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  206
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  207
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  196875000 #DRAM Reads:  196875000
+On count iteration of:  208
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  209
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  210
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  12500000
+On count iteration of:  211
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  212
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  213
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  214
+ ANALYTICAL # Activates: 1250 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  12500000
+On count iteration of:  215
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1250 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  216
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+On count iteration of:  217
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+On count iteration of:  218
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  12500000
+On count iteration of:  219
+ ANALYTICAL # Activates: 2500 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  220
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  221
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  222
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  223
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  196875000 #DRAM Reads:  50000000
+On count iteration of:  224
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  225
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  226
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  227
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  228
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  229
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  230
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  231
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  232
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  233
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  234
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  3125000
+On count iteration of:  235
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  236
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  237
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  238
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  239
+ ANALYTICAL # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  1250 #Compute PUs:  196875000 #DRAM Reads:  6250000
+On count iteration of:  240
+ ANALYTICAL # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  12500000
+ LOOP FORM # Activates: 2500 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  12500000
+On count iteration of:  241
+ ANALYTICAL # Activates: 2500 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  25000000
+On count iteration of:  242
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+On count iteration of:  243
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 2500 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  2500 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  244
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  25000000
+On count iteration of:  245
+ ANALYTICAL # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  25000000
+ LOOP FORM # Activates: 5000 #GB Latencies:  25000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  25000000
+On count iteration of:  246
+ ANALYTICAL # Activates: 5000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+On count iteration of:  247
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 5000 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  5000 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  248
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+On count iteration of:  249
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+On count iteration of:  250
+ ANALYTICAL # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+ LOOP FORM # Activates: 10000 #GB Latencies:  50000000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  50000000
+On count iteration of:  251
+ ANALYTICAL # Activates: 10000 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  10000 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  252
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  253
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  254
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  255
+ ANALYTICAL # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+ LOOP FORM # Activates: 39375 #GB Latencies:  196875000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  39375 #Compute PUs:  1562500000 #DRAM Reads:  196875000
+On count iteration of:  256
+ ANALYTICAL # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  1562500000 #DRAM Reads:  3125000
+ LOOP FORM # Activates: 625 #GB Latencies:  3125000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  1562500000 #DRAM Reads:  3125000
+On count iteration of:  257
+ ANALYTICAL # Activates: 625 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  1562500000 #DRAM Reads:  6250000
+ LOOP FORM # Activates: 1250 #GB Latencies:  6250000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  1562500000 #DRAM Reads:  6250000
+On count iteration of:  258
+10000 1000 5000 ----------------------- VAlues between the 2 forms did not matchup DEBUG HERE-------------------
+ ANALYTICAL # Activates: 625 #GB Latencies:  12500000 #Gb Writes:  3125000000 #DRAM Writes:  625000 #DRAM Latencies:  625 #Compute PUs:  1562500000 #DRAM Reads:  12500000
