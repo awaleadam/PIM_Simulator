@@ -52,11 +52,11 @@ def getConvOperations(height, width, kernel_height, kernel_width, stride, paddin
     
     patches = int(h*w) 
 
-    #m1 = [output_channels, flatten]
-    #m2 = [flatten, patches]
+    m1 = [output_channels, flatten]
+    m2 = [flatten, patches]
 
-    m1 = [patches, flatten]
-    m2 = [flatten, output_channels]
+    #m1 = [patches, flatten]
+    #m2 = [flatten, output_channels]
 
     return (m1, m2)
 

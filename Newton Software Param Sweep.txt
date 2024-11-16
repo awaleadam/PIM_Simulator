@@ -1,0 +1,84 @@
+Newton Software Param Sweep
+
+
+    m1_r1 = [1,20,50,500,1000,5000,10000,50000,100000,500000,1000000]
+    c1__r2 = [1,20,50,500,1000,5000,10000,50000,100000,500000,1000000]
+    m2_c2 = [1,20,50,500,1000,5000,10000,50000,100000,500000,1000000]
+
+
+
+DRAM Reuse Col Best Mapping Rate: 0.4628099173553719
+DRAM Reuse Row Best Mapping Rate: 0.371900826446281
+GB Reuse Col Best Mapping Rate: 0.08264462809917356
+GB Reuse Row Best Mapping Rate: 0.08264462809917356
+
+
+Newton Timing Param Sweep 
+
+    t_read_dram = [1, 10, 50]
+    t_act = [5, 50, 100]
+    t_write_dram = [1, 10, 50]
+    t_write_latency= [0, 1, 10, 30]
+    t_gb_latency = [0,1, 10, 30]
+    t_gb_write = [1, 10, 50]
+    t_compute_mac = [1,5,20]
+
+    m1_r1 = [5000]
+    c1__r2 = [10000]
+    m2_c2 = [1000]
+    i = m1_r1[0]
+    j = c1__r2[0]
+    k = m2_c2[0]
+
+5223548421 5205023171 6587520659 6661101909
+DRAM ROW 5205023171
+Comparison to DRAM Col 0.0035464876568433363  Comparison to GB Col 0.20986613318793995 Comparison to GB Row 0.21859427432459058
+
+DRAM Reuse Col Best Mapping Rate: 0.08153292181069959
+DRAM Reuse Row Best Mapping Rate: 0.11291152263374486
+GB Reuse Col Best Mapping Rate: 0.7654320987654321
+GB Reuse Row Best Mapping Rate: 0.040123456790123455
+
+Newton Hardware Param Sweep
+
+    newton_bit_widths = [8,16,64,128]
+
+    newton_dram_sizes = [2048, 4096, 8192, 16384]
+
+    newton_gb_sizes = [2048, 4096, 8192, 16384]
+
+    newton_bankss = [2,4,8,16,32]
+
+    newton_pu_widths = [2,4,8,16,32]
+
+
+    m1_r1 = [5000]
+    c1__r2 = [10000]
+    m2_c2 = [1000]
+    i = m1_r1[0]
+    j = c1__r2[0]
+    k = m2_c2[0]
+
+
+5223548421 5205023171 6587520659 6661101909
+DRAM ROW 5205023171
+Comparison to DRAM Col 0.0035464876568433363  Comparison to GB Col 0.20986613318793995 Comparison to GB Row 0.21859427432459058
+
+
+DRAM Reuse Col Best Mapping Rate: 0.44625
+DRAM Reuse Row Best Mapping Rate: 0.2975
+GB Reuse Col Best Mapping Rate: 0.170625
+GB Reuse Row Best Mapping Rate: 0.085625
+
+Newton Transformer Compare:
+
+VIT SOA: 1681874496  Framework 1616228928 Percent over:  0.03903119296720699
+Bert SOA: 1015778304  Framework 1015772760 Percent over:  5.4578838494270495e-06
+
+Newton CNN Compare:
+
+Alexnet SOA: 120684570  Framework 116922042 Percent over:  0.031176545601479956
+VGG16 SOA: 1315288932  Framework 1307352564 Percent over:  0.006033935059372947
+Googlenet SOA: 148297072  Framework 147834544 Percent over:  0.003118928740548566
+ResNet50 SOA: 1330219767  Framework 1330088823 Percent over:  9.843786962759816e-05
+DenseNet121 SOA: 310312248  Framework 310308156 Percent over:  1.3186717657370714e-05
