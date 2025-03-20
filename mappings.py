@@ -1,12 +1,266 @@
 import math
+#Inside tile row major, outside tile row major
+def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+    activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
+        activate_all_count = activate_all_count/(math.floor(math.floor(bits_dr/bits_data)/(m_tile*n_tile)))
+    else:
+        activate_all_count = activate_all_count*math.ceil((m_tile*n_tile)/(math.floor(bits_dr/bits_data)))
+
+    compute_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*m_tile*math.ceil(n_tile/(math.floor(bits_pu/bits_data)))
+
+    compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
+
+    if compute_pu_all_count_check != compute_pu_all_count:
+        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+
+
+    rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
+
+    rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if rd_all_bank_check != rd_all_bank:
+        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+
+
+    rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.floor(bits_pu_output/bits_data)
+
+    if math.ceil(m_tile/(math.floor(bits_pu_output/bits_data))) == 1:
+        rd_pu_all_count = rd_pu_all_count*1
+    else:
+        rd_pu_all_count = rd_pu_all_count*math.ceil(m_tile/(math.floor(bits_pu_output/bits_data)))*math.ceil(n/n_tile)
+
+    wr_bu_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if math.ceil(n_tile/(math.floor(bits_bf/bits_data))) == 1:
+        wr_bu_count = wr_bu_count*n_tile
+
+    else:
+        wr_bu_count = wr_bu_count*n_tile*m_tile 
+
+    activate_buffer_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if math.ceil(n_tile/(math.floor(bits_bf/bits_data))) == 1:
+        activate_buffer_count = activate_buffer_count*1
+    else:
+        activate_buffer_count = activate_buffer_count*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))*n_tile
+
+    if reuse_type == 'matrix':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        wr_bu_count = wr_bu_count*reuse_amount
+        activate_buffer_count = activate_buffer_count*reuse_amount
+    elif reuse_type == 'vector':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        activate_all_count = activate_all_count*reuse_amount
+
+
+    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+
+    total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
+    return total_cycles
+
+
+#Inside tile col major, outside tile row major
+def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+    activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
+        activate_all_count = activate_all_count/(math.floor(math.floor(bits_dr/bits_data)/(m_tile*n_tile)))
+    else:
+        activate_all_count = activate_all_count*math.ceil((m_tile*n_tile)/(math.floor(bits_dr/bits_data)))
+
+    compute_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*m_tile*math.ceil(n_tile/(math.floor(bits_pu/bits_data)))
+
+    compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
+
+    if compute_pu_all_count_check != compute_pu_all_count:
+        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+
+
+    rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
+
+    rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if rd_all_bank_check != rd_all_bank:
+        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+
+
+    rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.floor(bits_pu_output/bits_data)
+
+    if math.ceil(m_tile/(math.floor(bits_pu_output/bits_data))) == 1:
+        rd_pu_all_count = rd_pu_all_count*1
+    else:
+        rd_pu_all_count = rd_pu_all_count*math.ceil(m_tile/(math.floor(bits_pu_output/bits_data)))*math.ceil(n/n_tile)*math.ceil(n_tile/(math.floor(bits_pu/bits_data)))
+
+    
+    wr_bu_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*n_tile
+
+    activate_buffer_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))
+
+    if reuse_type == 'matrix':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        wr_bu_count = wr_bu_count*reuse_amount
+        activate_buffer_count = activate_buffer_count*reuse_amount
+    elif reuse_type == 'vector':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        activate_all_count = activate_all_count*reuse_amount
+
+
+    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+
+    total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
+    return total_cycles
+
+
+#Inside tile row major, outside tile col major
+def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+    activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
+        activate_all_count = activate_all_count/(math.floor(math.floor(bits_dr/bits_data)/(m_tile*n_tile)))
+    else:
+        activate_all_count = activate_all_count*math.ceil((m_tile*n_tile)/(math.floor(bits_dr/bits_data)))
+
+    compute_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*m_tile*math.ceil(n_tile/(math.floor(bits_pu/bits_data)))
+
+    compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
+
+    if compute_pu_all_count_check != compute_pu_all_count:
+        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+
+
+    rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
+
+    rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if rd_all_bank_check != rd_all_bank:
+        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+
+
+    rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*math.ceil(m_tile/(math.floor(bits_pu_output/bits_data)))*math.floor(bits_pu_output/bits_data)
+
+    wr_bu_count = math.ceil(n/n_tile)
+
+    if math.ceil(n_tile/(math.floor(bits_bf/bits_data))) == 1:
+        wr_bu_count = wr_bu_count*n_tile
+    else:  
+        wr_bu_count = wr_bu_count*n_tile*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))
+
+    activate_buffer_count = math.ceil(n/n_tile)
+
+    if math.ceil(n_tile/(math.floor(bits_bf/bits_data))) == 1:
+        activate_buffer_count = activate_buffer_count*1
+    else:
+        activate_buffer_count = activate_buffer_count*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*m_tile
+
+    if reuse_type == 'matrix':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        wr_bu_count = wr_bu_count*reuse_amount
+        activate_buffer_count = activate_buffer_count*reuse_amount
+    elif reuse_type == 'vector':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        activate_all_count = activate_all_count*reuse_amount
+
+
+    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+
+    total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
+    return total_cycles
+
+
+#Inside tile col major, outside tile col major
+def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+    activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
+        activate_all_count = activate_all_count/(math.floor(math.floor(bits_dr/bits_data)/(m_tile*n_tile)))
+    else:
+        activate_all_count = activate_all_count*math.ceil((m_tile*n_tile)/(math.floor(bits_dr/bits_data)))
+
+    compute_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*m_tile*math.ceil(n_tile/(math.floor(bits_pu/bits_data)))
+
+    compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
+
+    if compute_pu_all_count_check != compute_pu_all_count:
+        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+
+
+    rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
+
+    rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
+
+    if rd_all_bank_check != rd_all_bank:
+        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+
+
+    rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*math.floor(bits_pu_output/bits_data)
+
+    if math.ceil(m_tile/(math.floor(bits_pu_output/bits_data))) == 1:
+        rd_pu_all_count = rd_pu_all_count*1
+    else:
+        rd_pu_all_count = rd_pu_all_count*math.ceil(m_tile/(math.floor(bits_pu_output/bits_data)))*math.ceil(n_tile/(math.floor(bits_pu/bits_data)))
+
+    wr_bu_count = math.ceil(n/n_tile)
+
+    if math.ceil(n_tile/(math.floor(bits_bf/bits_data))) == 1:
+        wr_bu_count = wr_bu_count*n_tile
+    else:
+        wr_bu_count = wr_bu_count*n_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))
+
+    activate_buffer_count = math.ceil(n/n_tile)
+
+    if math.ceil(n_tile/(math.floor(bits_bf/bits_data))) == 1:
+        activate_buffer_count = activate_buffer_count*1
+    else:
+        activate_buffer_count = activate_buffer_count*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))
+
+    if reuse_type == 'matrix':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        wr_bu_count = wr_bu_count*reuse_amount
+        activate_buffer_count = activate_buffer_count*reuse_amount
+    elif reuse_type == 'vector':
+        compute_pu_all_count = compute_pu_all_count*reuse_amount
+        rd_all_bank = rd_all_bank*reuse_amount
+        rd_pu_all_count = rd_pu_all_count*reuse_amount
+        activate_all_count = activate_all_count*reuse_amount
+
+
+    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+
+    total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
+    return total_cycles
+
 
 
 def analyticalDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
-    #dram_map = math.ceil(dram_size/(bitwidth))
-    #gb_map = math.ceil(gb_size/(bitwidth))
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
 
     r1_map = r1#math.ceil(r1/pu_width)
     c1_map = c1#math.ceil(c1/pu_width)
@@ -41,8 +295,8 @@ def analyticalDramReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, 
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
     
-    #dram_map = math.ceil(dram_size/(bitwidth))
-    #gb_map = math.ceil(gb_size/(bitwidth))
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
 
     r1_map = r1#math.ceil(r1/pu_width)
     c1_map = c1#math.ceil(c1/pu_width)
@@ -74,8 +328,8 @@ def analyticalGBReuseCol(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
 
-    #dram_map = math.ceil(dram_size/(bitwidth))
-    #gb_map = math.ceil(gb_size/(bitwidth))
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
 
     r1_map = r1#math.ceil(r1/pu_width)
     c1_map = c1#math.ceil(c1/pu_width)
@@ -110,8 +364,8 @@ def analyticalGBReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bi
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
-    #dram_map = math.ceil(dram_size/(bitwidth))
-    #gb_map = math.ceil(gb_size/(bitwidth))
+    dram_map = math.ceil(dram_size/(bitwidth))
+    gb_map = math.ceil(gb_size/(bitwidth))
 
     r1_map = r1#math.ceil(r1/pu_width)
     c1_map = c1#math.ceil(c1/pu_width)
@@ -166,8 +420,8 @@ def analyticalDramReuseRowSam(r1, c1, r2, c2, dram_size, gb_size, banks, banks_g
     gb_writes = math.ceil(r1/banks)*r2*math.ceil(c2/banks_gb)
     dram_writes = math.ceil(r1/banks)*c1 
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
-    compute_pus = math.ceil(r1_map/banks)*math.ceil(c1_map/pu_width)*c2_map
-    read_dram = math.ceil(r1_map/banks)*c2_map*math.ceil(r2_map/(min(gb_map,dram_map)))
+    compute_pus = math.ceil(r1_map/banks)*math.ceil(c1_map/pu_width)*math.ceil(c2_map/banks_gb)
+    read_dram = math.ceil(r1_map/bank_min)*math.ceil(c2_map/bank_min)*math.ceil(r2_map/(min(gb_map,dram_map)))
     #read_dram = math.ceil(r1_map/banks)*math.ceil(r2_map/(min(gb_map,dram_map)))
 
     #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
@@ -179,7 +433,7 @@ def analyticalDramReuseRowSam(r1, c1, r2, c2, dram_size, gb_size, banks, banks_g
 
 
 
-def analyticalDramReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
+def analyticalDramReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, banks_gb,pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, gb_activate, pu_time):
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
     
@@ -190,6 +444,10 @@ def analyticalDramReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_widt
     c1_map = c1#math.ceil(c1/pu_width)
     r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
+    
+    bank_min = min(banks,banks_gb)
+
+    map_min = min(dram_map, )
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
     
@@ -203,13 +461,13 @@ def analyticalDramReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_widt
 
     #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 
-    total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
+    total_cycles = gb_activates*gb_activate + activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
 
     return total_cycles
 
 
 
-def analyticalGBReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
+def analyticalGBReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, banks_gb,pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, gb_activate, pu_time):
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
@@ -222,12 +480,18 @@ def analyticalGBReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width,
     r2_map = r2#math.ceil(r2/pu_width)
     c2_map  = c2#math.ceil(c2/pu_width)
 
-    
+    bank_min = min(banks,banks_gb)
+
+    map_min = min(gb_map,dram_map)
+
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
 
     activates = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
+    
     gb_latencies = math.ceil(r2_map/gb_map)*c2_map
-    gb_writes = r2*c2
+    gb_writes = r2*math.ceil(c2/banks_gb)
+    
+
     dram_writes = math.ceil(r1/banks)*c1
     dram_latencies = math.ceil(c1_map/dram_map)*math.ceil(r1_map/banks)
     
@@ -237,13 +501,13 @@ def analyticalGBReuseColSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width,
 
     read_dram = math.ceil(c1_map/(min(gb_map,dram_map)))*math.ceil(r1_map/banks)*c2_map
 
-    total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
+    total_cycles = gb_activates*gb_activate + activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
 
     #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 
     return total_cycles
 
-def analyticalGBReuseRowSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
+def analyticalGBReuseRowSam(r1, c1, r2, c2, dram_size, gb_size, banks, banks_gb,pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, gb_activate, pu_time):
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
     gb_map = math.ceil(gb_size/(bitwidth*pu_width))
 
@@ -257,6 +521,7 @@ def analyticalGBReuseRowSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width,
 
     #print("DRAM Map: ",dram_map," GB MAP: ",gb_map," R1 Map: ",r1_map, " C1 Map: ",c1_map," R2 Map: ",r2_map," C2 Map: ",c2_map )
 
+    bank_min = min(banks,banks_gb)
 
     activates = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)*r1_map
     gb_latencies = math.ceil(c1_map/gb_map)*r1_map
@@ -266,7 +531,7 @@ def analyticalGBReuseRowSam(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width,
     compute_pus = math.ceil(c2_map/banks)*r1_map*math.ceil(c1_map/pu_width)
     read_dram = math.ceil(r2_map/(min(gb_map,dram_map)))*math.ceil(c2_map/banks)*r1_map
 
-    total_cycles = activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
+    total_cycles = gb_activates*gb_activate + activates*activate_time + gb_latencies*gb_write_latency + gb_writes*gb_write_time + dram_writes*dram_write_time + dram_latencies*dram_write_latency + compute_pus*pu_time + read_dram*dram_read_time
 
     #print("# Activates:", activates, "#GB Latencies: ", gb_latencies, "#Gb Writes: ", gb_writes, "#DRAM Writes: ", dram_writes, "#DRAM Latencies: ", dram_latencies, "#Compute PUs: ", compute_pus, "#DRAM Reads: ",read_dram)
 

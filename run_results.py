@@ -86,17 +86,17 @@ def newton_software():
                     print(c,d,"GB cycles")
 '''             
 
-                if max(a,b,c,d) == a:
+                if min(a,b,c,d) == a:
                     #print("DRAM COL:",i,j,k)
                     count_a+=1
-                elif max(a,b,c,d) == b:
+                elif min(a,b,c,d) == b:
                     #print("DRAM ROW",i,j,k)
                     count_b+=1
-                elif max(a,b,c,d) == c:
-                    #print("GB COL",i,j,k)
+                elif min(a,b,c,d) == c:
+                    print("GB COL",i,j,k)
                     count_c+=1
-                elif max(a,b,c,d) == d:
-                    #print("GB ROW",i,j,k)
+                elif min(a,b,c,d) == d:
+                    print("GB ROW",i,j,k)
                     count_d+=1
 
                 total_count+=1
@@ -741,10 +741,226 @@ def software_hardware_sweep():
     # Show the plot
     plt.show()
 
+def samsung_validate():
+    #arch params samsung:
+
+    n_pus = 8
+
+    bits_pu = 256
+
+    n_channels = 1
+
+    bits_dram_row = 8192
+
+    bits_bu = 2048
+
+    bits_pu_output = 128
+
+    n_banks = 16
+
+    #software params samsung
+
+    m = [64,128,256]
+    n = [256,512,1024,2048]
+
+    data_width = 16
+
+    #timing params: Dummy for now
+
+    t_activate = 1
+    t_rd_all = 1 
+    t_act_buffer = 1
+    t_wr_buffer = 1
+    t_compute_pu_all = 1
+    t_rd_pu_all = 1
+
+    #Mapping parameters
+
+    m_tile = 8 #Number of accumulate registers
+    n_tile = 128#width of PU
+    # Form of Activate All, Compute PU All, Rd All Bank, Rd PU All, Wr BU, Activate Bu
+    #pairs are (64,256), (64,512), (64,1024), (64,2048), (128,256), (128,512), (128,1024), (128,2048), (256,256), (256,512), (256,1024), (256,2048)
+    counts = [[4,128,2048,9,272,1,]]
+
+    for m_vals in m:
+        for n_vals in n:
+            print("For pair ",m_vals,n_vals)
+            mappings.analyticalIterRowIntraRow(m_vals, n_vals, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, m_tile, n_tile)
+
+#Newton/SK Hynix params
+def samsung_software():
+    newton_bit_width = 16
+
+    newton_dram_size = 8192
+
+    newton_gb_size = 8192
+
+    newton_banks = 16
+
+    samsung_banks = 16
+
+    newton_pu_width = 16
+
+    newton_t_read_mac = 10
+
+    newton_t_act = 100
+
+    gb_t_activate = 100
+
+    newton_t_write = 2
+
+    newton_t_write_latency = 5
+
+    newton_t_gb_latency = 2
+
+    newton_t_gb_write = 5
+
+    newton_t_compute_mac = 2
+
+    #iterate through software params
+
+
+    m1_r1 = [1,20,50,500,1000,5000,10000,50000,100000,500000,1000000]
+    c1__r2 = [1,20,50,500,1000,5000,10000,50000,100000,500000,1000000]
+    m2_c2 = [1,20,50,500,1000,5000,10000,50000,100000,500000,1000000]
+
+
+    #m1_r1 = list(range(5000,10001,100))
+    #c1__r2 = list(range(5000,10001,100))
+    #m2_c2  = list(range(5000,10001,100))
+
+
+    #m1_r1 = list(range(1,4001,100))
+    #c1__r2 = list(range(1,4001,100))
+    #m2_c2  = list(range(1,4001,100))
+
+    total_count=0
+    count_a=0
+    count_b=0
+    count_c=0
+    count_d=0
+
+    ls_set = []
+
+    for i in m1_r1:
+        for j in c1__r2:
+            for k in m2_c2:
+                a = mappings.analyticalDramReuseColSam(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, samsung_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, gb_t_activate, newton_t_compute_mac)
+                b = mappings.analyticalDramReuseRowSam(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, samsung_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, gb_t_activate, newton_t_compute_mac)
+                c = mappings.analyticalGBReuseColSam(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, samsung_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, gb_t_activate, newton_t_compute_mac)
+                d = mappings.analyticalGBReuseRowSam(i,j,j,k,newton_dram_size, newton_gb_size, newton_banks, samsung_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, gb_t_activate, newton_t_compute_mac)
+                #ls_set.append([b,c])
+                ls_set.append([a,b,c,d])
+                '''
+                if max(a,b,c,d) == a:
+                    print("DRAM COL:",i,j,k)
+                elif max(a,b,c,d) == b:
+                    print("DRAM ROW",i,j,k)
+                elif max(a,b,c,d) == c:
+                    print("GB COL",i,j,k)
+                elif max(a,b,c,d) == d:
+                    print("GB ROW",i,j,k)
+
+                if a == b:
+                    print(i,j,k,"SAME DRAM")
+                if c == d:
+                    print(i,j,k,"SAME GB")
+
+                if a and b > 10000000000:
+                    print(i,j,k,"VALUES")
+                    print(a,b,"DRAM cycles")
+                    print(c,d,"GB cycles")
+'''             
+
+                if min(a,b,c,d) == a:
+                    #print("DRAM COL:",i,j,k)
+                    count_a+=1
+                elif min(a,b,c,d) == b:
+                    #print("DRAM ROW",i,j,k)
+                    count_b+=1
+                elif min(a,b,c,d) == c:
+                    print("GB COL",i,j,k)
+                    count_c+=1
+                elif min(a,b,c,d) == d:
+                    print("GB ROW",i,j,k)
+                    count_d+=1
+
+                total_count+=1
+
+    
+    print("Count of DRAM Col is: ",count_a, "Percentage is: ", count_a/total_count)
+    print("Count of DRAM Row is: ",count_b, "Percentage is: ", count_b/total_count)
+    print("Count of GB Col is: ",count_c, "Percentage is: ", count_c/total_count)
+    print("Count of GB Row is: ",count_d, "Percentage is: ", count_d/total_count)
+    print("Total Count is: ",total_count)
+    count_index_0 = 0
+    count_index_1 = 0
+    count_index_2 = 0
+    count_index_3 = 0
+    # Iterate through each list and find the index of the minimum value
+    for lst in ls_set:
+        min_index = lst.index(min(lst))
+        
+        # Increment the corresponding counter
+        if min_index == 0:
+            count_index_0 += 1
+        elif min_index == 1:
+            count_index_1 += 1
+        elif min_index == 2:
+            count_index_2 += 1
+        elif min_index == 3:
+            count_index_3 += 1
+
+    # Display the counts
+    print(f"DRAM Reuse Col Best Mapping Rate: {count_index_0/len(ls_set)}")
+    print(f"DRAM Reuse Row Best Mapping Rate: {count_index_1/len(ls_set)}")
+    print(f"GB Reuse Col Best Mapping Rate: {count_index_2/len(ls_set)}")
+    print(f"GB Reuse Row Best Mapping Rate: {count_index_3/len(ls_set)}")
+    print("Total length: ",len(ls_set))
+
+
+
+    #a = mappings.loopDramReuseRow(10000,1000,1000,5000,newton_dram_size, newton_gb_size, newton_banks, newton_pu_width, newton_bit_width, newton_t_act, newton_t_read_mac, newton_t_write, newton_t_write_latency, newton_t_gb_write, newton_t_gb_latency, newton_t_compute_mac)
+
+    #print(ls_set)
+    
+    sorted_set = sorted(ls_set, key=lambda x: x[0])
+
+    #print(sorted_set)
+
+    transposed_list = list(zip(*sorted_set))
+
+    # Plot each series of values
+    for idx, series in enumerate(transposed_list):
+        if idx == 0:
+            plt.plot(range(len(series)), series, marker='o', markersize=3,label=f"DRAM Reuse Col")
+        elif idx ==1:
+            plt.plot(range(len(series)), series, marker='o', markersize=1,label=f"DRAM Reuse Row")
+        elif idx == 2:
+            plt.plot(range(len(series)), series, marker='o', markersize=1,label=f"GBuf Reuse Col")
+        elif idx ==3:
+            plt.plot(range(len(series)), series, marker='o', markersize=1,label=f"GBuf Reuse Row")
+        
+        print("HI",idx)
+
+
+    plt.yscale('log')
+
+    # Adding labels and title
+    plt.xlabel('Software Configuration')
+    plt.ylabel('Number of Cycles')
+    plt.title('Software Sweep Of Sk Hynix AIM')
+    plt.legend()
+
+    # Show the plot
+    plt.show()
+
 
 #software_timing_sweep()
 
 #newton_software()
+
+#samsung_software()
 
 #newton_CNN()
 
@@ -752,4 +968,6 @@ def software_hardware_sweep():
 
 #software_timing_sweep()
 
-software_hardware_sweep()
+#software_hardware_sweep()
+
+samsung_validate()
