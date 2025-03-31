@@ -3,7 +3,7 @@ import math
 
 
 #Inside tile col major, outside tile row major
-def analyticalNoBroadcast(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1, output_reuse=1):
+def analyticalNoBroadcast(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, reuse_bu=1, output_reuse=1):
     activate_all_count = math.ceil(math.ceil((m*n)/n_channels)/math.ceil(bits_dr/bits_data)) #No reuse so can split across channels for m and n
 
 
@@ -19,17 +19,17 @@ def analyticalNoBroadcast(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_chann
 
     activate_buffer_count = math.ceil(math.ceil((m*n)/n_channels)/math.ceil(bits_bf/bits_data))
 
-    if reuse_type == 'matrix':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        wr_bu_count = wr_bu_count*reuse_amount
-        activate_buffer_count = activate_buffer_count*reuse_amount
-    elif reuse_type == 'vector':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        activate_all_count = activate_all_count*reuse_amount
+    if reuse_bank > 1:
+        compute_pu_all_count = compute_pu_all_count*reuse_bank
+        rd_all_bank = rd_all_bank*reuse_bank
+        rd_pu_all_count = rd_pu_all_count*reuse_bank
+        wr_bu_count = wr_bu_count*reuse_bank
+        activate_buffer_count = activate_buffer_count*reuse_bank
+    elif reuse_bu > 1:
+        compute_pu_all_count = compute_pu_all_count*reuse_bu
+        rd_all_bank = rd_all_bank*reuse_bu
+        rd_pu_all_count = rd_pu_all_count*reuse_bu
+        activate_all_count = activate_all_count*reuse_bu
 
 
     print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)

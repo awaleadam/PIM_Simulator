@@ -994,7 +994,7 @@ def sk_results():
     models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
     sam_costs = [dorn_cost_sam, gpt2_cost_sam, lstm_cost_sam, rnn_cost_sam, stargan_cost_sam, vit_cost_sam, resnet_cost_sam]
     model_costs = [dorn_cost_model, gpt2_cost_model, lstm_cost_model, rnn_cost_model, stargan_cost_model, vit_cost_model, resnet_cost_model]
-    print("SAM COSTS",sam_costs)
+    print("SK COSTS",sam_costs)
     print("MODEL COSTS",model_costs)
     # Plotting
     x = np.arange(len(models))  # X-axis positions for models
@@ -1150,7 +1150,7 @@ def explore_samsung(params_ls):
         matrix_amount = vals[4]
         mtile = min(m_tile,m)
         ntile = min(n_tile,n)
-
+        op = vals[0]
         if mtile == 0:
             print("Mtile is 0----------------------------------------------",params_ls)
             mtile = 1
@@ -1159,7 +1159,10 @@ def explore_samsung(params_ls):
             ntile = 1
         for i in range(vector_amount):
             for j in range(matrix_amount):
-                cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                if op == "Gemv":
+                    cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                else:
+                    cost += mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
     return cost
         
 def explore_model_samsung(params_ls):
@@ -1200,16 +1203,21 @@ def explore_model_samsung(params_ls):
         matrix_amount = param[4]
         m = param[1]
         n = param[2]
+        op = param[0]
         cost_tile = []
         for mtile in range(1, mtiles + 1):
             for ntile in ntiles:
+                if op == "Gemv":
                 #print("For pair ",mtile,ntile)
                 #print(type(mtile),type(ntile))
-                cost1 = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost2 = mappings.analyticalIterRowIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost3 = mappings.analyticalIterColIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost4 = mappings.analyticalIterColIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost_tile.append(min(cost1, cost2, cost3, cost4))
+                    cost1 = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost2 = mappings.analyticalIterRowIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost3 = mappings.analyticalIterColIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost4 = mappings.analyticalIterColIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost_tile.append(min(cost1, cost2, cost3, cost4))
+                else:
+                    temp_cost = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost_tile.append(temp_cost)
         if cost_tile == []:
             print("Cost tile is empty", param)
         cost += min(cost_tile)
@@ -1265,9 +1273,14 @@ def explore_sk(params_ls):
         mtile = min(m_tile,m)
         ntile = min(n_tile,n)
 
+        op = vals[0]
+
         for i in range(vector_amount):
-            for j in range(matrix_amount):
-                cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+            for j in range(matrix_amount):  
+                if op == "Gemv":
+                    cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                else:
+                    cost += mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
     return cost
         
 def explore_model_sk(params_ls):
@@ -1309,16 +1322,21 @@ def explore_model_sk(params_ls):
         matrix_amount = param[4]
         m = param[1]
         n = param[2]
+        op = param[0]
         cost_tile = []
         for mtile in range(1, mtiles + 1):
             for ntile in ntiles:
                 #print("For pair ",mtile,ntile)
                 #print(type(mtile),type(ntile))
-                cost1 = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost2 = mappings.analyticalIterRowIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost3 = mappings.analyticalIterColIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost4 = mappings.analyticalIterColIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
-                cost_tile.append(min(cost1, cost2, cost3, cost4))
+                if op == "Gemv":
+                    cost1 = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost2 = mappings.analyticalIterRowIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost3 = mappings.analyticalIterColIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost4 = mappings.analyticalIterColIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost_tile.append(min(cost1, cost2, cost3, cost4))
+                else:
+                    temp_cost = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost_tile.append(temp_cost)
         cost += min(cost_tile)
     return cost
 
