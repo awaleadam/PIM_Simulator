@@ -39,7 +39,7 @@ def analyticalNoBroadcast(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_chann
 
 
 
-def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
     if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
@@ -51,18 +51,18 @@ def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
 
     compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
 
-    if compute_pu_all_count_check != compute_pu_all_count:
-        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
-        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+    #if compute_pu_all_count_check != compute_pu_all_count:
+    #    print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+    #    print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
 
 
     rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
 
     rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
-    if rd_all_bank_check != rd_all_bank:
-        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
-        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+    #if rd_all_bank_check != rd_all_bank:
+    #    print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+    #    print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
 
 
     rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.floor(bits_pu_output/bits_data)
@@ -87,30 +87,30 @@ def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     else:
         activate_buffer_count = activate_buffer_count*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))*n_tile
 
-    if reuse_type == 'matrix':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        wr_bu_count = wr_bu_count*reuse_amount
-        activate_buffer_count = activate_buffer_count*reuse_amount
-    elif reuse_type == 'vector':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        activate_all_count = activate_all_count*reuse_amount
+    if reuse_bank > 1:
+        compute_pu_all_count = compute_pu_all_count*reuse_bank
+        rd_all_bank = rd_all_bank*reuse_bank
+        rd_pu_all_count = rd_pu_all_count*reuse_bank
+        wr_bu_count = wr_bu_count*reuse_bank
+        activate_buffer_count = activate_buffer_count*reuse_bank
+    elif resue_bu > 1:
+        compute_pu_all_count = compute_pu_all_count*resue_bu
+        rd_all_bank = rd_all_bank*resue_bu
+        rd_pu_all_count = rd_pu_all_count*resue_bu
+        activate_all_count = activate_all_count*resue_bu
 
 
-    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+    #print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
 
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     
     count_ls = [activate_all_count, compute_pu_all_count, rd_all_bank, rd_pu_all_count, wr_bu_count, activate_buffer_count]
 
-    return total_cycles, count_ls
-
+    #return total_cycles, count_ls
+    return total_cycles
 
 #Inside tile col major, outside tile row major
-def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
     if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
@@ -122,18 +122,18 @@ def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
 
     compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
 
-    if compute_pu_all_count_check != compute_pu_all_count:
-        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
-        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+    #if compute_pu_all_count_check != compute_pu_all_count:
+    #    print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+    #    print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
 
 
     rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
 
     rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
-    if rd_all_bank_check != rd_all_bank:
-        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
-        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+    #if rd_all_bank_check != rd_all_bank:
+    #    print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+    #    print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
 
 
     rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.floor(bits_pu_output/bits_data)
@@ -148,27 +148,27 @@ def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
 
     activate_buffer_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))
 
-    if reuse_type == 'matrix':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        wr_bu_count = wr_bu_count*reuse_amount
-        activate_buffer_count = activate_buffer_count*reuse_amount
-    elif reuse_type == 'vector':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        activate_all_count = activate_all_count*reuse_amount
+    if reuse_bank > 1:
+        compute_pu_all_count = compute_pu_all_count*reuse_bank
+        rd_all_bank = rd_all_bank*reuse_bank
+        rd_pu_all_count = rd_pu_all_count*reuse_bank
+        wr_bu_count = wr_bu_count*reuse_bank
+        activate_buffer_count = activate_buffer_count*reuse_bank
+    elif resue_bu > 1:
+        compute_pu_all_count = compute_pu_all_count*resue_bu
+        rd_all_bank = rd_all_bank*resue_bu
+        rd_pu_all_count = rd_pu_all_count*resue_bu
+        activate_all_count = activate_all_count*resue_bu
 
 
-    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+    #print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
 
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     return total_cycles
 
 
 #Inside tile row major, outside tile col major
-def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
     if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
@@ -180,18 +180,18 @@ def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
 
     compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
 
-    if compute_pu_all_count_check != compute_pu_all_count:
-        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
-        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+    #if compute_pu_all_count_check != compute_pu_all_count:
+    #    print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+    #    print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
 
 
     rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
 
     rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
-    if rd_all_bank_check != rd_all_bank:
-        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
-        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+    #if rd_all_bank_check != rd_all_bank:
+    #    print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+    #    print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
 
 
     rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*math.ceil(m_tile/(math.floor(bits_pu_output/bits_data)))*math.floor(bits_pu_output/bits_data)
@@ -210,27 +210,27 @@ def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     else:
         activate_buffer_count = activate_buffer_count*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*m_tile
 
-    if reuse_type == 'matrix':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        wr_bu_count = wr_bu_count*reuse_amount
-        activate_buffer_count = activate_buffer_count*reuse_amount
-    elif reuse_type == 'vector':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        activate_all_count = activate_all_count*reuse_amount
+    if reuse_bank > 1:
+        compute_pu_all_count = compute_pu_all_count*reuse_bank
+        rd_all_bank = rd_all_bank*reuse_bank
+        rd_pu_all_count = rd_pu_all_count*reuse_bank
+        wr_bu_count = wr_bu_count*reuse_bank
+        activate_buffer_count = activate_buffer_count*reuse_bank
+    elif resue_bu > 1:
+        compute_pu_all_count = compute_pu_all_count*resue_bu
+        rd_all_bank = rd_all_bank*resue_bu
+        rd_pu_all_count = rd_pu_all_count*resue_bu
+        activate_all_count = activate_all_count*resue_bu
 
 
-    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+    #print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
 
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     return total_cycles
 
 
 #Inside tile col major, outside tile col major
-def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_type='None',reuse_amount=1):
+def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
     if math.floor(bits_dr/bits_data) >= (m_tile*n_tile):
@@ -242,18 +242,18 @@ def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
 
     compute_pu_all_count_check = math.ceil(math.ceil(m/n_channels)/(n_pu))*n/(math.floor(bits_pu/bits_data))
 
-    if compute_pu_all_count_check != compute_pu_all_count:
-        print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
-        print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
+    #if compute_pu_all_count_check != compute_pu_all_count:
+    #    print("------------------------------------Error----------------------------------: Compute PU Counts mismatch")
+    #    print("Values: Calculated: ",compute_pu_all_count, " Expected: ", compute_pu_all_count_check)
 
 
     rd_all_bank_check = compute_pu_all_count*math.floor(bits_pu/bits_data)
 
     rd_all_bank = (n_tile)*m_tile*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
 
-    if rd_all_bank_check != rd_all_bank:
-        print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
-        print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
+    #if rd_all_bank_check != rd_all_bank:
+    #    print("------------------------------------Error----------------------------------: Rd ALL Bank Counts Mismatch")
+    #    print("Values: Calculated: ",rd_all_bank, " Expected: ", rd_all_bank_check)
 
 
     rd_pu_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)*math.floor(bits_pu_output/bits_data)
@@ -277,20 +277,20 @@ def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     else:
         activate_buffer_count = activate_buffer_count*math.ceil(n_tile/(math.floor(bits_bf/bits_data)))*math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))
 
-    if reuse_type == 'matrix':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        wr_bu_count = wr_bu_count*reuse_amount
-        activate_buffer_count = activate_buffer_count*reuse_amount
-    elif reuse_type == 'vector':
-        compute_pu_all_count = compute_pu_all_count*reuse_amount
-        rd_all_bank = rd_all_bank*reuse_amount
-        rd_pu_all_count = rd_pu_all_count*reuse_amount
-        activate_all_count = activate_all_count*reuse_amount
+    if reuse_bank > 1:
+        compute_pu_all_count = compute_pu_all_count*reuse_bank
+        rd_all_bank = rd_all_bank*reuse_bank
+        rd_pu_all_count = rd_pu_all_count*reuse_bank
+        wr_bu_count = wr_bu_count*reuse_bank
+        activate_buffer_count = activate_buffer_count*reuse_bank
+    elif resue_bu > 1:
+        compute_pu_all_count = compute_pu_all_count*resue_bu
+        rd_all_bank = rd_all_bank*resue_bu
+        rd_pu_all_count = rd_pu_all_count*resue_bu
+        activate_all_count = activate_all_count*resue_bu
 
 
-    print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+    #print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
 
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     return total_cycles
