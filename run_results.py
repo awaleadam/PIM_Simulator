@@ -1258,12 +1258,7 @@ def explore_sk(params_ls):
     m_tile = 1 #Number of accumulate registers
     n_tile = 1024#width of PU
 
-    if mtile == 0:
-        print("Mtile is 0----------------------------------------------",params_ls)
-        mtile = 1
-    if ntile == 0: 
-        print("Ntile is 0----------------------------------------------",params_ls)
-        ntile = 1
+
 
     for vals in params_ls:
         m = vals[1]
@@ -1272,7 +1267,12 @@ def explore_sk(params_ls):
         matrix_amount = vals[4]
         mtile = min(m_tile,m)
         ntile = min(n_tile,n)
-
+        if mtile == 0:
+            print("Mtile is 0----------------------------------------------",params_ls)
+            mtile = 1
+        if ntile == 0: 
+            print("Ntile is 0----------------------------------------------",params_ls)
+            ntile = 1
         op = vals[0]
 
         for i in range(vector_amount):
