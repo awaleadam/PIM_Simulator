@@ -989,7 +989,7 @@ def sk_results():
 
     resnet_cost_sam = explore_sk(resnet_values)
     resnet_cost_model = explore_model_sk(resnet_values)
-
+    
     # Prepare data for plotting
     models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
     sam_costs = [dorn_cost_sam, gpt2_cost_sam, lstm_cost_sam, rnn_cost_sam, stargan_cost_sam, vit_cost_sam, resnet_cost_sam]
@@ -1017,7 +1017,7 @@ def sk_results():
     plt.tight_layout()
     plt.savefig('sk_model_comparison.svg', dpi=300)  # Save the figure in high resolution
     plt.show()
-
+    
 
 def samsung_results():
     #arch params samsung:
@@ -1196,13 +1196,16 @@ def explore_model_samsung(params_ls):
     cost = 0 
 
     for param in params_ls:
-        ntiles = [x for x in range(1, param[2] + 1, 16)]
-        #print(param[2],param[1], "____________________HERE___________________________",n)
+        n = param[2]
+        ntiles = [x for x in range(0, param[2] + 1, 16)]
+        ntiles[0] += 1
+        if n not in ntiles:
+            ntiles.append(n)        #print(param[2],param[1], "____________________HERE___________________________",n)
         mtiles = param[1]
         vector_amount = param[3]
         matrix_amount = param[4]
         m = param[1]
-        n = param[2]
+
         op = param[0]
         cost_tile = []
         for mtile in range(1, mtiles + 1):
@@ -1258,7 +1261,7 @@ def explore_sk(params_ls):
     m_tile = 1 #Number of accumulate registers
     n_tile = 1024#width of PU
 
-
+    cost_ls = []
 
     for vals in params_ls:
         m = vals[1]
@@ -1274,13 +1277,18 @@ def explore_sk(params_ls):
             print("Ntile is 0----------------------------------------------",params_ls)
             ntile = 1
         op = vals[0]
-
+        #print("M tile",mtile,"N tile",ntile)
         for i in range(vector_amount):
             for j in range(matrix_amount):  
                 if op == "Gemv":
+                    #cost_compare = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
                     cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
                 else:
+                    #cost_compare = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
                     cost += mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+        #print("Indvidual cost, repeated",cost_compare,"Cost",cost,"vet  or",vector_amount,"matrix",matrix_amount,"Cost multiplied",cost_compare*vector_amount*matrix_amount)
+        #cost_ls.append(cost_compare)
+    #print("Cost LS, SK no model:",cost_ls)
     return cost
         
 def explore_model_sk(params_ls):
@@ -1314,16 +1322,24 @@ def explore_model_sk(params_ls):
 
     cost = 0 
 
+    cost_ls = [] 
+
     for param in params_ls:
-        ntiles = [x for x in range(1, param[2] + 1, 16)]
+        n = param[2]
+        ntiles = [x for x in range(0, param[2] + 1, 16)]
+        ntiles[0] += 1
+        if n not in ntiles:
+            ntiles.append(n)
+        #print("NTILES",ntiles)
         #print(param[2],param[1], "____________________HERE___________________________",n)
         mtiles = param[1]
         vector_amount = param[3]
         matrix_amount = param[4]
         m = param[1]
-        n = param[2]
+        
         op = param[0]
         cost_tile = []
+        #print(m,n, "____________________HERE___________________________",op)
         for mtile in range(1, mtiles + 1):
             for ntile in ntiles:
                 #print("For pair ",mtile,ntile)
@@ -1334,10 +1350,15 @@ def explore_model_sk(params_ls):
                     cost3 = mappings.analyticalIterColIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
                     cost4 = mappings.analyticalIterColIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
                     cost_tile.append(min(cost1, cost2, cost3, cost4))
+                    #print("Cost tile, SK for:",m,n,cost_tile)
+                    #print(m,n, "____________________HERE___________________________",op)
                 else:
                     temp_cost = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
                     cost_tile.append(temp_cost)
+                    #print("HERE")
         cost += min(cost_tile)
+        #cost_ls.append(min(cost_tile))
+    #print("Cost LS, MODEL:",cost_ls)
     return cost
 
         #cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all)
