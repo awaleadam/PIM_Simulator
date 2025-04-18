@@ -780,7 +780,7 @@ def samsung_validate():
     n_tile = 128#width of PU
     # Form of Activate All, Compute PU All, Rd All Bank, Rd PU All, Wr BU, Activate Bu
     #pairs are (64,256), (64,512), (64,1024), (64,2048), (128,256), (128,512), (128,1024), (128,2048), (256,256), (256,512), (256,1024), (256,2048)
-    counts = [[4,128,2048,9,272,1,]]
+    counts = [[9,128,2048,1,4,272], [9,256,4096,3,9,528], [9,512,8192,7,16,1040],[9,1024,16384,15,33,2064], [18,256,4096,3,9,528], [18,512,8192,7,17,1040],[18,1024,16384,15,33,2064],[18,2048,32768,31,66,4112],[36,512,8192,7,17,1040],[36,1024,16384,15,33,2064],[36,2048,32768,31,68,4112],[36,4096,65536,63,133,8208]]
 
     for m_vals in m:
         for n_vals in n:
@@ -1376,8 +1376,8 @@ def explore_model_sk(params_ls):
 
 #software_hardware_sweep()
 
-#samsung_validate()
+samsung_validate()
 
-samsung_results()
+#samsung_results()
 
-sk_results()
+#sk_results()

@@ -100,7 +100,7 @@ def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
         activate_all_count = activate_all_count*resue_bu
 
 
-    #print("Activate All Count: ", activate_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Rd PU All Count: ", rd_pu_all_count, "Wr BU Count: ", wr_bu_count, "Activate Buffer Count: ", activate_buffer_count)
+    print("Rd PU All Count: ", rd_pu_all_count, "Compute PU All Count: ", compute_pu_all_count, "Rd All Bank Count: ", rd_all_bank, "Activate Buffer Count: ", activate_buffer_count, "Activate All Count: ", activate_all_count, "Wr BU Count: ", wr_bu_count)
 
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     
