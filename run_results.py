@@ -1030,6 +1030,7 @@ def sk_arch_results():
     vit_values = ps.read_model("cost_model_input/vit.txt")
     resnet_values = ps.read_model("cost_model_input/resnet50.txt")
     arch_ls = []
+    sk_arch_ls=[]
     one_arch_param = []
     for channel in channels:
         for BU in BUs:
@@ -1039,6 +1040,15 @@ def sk_arch_results():
                         for PU_output in PU_outputs:
                             if PU_output <= PU_input:
                                 one_arch_param = [channel, BU, DRAM, PU_Bank, PU_input, PU_output]
+                                
+                                dorn_sk = explore_sk_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                gpt_sk = explore_sk_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                lstm_sk = explore_sk_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                rnn_sk = explore_sk_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                stargan_sk = explore_sk_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                vit_sk = explore_sk_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                resnet_sk =explore_sk_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                
                                 dorn_cost =explore_model_sk_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
                                 gpt_cost =explore_model_sk_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
                                 lstm_cost = explore_model_sk_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
@@ -1046,8 +1056,59 @@ def sk_arch_results():
                                 stargan_cost = explore_model_sk_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
                                 vit_cost = explore_model_sk_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
                                 resnet_cost =explore_model_sk_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                arch_ls.append([one_arch_param, dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost])
-    print("ARCHITECTURE COSTS",arch_ls)
+                                print("Arch_Param:", one_arch_param)
+                                print("Model_cost:",dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost)
+                                print("SK_cost:",dorn_sk, gpt_sk, lstm_sk, rnn_sk, stargan_sk, vit_sk, resnet_sk)
+                                #arch_ls.append([one_arch_param, dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost])
+    #print("ARCHITECTURE COSTS",arch_ls)
+    
+def samsung_arch_results():
+
+    channels = [32,64]
+    BUs = [1024,2048,4096,8192,16384]
+    DRAMs = [1024,2048,4096,8192,16384,32768]
+    PUs_Banks = [4,8,16,32]
+    PU_inputs = [256,512,1024]
+    PU_outputs = [64,128,256,512]
+    dorn_values = ps.read_model("cost_model_input/dorn.txt")
+    gpt2_values = ps.read_model("cost_model_input/gpt2.txt")
+    lstm_values = ps.read_model("cost_model_input/lstm.txt")
+    rnn_values = ps.read_model("cost_model_input/rnnt_manually_generated.txt")
+    stargan_values = ps.read_model("cost_model_input/stargan_generator.txt")
+    vit_values = ps.read_model("cost_model_input/vit.txt")
+    resnet_values = ps.read_model("cost_model_input/resnet50.txt")
+    #arch_ls = []
+    #sk_arch_ls=[]
+    one_arch_param = []
+    for channel in channels:
+        for BU in BUs:
+            for DRAM in DRAMs:
+                for PU_Bank in PUs_Banks:
+                    for PU_input in PU_inputs:
+                        for PU_output in PU_outputs:
+                            if PU_output <= PU_input:
+                                one_arch_param = [channel, BU, DRAM, PU_Bank, PU_input, PU_output]
+                                
+                                dorn_sk = explore_samsung_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                gpt_sk = explore_samsung_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                lstm_sk = explore_samsung_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                rnn_sk = explore_samsung_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                stargan_sk = explore_samsung_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                vit_sk = explore_samsung_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                resnet_sk =explore_samsung_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                
+                                dorn_cost =explore_model_samsung_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                gpt_cost =explore_model_samsung_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                lstm_cost = explore_model_samsung_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                rnn_cost = explore_model_samsung_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                stargan_cost = explore_model_samsung_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                vit_cost = explore_model_samsung_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                resnet_cost =explore_model_samsung_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                print("Arch_Param:", one_arch_param)
+                                print("Model_cost:",dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost)
+                                print("SK_cost:",dorn_sk, gpt_sk, lstm_sk, rnn_sk, stargan_sk, vit_sk, resnet_sk)
+                                #arch_ls.append([one_arch_param, dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost])
+    #print("ARCHITECTURE COSTS",arch_ls)
     
 
 
@@ -1530,8 +1591,212 @@ def explore_model_sk_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_ou
         #cost_ls.append(min(cost_tile))
     #print("Cost LS, MODEL:",cost_ls)
     return cost
+def explore_sk_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_output):
+    t_activate = 96
+    t_rd_all = 48 
+    t_act_buffer = 0
+    t_wr_buffer = 2
+    t_compute_pu_all = 4
+    t_rd_pu_all = 64
 
-        #cost += mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all)
+    #arch params sk:
+
+    n_pus = PU_Bank
+
+    bits_pu = PU_input
+
+    n_channels = channel
+
+    bits_dram_row = DRAM
+
+    bits_bu = BU
+
+    bits_pu_output = PU_output
+
+    n_banks = PU_Bank
+
+
+    #Software params
+
+    data_width = 16
+    cost=[0,[0,0,0,0,0,0]]
+    m_tile = 1 #Number of accumulate registers
+    n_tile = 1024#width of PU
+
+    cost_ls = []
+
+    for vals in params_ls:
+        m = vals[1]
+        n = vals[2]
+        vector_amount = vals[3]
+        matrix_amount = vals[4]
+        mtile = min(m_tile,m)
+        ntile = min(n_tile,n)
+        if mtile == 0:
+            print("Mtile is 0----------------------------------------------",params_ls)
+            mtile = 1
+        if ntile == 0: 
+            print("Ntile is 0----------------------------------------------",params_ls)
+            ntile = 1
+        op = vals[0]
+        #print("M tile",mtile,"N tile",ntile)
+        for i in range(vector_amount):
+            for j in range(matrix_amount):  
+                if op == "Gemv":
+                    #cost_compare = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    
+                    temp_cost = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    cost[0] = cost[0] + temp_cost[0]
+                    cost[1] = [x + y for x, y in zip(cost[1], temp_cost[1])]
+                else:
+                    #cost_compare = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    temp_cost = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    cost[0] = cost[0] + temp_cost[0]
+                    cost[1] = [x + y for x, y in zip(cost[1], temp_cost[1])]
+        #print("Indvidual cost, repeated",cost_compare,"Cost",cost,"vet  or",vector_amount,"matrix",matrix_amount,"Cost multiplied",cost_compare*vector_amount*matrix_amount)
+        #cost_ls.append(cost_compare)
+    #print("Cost LS, SK no model:",cost_ls)
+    return cost
+
+
+
+def explore_model_samsung_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_output):
+    t_activate = 28
+    t_rd_all = 20 
+    t_act_buffer = 28
+    t_wr_buffer = 28
+    t_compute_pu_all = 4
+    t_rd_pu_all = 22
+
+    #arch params samsung:
+
+    n_pus = PU_Bank
+
+    bits_pu = PU_input
+
+    n_channels = channel
+
+    bits_dram_row = DRAM
+
+    bits_bu = BU
+
+    bits_pu_output = PU_output
+
+    n_banks = PU_Bank
+
+
+    #Software params
+
+    data_width = 16
+    cost=[0,[0,0,0,0,0,0]]
+    #cost = 0 
+
+    cost_ls = [] 
+
+    for param in params_ls:
+        n = param[2]
+        ntiles = [x for x in range(0, param[2] + 1, 16)]
+        ntiles[0] += 1
+        if n not in ntiles:
+            ntiles.append(n)
+        #print("NTILES",ntiles)
+        #print(param[2],param[1], "____________________HERE___________________________",n)
+        mtiles = param[1]
+        vector_amount = param[3]
+        matrix_amount = param[4]
+        m = param[1]
+        
+        op = param[0]
+        cost_tile = []
+        #print(m,n, "____________________HERE___________________________",op)
+        for mtile in range(1, mtiles + 1):
+            for ntile in ntiles:
+                #print("For pair ",mtile,ntile)
+                #print(type(mtile),type(ntile))
+                if op == "Gemv":
+                    cost1 = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost2 = mappings.analyticalIterRowIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost3 = mappings.analyticalIterColIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost4 = mappings.analyticalIterColIntraCol(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    #temp_cost = min(cost1, cost2, cost3, cost4), key=lambda x: x[0]
+                    cost_tile.append(min((cost1, cost2, cost3, cost4), key=lambda x: x[0]))
+                    #print("Cost tile, SK for:",m,n,cost_tile)
+                    #print(m,n, "____________________HERE___________________________",op)
+                else:
+                    temp_cost = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile, matrix_amount, vector_amount)
+                    cost_tile.append(temp_cost)
+                    #print("HERE")
+        min_cost = min(cost_tile, key=lambda x: x[0])
+        cost[0] = cost[0] + min_cost[0]
+        cost[1] = [x + y for x, y in zip(cost[1], min_cost[1])]
+        #cost_ls.append(min(cost_tile))
+    #print("Cost LS, MODEL:",cost_ls)
+    return cost
+def explore_samsung_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_output):
+    t_activate = 28
+    t_rd_all = 20 
+    t_act_buffer = 28
+    t_wr_buffer = 28
+    t_compute_pu_all = 4
+    t_rd_pu_all = 22
+
+    #arch params sk:
+
+    n_pus = PU_Bank
+
+    bits_pu = PU_input
+
+    n_channels = channel
+
+    bits_dram_row = DRAM
+
+    bits_bu = BU
+
+    bits_pu_output = PU_output
+
+    n_banks = PU_Bank
+
+
+    #Software params
+
+    data_width = 16
+    cost=[0,[0,0,0,0,0,0]]
+    m_tile = 8 #Number of accumulate registers
+    n_tile = 128#width of PU
+    cost_ls = []
+
+    for vals in params_ls:
+        m = vals[1]
+        n = vals[2]
+        vector_amount = vals[3]
+        matrix_amount = vals[4]
+        mtile = min(m_tile,m)
+        ntile = min(n_tile,n)
+        if mtile == 0:
+            print("Mtile is 0----------------------------------------------",params_ls)
+            mtile = 1
+        if ntile == 0: 
+            print("Ntile is 0----------------------------------------------",params_ls)
+            ntile = 1
+        op = vals[0]
+        #print("M tile",mtile,"N tile",ntile)
+        for i in range(vector_amount):
+            for j in range(matrix_amount):  
+                if op == "Gemv":
+                    #cost_compare = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    
+                    temp_cost = mappings.analyticalIterRowIntraRow(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    cost[0] = cost[0] + temp_cost[0]
+                    cost[1] = [x + y for x, y in zip(cost[1], temp_cost[1])]
+                else:
+                    #cost_compare = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    temp_cost = mappings.analyticalNoBroadcast(m, n, data_width, n_pus, bits_pu, bits_pu_output, n_channels, bits_dram_row, bits_bu, n_banks, t_activate, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu_all, t_rd_pu_all, mtile, ntile)
+                    cost[0] = cost[0] + temp_cost[0]
+                    cost[1] = [x + y for x, y in zip(cost[1], temp_cost[1])]
+        #print("Indvidual cost, repeated",cost_compare,"Cost",cost,"vet  or",vector_amount,"matrix",matrix_amount,"Cost multiplied",cost_compare*vector_amount*matrix_amount)
+        #cost_ls.append(cost_compare)
+    #print("Cost LS, SK no model:",cost_ls)
+    return cost
 #software_timing_sweep()
 
 #newton_software()
@@ -1555,3 +1820,5 @@ def explore_model_sk_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_ou
 #sk_validate()
 
 sk_arch_results()
+
+samsung_arch_results()

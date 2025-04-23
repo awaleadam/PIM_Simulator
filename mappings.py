@@ -771,9 +771,9 @@ grouped_tiles = partition_each_row_grouped(test1, 2)
 grouped_2 = partition_each_row_grouped(test2_transpose,2)
 
 # Display the result
-print(grouped_tiles , "Mat 1")
-print(grouped_2,"Mat 2")
-print(len(grouped_tiles),"Total Rows")
+#print(grouped_tiles , "Mat 1")
+#print(grouped_2,"Mat 2")
+#print(len(grouped_tiles),"Total Rows")
 #assert len(matrix_a[0]) == len(matrix_b), "Row 2 != Col 1. Cant MatMul"
 
 '''

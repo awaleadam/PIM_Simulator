@@ -215,6 +215,6 @@ def test():
 
 #read_cache_vals()
 
-test()
+#test()
 
 #read_HBM_vals()
