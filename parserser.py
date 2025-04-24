@@ -202,16 +202,18 @@ def test():
         return min((pairs, pairs2), key=lambda x: x[0])
 
     # Example usage
-    pairs = [10,[1, 2, 3]
+    pairs = [10,[1, 2, 3,4,5,6]
     ]
-    pairs2 = [2,[4,5,6]
+    pairs2 = [2,[4,5,6,7,8,9]
     ]
-    lowest_list3 = [0,[0,0,0,0]]
+    lowest_list3 = [0,[0,0,0,0,1,2]]
     lowest_list = find_lowest_number_list(pairs,pairs2)
+    lowest_list3[0] = lowest_list[0] + lowest_list3[0]
+    lowest_list3[1] = [lowest_list3[1][0] + lowest_list[1][0],  lowest_list3[1][1] + lowest_list[1][1],  lowest_list3[1][2] + lowest_list[1][2], + lowest_list3[1][3] + lowest_list[1][3],  lowest_list3[1][4] + lowest_list[1][4], lowest_list3[1][5] + lowest_list[1][5]]
     #lowest_list2 = find_lowest_number_list(pairs2)
     #lowest_list3[0] = lowest_list[0] + lowest_list2[0]
     #lowest_list3[1] = [x + y for x, y in zip(lowest_list[1], lowest_list2[1])]
-    print(f"The list with the lowest corresponding number is: {lowest_list}")
+    print(f"The list with the lowest corresponding number is: {lowest_list3}")
 
 #read_cache_vals()
 

@@ -1728,6 +1728,7 @@ def explore_model_samsung_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, 
                     #print("HERE")
         min_cost = min(cost_tile, key=lambda x: x[0])
         cost[0] = cost[0] + min_cost[0]
+    
         cost[1] = [x + y for x, y in zip(cost[1], min_cost[1])]
         #cost_ls.append(min(cost_tile))
     #print("Cost LS, MODEL:",cost_ls)
