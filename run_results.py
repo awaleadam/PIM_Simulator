@@ -1017,11 +1017,17 @@ def samsung_software():
 def sk_arch_results():
 
     channels = [32,64]
+    #channels = [32]
     BUs = [1024,2048,4096,8192,16384]
+    #BUs = [1024]
     DRAMs = [1024,2048,4096,8192,16384,32768]
+    #DRAMs = [1024]
     PUs_Banks = [4,8,16,32]
+    #PUs_Banks = [4]
     PU_inputs = [256,512,1024]
+    #PU_inputs = [256]
     PU_outputs = [64,128,256,512]
+    #PU_outputs = [64]
     dorn_values = ps.read_model("cost_model_input/dorn.txt")
     gpt2_values = ps.read_model("cost_model_input/gpt2.txt")
     lstm_values = ps.read_model("cost_model_input/lstm.txt")
@@ -1032,44 +1038,53 @@ def sk_arch_results():
     arch_ls = []
     sk_arch_ls=[]
     one_arch_param = []
-    for channel in channels:
-        for BU in BUs:
-            for DRAM in DRAMs:
-                for PU_Bank in PUs_Banks:
-                    for PU_input in PU_inputs:
-                        for PU_output in PU_outputs:
-                            if PU_output <= PU_input:
-                                one_arch_param = [channel, BU, DRAM, PU_Bank, PU_input, PU_output]
-                                
-                                dorn_sk = explore_sk_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                gpt_sk = explore_sk_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                lstm_sk = explore_sk_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                rnn_sk = explore_sk_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                stargan_sk = explore_sk_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                vit_sk = explore_sk_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                resnet_sk =explore_sk_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                
-                                dorn_cost =explore_model_sk_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                gpt_cost =explore_model_sk_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                lstm_cost = explore_model_sk_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                rnn_cost = explore_model_sk_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                stargan_cost = explore_model_sk_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                vit_cost = explore_model_sk_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                resnet_cost =explore_model_sk_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                print("Arch_Param:", one_arch_param)
-                                print("Model_cost:",dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost)
-                                print("SK_cost:",dorn_sk, gpt_sk, lstm_sk, rnn_sk, stargan_sk, vit_sk, resnet_sk)
+    with open("sk_arch_results.txt", "w") as file:
+        for channel in channels:
+            for BU in BUs:
+                for DRAM in DRAMs:
+                    for PU_Bank in PUs_Banks:
+                        for PU_input in PU_inputs:
+                            for PU_output in PU_outputs:
+                                if PU_output <= PU_input:
+                                    one_arch_param = [channel, BU, DRAM, PU_Bank, PU_input, PU_output]
+                                    
+                                    file.write(f"Arch_Param: {one_arch_param}\n")
+                                    dorn_sk = explore_sk_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    gpt_sk = explore_sk_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    lstm_sk = explore_sk_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    rnn_sk = explore_sk_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    stargan_sk = explore_sk_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    vit_sk = explore_sk_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    resnet_sk = explore_sk_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    
+                                    file.write(f"SK_cost: {dorn_sk}, {gpt_sk}, {lstm_sk}, {rnn_sk}, {stargan_sk}, {vit_sk}, {resnet_sk}\n")
+                                    
+                                    dorn_cost = explore_model_sk_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    gpt_cost = explore_model_sk_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    lstm_cost = explore_model_sk_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    rnn_cost = explore_model_sk_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    stargan_cost = explore_model_sk_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    vit_cost = explore_model_sk_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    resnet_cost = explore_model_sk_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    
+                                    file.write(f"Model_cost: {dorn_cost}, {gpt_cost}, {lstm_cost}, {rnn_cost}, {stargan_cost}, {vit_cost}, {resnet_cost}\n")
                                 #arch_ls.append([one_arch_param, dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost])
     #print("ARCHITECTURE COSTS",arch_ls)
     
 def samsung_arch_results():
 
     channels = [32,64]
+    #channels = [32]
     BUs = [1024,2048,4096,8192,16384]
+    #BUs = [1024]
     DRAMs = [1024,2048,4096,8192,16384,32768]
+    #DRAMs = [1024]
     PUs_Banks = [4,8,16,32]
+    #PUs_Banks = [4]
     PU_inputs = [256,512,1024]
+    #PU_inputs = [256]
     PU_outputs = [64,128,256,512]
+    #PU_outputs = [64]
     dorn_values = ps.read_model("cost_model_input/dorn.txt")
     gpt2_values = ps.read_model("cost_model_input/gpt2.txt")
     lstm_values = ps.read_model("cost_model_input/lstm.txt")
@@ -1080,34 +1095,36 @@ def samsung_arch_results():
     #arch_ls = []
     #sk_arch_ls=[]
     one_arch_param = []
-    for channel in channels:
-        for BU in BUs:
-            for DRAM in DRAMs:
-                for PU_Bank in PUs_Banks:
-                    for PU_input in PU_inputs:
-                        for PU_output in PU_outputs:
-                            if PU_output <= PU_input:
-                                one_arch_param = [channel, BU, DRAM, PU_Bank, PU_input, PU_output]
-                                
-                                dorn_sk = explore_samsung_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                gpt_sk = explore_samsung_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                lstm_sk = explore_samsung_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                rnn_sk = explore_samsung_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                stargan_sk = explore_samsung_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                vit_sk = explore_samsung_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                resnet_sk =explore_samsung_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                
-                                dorn_cost =explore_model_samsung_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                gpt_cost =explore_model_samsung_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                lstm_cost = explore_model_samsung_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                rnn_cost = explore_model_samsung_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                stargan_cost = explore_model_samsung_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                vit_cost = explore_model_samsung_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                resnet_cost =explore_model_samsung_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
-                                print("Arch_Param:", one_arch_param)
-                                print("Model_cost:",dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost)
-                                print("SK_cost:",dorn_sk, gpt_sk, lstm_sk, rnn_sk, stargan_sk, vit_sk, resnet_sk)
-                                #arch_ls.append([one_arch_param, dorn_cost, gpt_cost, lstm_cost, rnn_cost, stargan_cost, vit_cost, resnet_cost])
+    with open("samsung_arch_results.txt", "w") as file:
+        for channel in channels:
+            for BU in BUs:
+                for DRAM in DRAMs:
+                    for PU_Bank in PUs_Banks:
+                        for PU_input in PU_inputs:
+                            for PU_output in PU_outputs:
+                                if PU_output <= PU_input:
+                                    one_arch_param = [channel, BU, DRAM, PU_Bank, PU_input, PU_output]
+                                    file.write(f"Arch_Param: {one_arch_param}\n")
+
+                                    dorn_sk = explore_samsung_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    gpt_sk = explore_samsung_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    lstm_sk = explore_samsung_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    rnn_sk = explore_samsung_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    stargan_sk = explore_samsung_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    vit_sk = explore_samsung_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    resnet_sk = explore_samsung_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    
+                                    file.write(f"Samsung_cost: {dorn_sk}, {gpt_sk}, {lstm_sk}, {rnn_sk}, {stargan_sk}, {vit_sk}, {resnet_sk}\n")
+
+                                    dorn_cost = explore_model_samsung_power(dorn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    gpt_cost = explore_model_samsung_power(gpt2_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    lstm_cost = explore_model_samsung_power(lstm_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    rnn_cost = explore_model_samsung_power(rnn_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    stargan_cost = explore_model_samsung_power(stargan_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    vit_cost = explore_model_samsung_power(vit_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    resnet_cost = explore_model_samsung_power(resnet_values, channel, BU, DRAM, PU_Bank, PU_input, PU_output)
+                                    
+                                    file.write(f"Model_cost: {dorn_cost}, {gpt_cost}, {lstm_cost}, {rnn_cost}, {stargan_cost}, {vit_cost}, {resnet_cost}\n")
     #print("ARCHITECTURE COSTS",arch_ls)
     
 

@@ -1,5 +1,5 @@
 import os
-
+import math
 def read_model(file_path):
     command_ls = []
 
@@ -46,6 +46,8 @@ def read_HBM_vals():
     directory_path = "power_vals/HBM/"
     out_files = [f for f in os.listdir(directory_path) if f.endswith('.out')]
 
+    hbm_area_dict = {}
+    hbm_energy_dict = {}
 
     for out_file in out_files:
         if not out_file.endswith('.cfg.out'):  # Exclude .cfg.out files
@@ -56,12 +58,13 @@ def read_HBM_vals():
             with open(file_path, 'r') as file:
                 for line in file:
                     line=line.strip()
+                    #print(line)
                     if line.startswith("Number of banks:"):
                         banks = int(line.strip().split()[-1])  # Convert to bits
-                        print(f"Banks: {banks}")
+                        #(f"Banks: {banks}")
                     if line.startswith("Page size (bits):"):
                         row_size = float(line.strip().split()[-1])
-                        print(f"Row Size: {row_size}")
+                        #print(f"Row Size: {row_size}")
                     if line.startswith("Activation energy:"):
                         actvation_energy = float(line.strip().split()[-2])
                         #print(f"Activation energy: {actvation_energy}")
@@ -69,7 +72,7 @@ def read_HBM_vals():
                         read_energy = float(line.strip().split()[-2])
                         #print(f"Read energy: {read_energy}")
                         #print(f"Cache energy write: {write_energy_cache} nj" )
-                    if line.startswith("Write Energy:"):
+                    if line.startswith("Write energy:"):
                         write_energy = float(line.strip().split()[-2])
                         #print(f"Write energy: {write_energy}")
                     if line.startswith("Precharge energy:"):
@@ -81,15 +84,20 @@ def read_HBM_vals():
                     if line.startswith("DRAM area per die:"):
                         die_area = float(line.strip().split()[-2])
                         #print(f"DRAM area per die: {die_area}")
+            hbm_area_dict[(banks, row_size)] = core_area
+            hbm_energy_dict[(banks, row_size)] = [actvation_energy, read_energy, write_energy, precharge_energy]
                 #print(f"Cache area: {area_cache} mm2")
                 #print(f"Cache read energy: {read_energy_cache} nj")
                 #print(f"Cache write energy: {write_energy_cache} nj")
                 #print(f"Cache leakage power: {leakage_power_cache} mw")
-
+    return hbm_area_dict, hbm_energy_dict
 def read_DDR_vals():
 
     directory_path = "power_vals/DDR/"
     out_files = [f for f in os.listdir(directory_path) if f.endswith('.out')]
+
+    ddr_area_dict = {}
+    ddr_energy_dict = {}
 
     count = 0
     for out_file in out_files:
@@ -104,10 +112,10 @@ def read_DDR_vals():
                     line=line.strip()
                     if line.startswith("Number of banks:"):
                         banks = int(line.strip().split()[-1])  # Convert to bits
-                        print(f"Banks: {banks}")
+                        #print(f"Banks: {banks}")
                     if line.startswith("Page size (bits):"):
                         row_size = float(line.strip().split()[-1])
-                        print(f"Row Size: {row_size}")
+                        #print(f"Row Size: {row_size}")
                     if line.startswith("Activation energy:"):
                         actvation_energy = float(line.strip().split()[-2])
                         #print(f"Activation energy: {actvation_energy}")
@@ -115,7 +123,7 @@ def read_DDR_vals():
                         read_energy = float(line.strip().split()[-2])
                         #print(f"Read energy: {read_energy}")
                         #print(f"Cache energy write: {write_energy_cache} nj" )
-                    if line.startswith("Write Energy:"):
+                    if line.startswith("Write energy:"):
                         write_energy = float(line.strip().split()[-2])
                         #print(f"Write energy: {write_energy}")
                     if line.startswith("Precharge energy:"):
@@ -127,11 +135,89 @@ def read_DDR_vals():
                     if line.startswith("DRAM area per die:"):
                         die_area = float(line.strip().split()[-2])
                         #print(f"DRAM area per die: {die_area}")
+            ddr_area_dict[(banks, row_size)] = core_area
+            ddr_energy_dict[(banks, row_size)] = [actvation_energy, read_energy, write_energy, precharge_energy]
                 #print(f"Cache area: {area_cache} mm2")
                 #print(f"Cache read energy: {read_energy_cache} nj")
                 #print(f"Cache write energy: {write_energy_cache} nj")
                 #print(f"Cache leakage power: {leakage_power_cache} mw")
-    print(count)
+    #print(count)
+    return ddr_area_dict, ddr_energy_dict
+
+
+def arch_explore_samsung():
+    directory_path = "Arch_explore/Samsung/"
+    files = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
+    channel = 1
+    BU = 1
+    DRAM = 1
+    PU = 1
+    Bank = 1
+    PU_input = 1
+    PU_output = 1
+    model_latency_ls = []
+    model_area_ls = []
+    model_energy_ls = []
+    samsung_latency_ls = []
+    samsung_area_ls = []
+    samsung_energy_ls = []
+    pu_area_adder = 0.0
+    pu_energy_adder = 0.0
+    pu_area_mul = 0.0
+    pu_energy_mul = 0.0
+    pu_area_dflip = 0.0
+    pu_energy_dflip = 0.0
+    hbm_area_dict, hbm_energy_dict = read_HBM_vals()
+
+    for file_name in files:
+        file_path = os.path.join(directory_path, file_name)
+        #print(f"Reading file: {file_path}")
+        with open(file_path, 'r') as file:
+            for line in file:
+                line = line.strip()  # Remove leading/trailing whitespace
+                if line.startswith("Arch_Param:"):
+                    temp_list = (line.split(":")[1].replace("[", "").replace("]", "")).split(",")  # Extract the value after "Arch Param:" and remove all "[" and "]"
+                    #print(temp_list)  # Split the line by commas and print the result  
+                    channel = int(temp_list[0])
+                    BU = int(temp_list[1])
+                    DRAM = int(temp_list[2])
+                    PU = int(temp_list[3]) 
+                    Bank = int(temp_list[3])
+                    PU_input = int(temp_list[4])
+                    PU_output = int(temp_list[5])
+                    #(f"Channel: {channel}, BU: {BU}, DRAM: {DRAM}, PU: {PU}, Bank: {Bank}, PU_input: {PU_input}, PU_output: {PU_output}")
+                if line.startswith("Samsung_cost:"):
+                    if line.startswith("Samsung_cost:"):
+                        values = line.split(":")[1].strip().replace("[", "").replace("]", "").replace(",", "").split(" ")
+                        activate_bank = list(map(float, values[1::7]))  # Convert every 7th element starting from the first index to float
+                        cycles_models = list(map(float, values[::7]))  # Convert every 7th element starting from the zeroth index to float
+                        compute_pu = list(map(float, values[2::7]))  # Convert every 7th element starting from the second index to float
+                        rd_bank = list(map(float, values[3::7]))  # Convert every 7th element starting from the third index to float
+                        rd_pu = list(map(float, values[4::7]))  # Convert every 7th element starting from the fourth index to float
+                        wr_bu = list(map(float, values[5::7]))  # Convert every 7th element starting from the fifth index to float
+                        activate_bu = list(map(float, values[6::7]))  # Convert every 7th element starting from the sixth index to float
+                        #cycles_models = float(values[::7])  # Get every 8th element
+                        #compute_pu = float(values[2::7])  # Get every 8th element starting from the second index
+                        #rd_bank = float(values[3::7])  # Get every 8th element starting from the third index
+                        #rd_pu = float(values[4::7])  # Get every 8th element starting from the fourth index
+                        #wr_bu = float(values[5::7])  # Get every 8th element starting from the fifth index
+                        #activate_bu = float(values[6::7])  # Get every 8th element starting from the sixth index
+                        #print("-----------------------START-----------------------")
+                        #print(f"Activate bank: {activate_bank}")
+                        #print(f"Cycles models: {cycles_models}")
+                        #print(f"Compute pu: {compute_pu}")
+                        #print(f"Read bank: {rd_bank}")
+                        #print(f"Read pu: {rd_pu}")
+                        #print(f"Write bu: {wr_bu}")
+                        #print(f"Activate bu: {activate_bu}")
+                        
+                        average_cycles = float(sum(cycles_models)) / len(cycles_models) if cycles_models else 0.0
+                        #print(f"Average of cycles_models: {average_cycles}")
+                        samsung_latency_ls.append(average_cycles)
+                        area = float(sum(compute_pu)) 
+                        num_pu_mul = math.ceil(PU_input/16)
+                        size_flip_flop = math.ceil(PU_output/16)
+                        num_pu_add = num_pu_mul - 1
 def read_cache_vals():
 
     directory_path = "power_vals/Cache/"
@@ -163,7 +249,8 @@ def read_cache_vals():
             content = file.read()
             #print(f"Content of {cfg_file}:\n{content}")
     '''
-
+    cache_area_dict = {}
+    cache_energy_dict = {}
     for out_file in out_files:
         if not out_file.endswith('.cfg.out'):  # Exclude .cfg.out files
             file_path = os.path.join(directory_path, out_file)
@@ -187,10 +274,13 @@ def read_cache_vals():
                     if line.startswith("Total leakage power of a bank (mW):"):
                         leakage_power_cache = float(line.strip().split()[-1])
                         #print(f"Cache leakage power: {leakage_power_cache} mw" )
+            cache_area_dict[cache_size] = area_cache
+            cache_energy_dict[cache_size] = [read_energy_cache, write_energy_cache]
                 #print(f"Cache area: {area_cache} mm2")
                 #print(f"Cache read energy: {read_energy_cache} nj")
                 #print(f"Cache write energy: {write_energy_cache} nj")
                 #print(f"Cache leakage power: {leakage_power_cache} mw")
+    return cache_area_dict, cache_energy_dict
 # Example usage
 # parse_file('input.csv')
 
@@ -219,4 +309,8 @@ def test():
 
 #test()
 
-#read_HBM_vals()
+#x, y = read_HBM_vals()
+#print("START")
+#print(x)
+#print(y)
+arch_explore_samsung()
