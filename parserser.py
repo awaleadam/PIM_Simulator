@@ -85,7 +85,7 @@ def read_HBM_vals():
                         die_area = float(line.strip().split()[-2])
                         #print(f"DRAM area per die: {die_area}")
             hbm_area_dict[(banks, row_size)] = core_area
-            hbm_energy_dict[(banks, row_size)] = [actvation_energy, read_energy, write_energy, precharge_energy]
+            hbm_energy_dict[(banks, row_size)] = [float(actvation_energy), float(read_energy), float(write_energy), float(precharge_energy)]
                 #print(f"Cache area: {area_cache} mm2")
                 #print(f"Cache read energy: {read_energy_cache} nj")
                 #print(f"Cache write energy: {write_energy_cache} nj")
@@ -214,10 +214,12 @@ def arch_explore_samsung():
                         average_cycles = float(sum(cycles_models)) / len(cycles_models) if cycles_models else 0.0
                         #print(f"Average of cycles_models: {average_cycles}")
                         samsung_latency_ls.append(average_cycles)
-                        area = float(sum(compute_pu)) 
                         num_pu_mul = math.ceil(PU_input/16)
                         size_flip_flop = math.ceil(PU_output/16)
                         num_pu_add = num_pu_mul - 1
+                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (Bank * hbm_area_dict[(Bank, DRAM)])* channel + hbm_area_dict[(Bank, BU)]* channel
+                        samsung_area_ls.append(area)
+                        power = (float(sum(activate_bank)) / len(activate_bank)) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * channel + (float(sum(activate_bu)) / len(activate_bu)) * channel + (float(sum(compute_pu)) / len(compute_pu)) * PU * channel
 def read_cache_vals():
 
     directory_path = "power_vals/Cache/"
@@ -309,8 +311,9 @@ def test():
 
 #test()
 
-#x, y = read_HBM_vals()
+#x, y = read_DDR_vals()
 #print("START")
 #print(x)
 #print(y)
+#print(y[(32,1024.0)][0]*2.0)
 arch_explore_samsung()
