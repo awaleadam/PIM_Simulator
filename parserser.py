@@ -219,7 +219,7 @@ def arch_explore_samsung():
                         num_pu_add = num_pu_mul - 1
                         area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (Bank * hbm_area_dict[(Bank, DRAM)])* channel + hbm_area_dict[(Bank, BU)]* channel
                         samsung_area_ls.append(area)
-                        power = (float(sum(activate_bank)) / len(activate_bank)) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * channel + (float(sum(activate_bu)) / len(activate_bu)) * channel + (float(sum(compute_pu)) / len(compute_pu)) * PU * channel
+                        power = (float(sum(activate_bank)) / len(activate_bank)) * (hbm_energy_dict[(Bank, DRAM)][0] + hbm_energy_dict[(Bank,DRAM)][3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * hbm_energy_dict[(Bank, DRAM)][1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (hbm_energy_dict[(Bank, DRAM)][0] + hbm_energy_dict[(Bank, DRAM)][2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * hbm_energy_dict[(Bank, DRAM)][1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (hbm_energy_dict[(Bank, DRAM)][0] + hbm_energy_dict[((Bank, DRAM))][3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * PU * channel
 def read_cache_vals():
 
     directory_path = "power_vals/Cache/"
