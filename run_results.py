@@ -1372,6 +1372,8 @@ def explore_model_samsung(params_ls):
         n = param[2]
         ntiles = [x for x in range(0, param[2] + 1, 16)]
         ntiles[0] += 1
+        ntiles.append(n)
+        ntiles.append(128)
         if n not in ntiles:
             ntiles.append(n)        #print(param[2],param[1], "____________________HERE___________________________",n)
         mtiles = param[1]
@@ -1501,6 +1503,8 @@ def explore_model_sk(params_ls):
         n = param[2]
         ntiles = [x for x in range(0, param[2] + 1, 16)]
         ntiles[0] += 1
+        ntiles.append(n)
+        ntiles.append(1024)
         if n not in ntiles:
             ntiles.append(n)
         #print("NTILES",ntiles)
@@ -1573,6 +1577,8 @@ def explore_model_sk_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_ou
         n = param[2]
         ntiles = [x for x in range(0, param[2] + 1, 16)]
         ntiles[0] += 1
+        ntiles.append(n)
+        ntiles.append(1024)
         if n not in ntiles:
             ntiles.append(n)
         #print("NTILES",ntiles)
@@ -1714,6 +1720,8 @@ def explore_model_samsung_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, 
         n = param[2]
         ntiles = [x for x in range(0, param[2] + 1, 16)]
         ntiles[0] += 1
+        ntiles.append(n)
+        ntiles.append(128)
         if n not in ntiles:
             ntiles.append(n)
         #print("NTILES",ntiles)
@@ -1831,12 +1839,12 @@ def explore_samsung_power(params_ls,channel, BU, DRAM, PU_Bank, PU_input, PU_out
 
 #samsung_validate()
 
-#samsung_results()
+samsung_results()
 
-#sk_results()
+sk_results()
 
 #sk_validate()
 
-sk_arch_results()
+#sk_arch_results()
 
-samsung_arch_results()
+#samsung_arch_results()

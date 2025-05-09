@@ -36,7 +36,8 @@ def analyticalNoBroadcast(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_chann
 
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     count_ls = [activate_all_count, compute_pu_all_count, rd_all_bank, rd_pu_all_count, wr_bu_count, activate_buffer_count]
-    return [total_cycles, count_ls]
+    #return [total_cycles, count_ls]
+    return total_cycles
 
 
 
@@ -116,8 +117,9 @@ def analyticalIterRowIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     count_ls = [activate_all_count, compute_pu_all_count, rd_all_bank, rd_pu_all_count, wr_bu_count, activate_buffer_count]
     #count_ls = [rd_pu_all_count,compute_pu_all_count,rd_all_bank,activate_buffer_count,activate_all_count,wr_bu_count]
     #return total_cycles, count_ls
-    return [total_cycles, count_ls]
+    #return [total_cycles, count_ls]
 
+    return total_cycles
 #Inside tile col major, outside tile row major
 def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
@@ -181,9 +183,9 @@ def analyticalIterColIntraRow(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     
     count_ls = [activate_all_count, compute_pu_all_count, rd_all_bank, rd_pu_all_count, wr_bu_count, activate_buffer_count]
-    return [total_cycles, count_ls]
+    #return [total_cycles, count_ls]
 
-
+    return total_cycles
 #Inside tile row major, outside tile col major
 def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
@@ -248,9 +250,9 @@ def analyticalIterRowIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     total_cycles = activate_all_count*t_act_all + compute_pu_all_count*t_compute_pu + rd_all_bank*t_rd_all + rd_pu_all_count*t_rd_pu + wr_bu_count*t_wr_buffer + activate_buffer_count*t_act_buffer
     
     count_ls = [activate_all_count, compute_pu_all_count, rd_all_bank, rd_pu_all_count, wr_bu_count, activate_buffer_count]
-    return [total_cycles, count_ls]
+    #return [total_cycles, count_ls]
 
-
+    return total_cycles
 #Inside tile col major, outside tile col major
 def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_channels, bits_dr, bits_bf, n_banks, t_act_all, t_rd_all, t_act_buffer, t_wr_buffer, t_compute_pu, t_rd_pu, m_tile, n_tile, reuse_bank=1, resue_bu=1):
     activate_all_count = math.ceil(math.ceil(m/n_channels)/(n_pu*m_tile))*math.ceil(n/n_tile)
@@ -320,9 +322,9 @@ def analyticalIterColIntraCol(m,n, bits_data, n_pu, bits_pu, bits_pu_output, n_c
     
     count_ls = [activate_all_count, compute_pu_all_count, rd_all_bank, rd_pu_all_count, wr_bu_count, activate_buffer_count]
 
-    return [total_cycles, count_ls]
+    #return [total_cycles, count_ls]
 
-
+    return total_cycles
 
 def analyticalDramReuseRow(r1, c1, r2, c2, dram_size, gb_size, banks, pu_width, bitwidth, activate_time, dram_read_time, dram_write_time, dram_write_latency, gb_write_time, gb_write_latency, pu_time):
     dram_map = math.ceil(dram_size/(bitwidth*pu_width))
