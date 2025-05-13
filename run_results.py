@@ -1132,41 +1132,45 @@ def samsung_arch_results():
 def sk_results():
 
 
-    dorn_values = ps.read_model("cost_model_input/dorn.txt")
+    #dorn_values = ps.read_model("cost_model_input/dorn.txt")
     gpt2_values = ps.read_model("cost_model_input/gpt2.txt")
-    lstm_values = ps.read_model("cost_model_input/lstm.txt")
-    rnn_values = ps.read_model("cost_model_input/rnnt_manually_generated.txt")
-    stargan_values = ps.read_model("cost_model_input/stargan_generator.txt")
+    #lstm_values = ps.read_model("cost_model_input/lstm.txt")
+    #rnn_values = ps.read_model("cost_model_input/rnnt_manually_generated.txt")
+    #stargan_values = ps.read_model("cost_model_input/stargan_generator.txt")
     vit_values = ps.read_model("cost_model_input/vit.txt")
-    resnet_values = ps.read_model("cost_model_input/resnet50.txt")
+    #resnet_values = ps.read_model("cost_model_input/resnet50.txt")
 
 
 
-    dorn_cost_sam = explore_sk(dorn_values)
-    dorn_cost_model = explore_model_sk(dorn_values)
+    #dorn_cost_sam = explore_sk(dorn_values)
+    #dorn_cost_model = explore_model_sk(dorn_values)
     
     gpt2_cost_sam = explore_sk(gpt2_values)
     gpt2_cost_model = explore_model_sk(gpt2_values)  
 
-    lstm_cost_sam = explore_sk(lstm_values)   
-    lstm_cost_model = explore_model_sk(lstm_values)
+    #lstm_cost_sam = explore_sk(lstm_values)   
+    #lstm_cost_model = explore_model_sk(lstm_values)
 
-    rnn_cost_sam = explore_sk(rnn_values)
-    rnn_cost_model = explore_model_sk(rnn_values)
+    #rnn_cost_sam = explore_sk(rnn_values)
+    #rnn_cost_model = explore_model_sk(rnn_values)
 
-    stargan_cost_sam = explore_sk(stargan_values)
-    stargan_cost_model = explore_model_sk(stargan_values)
+    #stargan_cost_sam = explore_sk(stargan_values)
+    #stargan_cost_model = explore_model_sk(stargan_values)
 
     vit_cost_sam = explore_sk(vit_values)
     vit_cost_model = explore_model_sk(vit_values)
 
-    resnet_cost_sam = explore_sk(resnet_values)
-    resnet_cost_model = explore_model_sk(resnet_values)
+    #resnet_cost_sam = explore_sk(resnet_values)
+    #resnet_cost_model = explore_model_sk(resnet_values)
     
     # Prepare data for plotting
-    models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
-    sam_costs = [dorn_cost_sam, gpt2_cost_sam, lstm_cost_sam, rnn_cost_sam, stargan_cost_sam, vit_cost_sam, resnet_cost_sam]
-    model_costs = [dorn_cost_model, gpt2_cost_model, lstm_cost_model, rnn_cost_model, stargan_cost_model, vit_cost_model, resnet_cost_model]
+    #models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
+    #sam_costs = [dorn_cost_sam, gpt2_cost_sam, lstm_cost_sam, rnn_cost_sam, stargan_cost_sam, vit_cost_sam, resnet_cost_sam]
+    #model_costs = [dorn_cost_model, gpt2_cost_model, lstm_cost_model, rnn_cost_model, stargan_cost_model, vit_cost_model, resnet_cost_model]
+    sam_costs = [gpt2_cost_sam, vit_cost_sam]
+    model_costs = [gpt2_cost_model, vit_cost_model]
+ 
+    models = ['GPT2', 'ViT']
     print("SK COSTS",sam_costs)
     print("MODEL COSTS",model_costs)
     # Plotting
@@ -1211,13 +1215,13 @@ def samsung_results():
 
     #Parsing Models
 
-    dorn_values = ps.read_model("cost_model_input/dorn.txt")
+    #dorn_values = ps.read_model("cost_model_input/dorn.txt")
     gpt2_values = ps.read_model("cost_model_input/gpt2.txt")
-    lstm_values = ps.read_model("cost_model_input/lstm.txt")
-    rnn_values = ps.read_model("cost_model_input/rnnt_manually_generated.txt")
-    stargan_values = ps.read_model("cost_model_input/stargan_generator.txt")
+    #lstm_values = ps.read_model("cost_model_input/lstm.txt")
+    #rnn_values = ps.read_model("cost_model_input/rnnt_manually_generated.txt")
+    #stargan_values = ps.read_model("cost_model_input/stargan_generator.txt")
     vit_values = ps.read_model("cost_model_input/vit.txt")
-    resnet_values = ps.read_model("cost_model_input/resnet50.txt")
+    #resnet_values = ps.read_model("cost_model_input/resnet50.txt")
 
     #software params samsung
 
@@ -1235,31 +1239,35 @@ def samsung_results():
     t_compute_pu_all = 10
     t_rd_pu_all = 120
 
-    dorn_cost_sam = explore_samsung(dorn_values)
-    dorn_cost_model = explore_model_samsung(dorn_values)
+    #dorn_cost_sam = explore_samsung(dorn_values)
+    #dorn_cost_model = explore_model_samsung(dorn_values)
     
     gpt2_cost_sam = explore_samsung(gpt2_values)
     gpt2_cost_model = explore_model_samsung(gpt2_values)  
 
-    lstm_cost_sam = explore_samsung(lstm_values)   
-    lstm_cost_model = explore_model_samsung(lstm_values)
+    #lstm_cost_sam = explore_samsung(lstm_values)   
+    #lstm_cost_model = explore_model_samsung(lstm_values)
 
-    rnn_cost_sam = explore_samsung(rnn_values)
-    rnn_cost_model = explore_model_samsung(rnn_values)
+    #rnn_cost_sam = explore_samsung(rnn_values)
+    #rnn_cost_model = explore_model_samsung(rnn_values)
 
-    stargan_cost_sam = explore_samsung(stargan_values)
-    stargan_cost_model = explore_model_samsung(stargan_values)
+    #stargan_cost_sam = explore_samsung(stargan_values)
+    #stargan_cost_model = explore_model_samsung(stargan_values)
 
     vit_cost_sam = explore_samsung(vit_values)
     vit_cost_model = explore_model_samsung(vit_values)
 
-    resnet_cost_sam = explore_samsung(resnet_values)
-    resnet_cost_model = explore_model_samsung(resnet_values)
+    #resnet_cost_sam = explore_samsung(resnet_values)
+    #resnet_cost_model = explore_model_samsung(resnet_values)
 
     # Prepare data for plotting
-    models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
-    sam_costs = [dorn_cost_sam, gpt2_cost_sam, lstm_cost_sam, rnn_cost_sam, stargan_cost_sam, vit_cost_sam, resnet_cost_sam]
-    model_costs = [dorn_cost_model, gpt2_cost_model, lstm_cost_model, rnn_cost_model, stargan_cost_model, vit_cost_model, resnet_cost_model]
+    #models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
+    #sam_costs = [dorn_cost_sam, gpt2_cost_sam, lstm_cost_sam, rnn_cost_sam, stargan_cost_sam, vit_cost_sam, resnet_cost_sam]
+    #model_costs = [dorn_cost_model, gpt2_cost_model, lstm_cost_model, rnn_cost_model, stargan_cost_model, vit_cost_model, resnet_cost_model]
+    models = ['GPT2', 'ViT']
+    sam_costs = [gpt2_cost_sam, vit_cost_sam]
+    model_costs = [gpt2_cost_model, vit_cost_model]
+    
     print("SAMSUNG COSTS",sam_costs)
     print("MODEL COSTS",model_costs)
     # Plotting
