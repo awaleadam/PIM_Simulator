@@ -227,9 +227,13 @@ def arch_explore_samsung():
     t_compute_pu_all = 4
     t_rd_pu_all = 22
     bank_ls = [4, 8, 16, 32]
+
+    other_flag = 0
     for file_name in files:
         file_path = os.path.join(directory_path, file_name)
         #print(f"Reading file: {file_path}")
+        if "other" in file_name:
+            other_flag = 1
         with open(file_path, 'r') as file:
             for line in file:
                 line = line.strip()  # Remove leading/trailing whitespace
@@ -273,24 +277,26 @@ def arch_explore_samsung():
                         #print(f"Average of cycles_models: {average_cycles}")
                         samsung_latency_ls.append(average_cycles)
                         #average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(activate_bu)) / len(activate_bu)) * t_act_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
-                        average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
-                        samsung_latency_ls.append(average_cycles2)
+                        #average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
+                        #samsung_latency_ls.append(average_cycles2)
                         #print(f"Average of cycles_models: {average_cycles2}")
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
                                     samsung_latency_compare.append(average_cycles)
-                                    samsung_latency_compare.append(average_cycles2)
+                                    #samsung_latency_compare.append(average_cycles2)
                         num_pu_mul = math.ceil(PU_input/16)
                         size_flip_flop = math.ceil(PU_output/16)
                         num_pu_add = num_pu_mul - 1
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
-                                    area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
-                                    area2 = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
+                                    if other_flag == 0:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
+                                    elif other_flag == 1:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
                                     samsung_area_ls.append(area)
-                                    samsung_area_ls.append(area2)
+                                    #samsung_area_ls.append(area2)
                             #area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (Bank * x)* channel 
                             #area2 = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (Bank * x)* channel 
                             #samsung_area_ls.append(area)
@@ -298,10 +304,12 @@ def arch_explore_samsung():
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_energy_dict[(bank_value,DRAM)]:
-                                    power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
-                                    power2 = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 0:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 1:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
                                     samsung_energy_ls.append(power)
-                                    samsung_energy_ls.append(power2)
+                                    #samsung_energy_ls.append(power2)
                 if line.startswith("Model_cost:"):
                     if line.startswith("Model_cost:"):
                         values = line.split(":")[1].strip().replace("[", "").replace("]", "").replace(",", "").split(" ")
@@ -331,32 +339,36 @@ def arch_explore_samsung():
                         #print(f"Average of cycles_models: {average_cycles}")
                         model_latency_ls.append(average_cycles)
                         #average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(activate_bu)) / len(activate_bu)) * t_act_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
-                        average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
-                        model_latency_ls.append(average_cycles2)
+                        #average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
+                        #model_latency_ls.append(average_cycles2)
                         #print(f"Average of cycles_models: {average_cycles2}")
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:  
                                     model_latency_compare.append(average_cycles)
-                                    model_latency_compare.append(average_cycles2)
+                                    #model_latency_compare.append(average_cycles2)
                         num_pu_mul = math.ceil(PU_input/16)
                         size_flip_flop = math.ceil(PU_output/16)
                         num_pu_add = num_pu_mul - 1
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
-                                    area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
-                                    area2 = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
+                                    if other_flag == 0:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
+                                    elif other_flag == 1:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
                                     model_area_ls.append(area)
-                                    model_area_ls.append(area2)
+                                    #model_area_ls.append(area2)
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_energy_dict[(bank_value,DRAM)]:
-                                    power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
-                                    power2 = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 0:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 1:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
                                     model_energy_ls.append(power)
-                                    model_energy_ls.append(power2)
-    
+                                    #model_energy_ls.append(power2)
+            other_flag = 0
 
     # Plot model_latency_ls and samsung_latency_ls
     # Sort samsung_latency_ls and model_latency_ls based on samsung_latency_ls
@@ -501,6 +513,7 @@ def arch_explore_sk():
     pu_energy_mul = 5000000000000000
     pu_area_dflip = 0.00003
     pu_energy_dflip = 336000
+    
     hbm_area_dict, hbm_energy_dict = read_DDR_vals()
     cache_area_dict, cache_energy_dict = read_cache_vals()
     bank_ls = [4, 8, 16, 32]
@@ -510,8 +523,12 @@ def arch_explore_sk():
     t_wr_buffer = 44
     t_compute_pu_all = 4
     t_rd_pu_all = 64
+
+    other_flag = 0 
     for file_name in files:
         file_path = os.path.join(directory_path, file_name)
+        if "other" in file_name:
+            other_flag = 1
         #print(f"Reading file: {file_path}")
         with open(file_path, 'r') as file:
             for line in file:
@@ -555,13 +572,13 @@ def arch_explore_sk():
                         average_cycles = float(sum(cycles_models)) / len(cycles_models) if cycles_models else 0.0
                         #print(f"Average of cycles_models: {average_cycles}")
                         samsung_latency_ls.append(average_cycles)
-                        average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(activate_bu)) / len(activate_bu)) * t_act_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
-                        samsung_latency_ls.append(average_cycles2)
+                        #average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(activate_bu)) / len(activate_bu)) * t_act_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
+                        #samsung_latency_ls.append(average_cycles2)
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
                                     samsung_latency_compare.append(average_cycles)
-                                    samsung_latency_compare.append(average_cycles2)
+                                    #samsung_latency_compare.append(average_cycles2)
                         #print(f"Average of cycles_models: {average_cycles2}")
                         
                         num_pu_mul = math.ceil(PU_input/16)
@@ -570,17 +587,21 @@ def arch_explore_sk():
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
-                                    area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
-                                    area2 = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
+                                    if other_flag == 0:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
+                                    elif other_flag == 1:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
                                     samsung_area_ls.append(area)
-                                    samsung_area_ls.append(area2)
+                                    #samsung_area_ls.append(area2)
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_energy_dict[(bank_value,DRAM)]:
-                                    power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
-                                    power2 = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 0:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    elif other_flag == 1:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
                                     samsung_energy_ls.append(power)
-                                    samsung_energy_ls.append(power2)
+                                    #samsung_energy_ls.append(power2)
                 if line.startswith("Model_cost:"):
                     if line.startswith("Model_cost:"):
                         values = line.split(":")[1].strip().replace("[", "").replace("]", "").replace(",", "").split(" ")
@@ -609,32 +630,36 @@ def arch_explore_sk():
                         average_cycles = float(sum(cycles_models)) / len(cycles_models) if cycles_models else 0.0
                         #print(f"Average of cycles_models: {average_cycles}")
                         model_latency_ls.append(average_cycles)
-                        average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(activate_bu)) / len(activate_bu)) * t_act_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
-                        model_latency_ls.append(average_cycles2)
+                        #average_cycles2 = (float(sum(activate_bank)) / len(activate_bank))* t_activate + (float(sum(rd_bank)) / len(rd_bank)) * t_rd_all + (float(sum(rd_pu)) / len(rd_pu)) * t_rd_pu_all + (float(sum(wr_bu)) / len(wr_bu)) * t_wr_buffer + (float(sum(activate_bu)) / len(activate_bu)) * t_act_buffer + (float(sum(compute_pu)) / len(compute_pu)) * t_compute_pu_all
+                        #model_latency_ls.append(average_cycles2)
                         #print(f"Average of cycles_models: {average_cycles2}")
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
                                     model_latency_compare.append(average_cycles)
-                                    model_latency_compare.append(average_cycles2)
+                                    #model_latency_compare.append(average_cycles2)
                         num_pu_mul = math.ceil(PU_input/16)
                         size_flip_flop = math.ceil(PU_output/16)
                         num_pu_add = num_pu_mul - 1
                         for bank_value in bank_ls:
                             if bank_value >= PU:
                                 for x in hbm_area_dict[(bank_value,DRAM)]:
-                                    area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
-                                    area2 = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
+                                    if other_flag == 0:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + (bank_value * x)* channel 
+                                    elif other_flag == 1:
+                                        area = PU* (num_pu_add * pu_area_adder + num_pu_mul * pu_area_mul + size_flip_flop * pu_area_dflip) + cache_area_dict[BU]* channel + (bank_value * x)* channel 
                                     model_area_ls.append(area)
-                                    model_area_ls.append(area2)
+                                    #model_area_ls.append(area2)
                         for bank_value in bank_ls:
                             if bank_value >= PU:                        
                                 for x in hbm_energy_dict[(bank_value,DRAM)]:
-                                    power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
-                                    power2 = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 0:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * x[1] * channel + (float(sum(activate_bu)) / len(activate_bu)) * (x[0] + x[3]) * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
+                                    if other_flag == 1:
+                                        power = (float(sum(activate_bank)) / len(activate_bank)) * (x[0] + x[3]) * PU * channel + (float(sum(rd_bank)) / len(rd_bank)) * x[1] * PU * channel + (float(sum(rd_pu)) / len(rd_pu)) * (x[0] + x[2] ) * PU * channel + (float(sum(wr_bu)) / len(wr_bu)) * cache_energy_dict[BU][1] * channel + (float(sum(compute_pu)) / len(compute_pu)) * (num_pu_add * pu_energy_adder + num_pu_mul * pu_energy_mul + size_flip_flop * pu_energy_dflip) * PU * channel
                                     model_energy_ls.append(power)
-                                    model_energy_ls.append(power2)
-    
+                                    #model_energy_ls.append(power2)
+        other_flag = 0
 
     # Plot model_latency_ls and samsung_latency_ls
     # Sort samsung_latency_ls and model_latency_ls based on samsung_latency_ls
@@ -857,5 +882,6 @@ def test():
 #print(x)
 #print(y)
 #print(y[(32,1024.0)][0]*2.0)
+
 arch_explore_samsung()
 #arch_explore_sk()
