@@ -376,6 +376,12 @@ def arch_explore_samsung():
     samsung_latency_ls = [samsung_latency_ls[i] for i in sorted_indices]
     model_latency_ls = [model_latency_ls[i] for i in sorted_indices]
 
+    sorted_indices2 = sorted(range(len(samsung_latency_compare)), key=lambda k: samsung_latency_compare[k])
+    model_energy_ls = [model_energy_ls[i] for i in sorted_indices2]
+    samsung_energy_ls = [samsung_energy_ls[i] for i in sorted_indices2]
+    samsung_latency_compare = [samsung_latency_compare[i] for i in sorted_indices2]
+    model_latency_compare = [model_latency_compare[i] for i in sorted_indices2]
+
     # Calculate the differences in percentage
     percentage_differences = [
         ((samsung - model) / samsung) * 100 if samsung != 0 else 0
@@ -488,7 +494,51 @@ def arch_explore_samsung():
 
     # Save and show the plot
     plt.savefig('energy_vs_latency_comparison.svg', format='svg')
+
+    model_perf = [lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)]
+    samsung_perf = [lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)]
+    percentage_differences = [
+        ((-samsung + model) / samsung) * 100 if samsung != 0 else 0
+        for samsung, model in zip(samsung_perf, model_perf)
+    ]
+
+    # Calculate average, max, and min percentage differences
+    avg_difference = sum(percentage_differences) / len(percentage_differences) if percentage_differences else 0
+    max_difference = max(percentage_differences, default=0)
+    min_difference = min(percentage_differences, default=0)
+
+    print(f"Average Difference Perf: {avg_difference:.2f}%")
+    print(f"Max Difference Perf: {max_difference:.2f}%")
+    print(f"Min Difference Perf: {min_difference:.2f}%")
+
+
+
+
+    plt.show() 
+
+    plt.figure(figsize=(10, 6))
+
+    # Plot the first dataset
+    plt.plot([lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)], label='DPIMC', marker='o', markersize=4)
+
+    # Plot the second dataset
+    plt.plot([lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)], label='Samsung Compiler', marker='x', markersize=4)
+
+
+    # Add labels, title, and legend
+    plt.title('Performance Comparison')
+    plt.xlabel('Configuration')
+    plt.ylabel('Perfromance')
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.legend()
+    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
+
+    # Save and show the plot
+    plt.savefig('performance_comparison_hbm.svg', format='svg')
     plt.show()
+
+
 def arch_explore_sk():
     directory_path = "Arch_explore/SK/"
     files = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
@@ -667,6 +717,11 @@ def arch_explore_sk():
     samsung_latency_ls = [samsung_latency_ls[i] for i in sorted_indices]
     model_latency_ls = [model_latency_ls[i] for i in sorted_indices]
 
+    sorted_indices2 = sorted(range(len(samsung_latency_compare)), key=lambda k: samsung_latency_compare[k])
+    model_energy_ls = [model_energy_ls[i] for i in sorted_indices2]
+    samsung_energy_ls = [samsung_energy_ls[i] for i in sorted_indices2]
+    samsung_latency_compare = [samsung_latency_compare[i] for i in sorted_indices2]
+    model_latency_compare = [model_latency_compare[i] for i in sorted_indices2]
     # Calculate the differences in percentage
     percentage_differences = [
         ((samsung - model) / samsung) * 100 if samsung != 0 else 0
@@ -783,8 +838,45 @@ def arch_explore_sk():
     plt.legend()
     plt.grid(True, which="both", linestyle='--', linewidth=0.5)
 
+
+
+    model_perf = [lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)]
+    samsung_perf = [lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)]
+    percentage_differences = [
+        ((-samsung + model) / samsung) * 100 if samsung != 0 else 0
+        for samsung, model in zip(samsung_perf, model_perf)
+    ]
+
+    # Calculate average, max, and min percentage differences
+    avg_difference = sum(percentage_differences) / len(percentage_differences) if percentage_differences else 0
+    max_difference = max(percentage_differences, default=0)
+    min_difference = min(percentage_differences, default=0)
+
+    print(f"Average Difference Perf: {avg_difference:.2f}%")
+    print(f"Max Difference Perf: {max_difference:.2f}%")
+    print(f"Min Difference Perf: {min_difference:.2f}%")
+
+
+
+    plt.figure(figsize=(10, 6))
+
+    # Plot the first dataset
+    plt.plot([lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)], label='DPIMC', marker='o', markersize=4)
+
+    # Plot the second dataset
+    plt.plot([lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)], label='SK Hynix Compiler', marker='x', markersize=4)
+
+    # Add labels, title, and legend
+    plt.title('Performance Comparison')
+    plt.xlabel('Configuration')
+    plt.ylabel('Perfromance')
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.legend()
+    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
+
     # Save and show the plot
-    plt.savefig('area_vs_latency_comparison_ddr.svg', format='svg')
+    plt.savefig('performance_comparison_ddr.svg', format='svg')
     plt.show()
 def read_cache_vals():
 
@@ -884,4 +976,4 @@ def test():
 #print(y[(32,1024.0)][0]*2.0)
 
 arch_explore_samsung()
-#arch_explore_sk()
+arch_explore_sk()
