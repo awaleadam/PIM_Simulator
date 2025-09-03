@@ -382,12 +382,74 @@ def arch_explore_samsung():
     samsung_latency_compare = [samsung_latency_compare[i] for i in sorted_indices2]
     model_latency_compare = [model_latency_compare[i] for i in sorted_indices2]
 
+    plt.figure(figsize=(10, 6), dpi=100)
+
+    # Plot the first dataset
+    plt.scatter(model_energy_ls, model_latency_compare, label='DPC', color='blue', alpha=0.7, edgecolors='k', s=150)
+
+    # Plot the second dataset
+    plt.scatter(samsung_energy_ls, samsung_latency_compare, label='Samsung', color='red', alpha=0.7, edgecolors='k', s=150)
+
+    # Add labels, title, and legend
+    plt.title('Energy vs Latency across HBM Configurations of DPC vs Samsung', fontsize=40)
+    plt.xlabel('Energy (nJ)', fontsize=40)
+    plt.ylabel('Latency (Cycles)', fontsize=40)
+    plt.xticks(fontsize=30)  # Increase font size of x ticks
+    plt.yticks(fontsize=30)  # Increase font size of y ticks
+    #plt.xscale('log')
+    #plt.yscale('log')
+    plt.legend(fontsize=30)
+    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
+
+    # Save and show the plot
+    plt.savefig('energy_vs_latency_comparison.svg', format='svg')
+    plt.show()
+
+
+    model_perf = [lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)]
+    samsung_perf = [lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)]
+    percentage_differences = [
+        ((-samsung + model) / samsung) * 100 if samsung != 0 else 0
+        for samsung, model in zip(samsung_perf, model_perf)
+    ]
+    # Calculate average, max, and min percentage differences
+    avg_difference = sum(percentage_differences) / len(percentage_differences) if percentage_differences else 0
+    max_difference = max(percentage_differences, default=0)
+    min_difference = min(percentage_differences, default=0)
+
+    print(f"Average Difference Perf: {avg_difference:.2f}%")
+    print(f"Max Difference Perf: {max_difference:.2f}%")
+    print(f"Min Difference Perf: {min_difference:.2f}%")
+
+
+    plt.figure(figsize=(10, 6))
+
+    # Plot the first dataset
+    plt.plot([lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)], label='DPIMC', marker='o', markersize=4)
+
+    # Plot the second dataset
+    plt.plot([lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)], label='Samsung Compiler', marker='x', markersize=4)
+
+
+    # Add labels, title, and legend
+    plt.title('Performance Comparison')
+    plt.xlabel('Configuration')
+    plt.ylabel('Perfromance')
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.legend()
+    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
+
+    # Save and show the plot
+    plt.savefig('performance_comparison_hbm.svg', format='svg')
+    plt.show()
+
+
     # Calculate the differences in percentage
     percentage_differences = [
         ((samsung - model) / samsung) * 100 if samsung != 0 else 0
         for samsung, model in zip(samsung_latency_ls, model_latency_ls)
     ]
-
     # Calculate average, max, and min percentage differences
     avg_difference = sum(percentage_differences) / len(percentage_differences) if percentage_differences else 0
     max_difference = max(percentage_differences, default=0)
@@ -399,16 +461,16 @@ def arch_explore_samsung():
 
     # Plot the sorted latency lists
     plt.figure(figsize=(10, 6))
-    plt.plot(model_latency_ls, label='DPIMC', marker='o', markersize=4)
+    plt.plot(model_latency_ls, label='DPC', marker='o', markersize=4)
     plt.plot(samsung_latency_ls, label='Samsung Compiler', marker='x', markersize=4)
-    plt.title('Average Latency for HBM')
-    plt.xlabel('Architecture Configuration')
-    plt.ylabel('Cycles')
+    plt.title('Average Latency across HBM Configurations of DPC vs Samsung', fontsize=40)
+    plt.xlabel('Architecture Configuration', fontsize=40)
+    plt.ylabel('Cycles',fontsize=40)
     plt.yscale('log')
     plt.xticks([])  # Remove the labels on the x-axis
     y_ticks = [10**i for i in range(10, 13)]  # Set y-ticks from 10^10 to 10^12
-    plt.yticks(ticks=y_ticks, labels=[f"$10^{{{i}}}$" for i in range(10, 13)])  # Use 10^x format for y-axis labels
-    plt.legend()
+    plt.yticks(ticks=y_ticks, labels=[f"$10^{{{i}}}$" for i in range(10, 13)], fontsize=30)  # Use 10^x format for y-axis labels
+    plt.legend(fontsize=30)
     plt.grid(True, which="both", linestyle='--', linewidth=0.5)
     plt.savefig('latency_compare_hbm.svg', format='svg')
     plt.show()
@@ -475,68 +537,7 @@ def arch_explore_samsung():
     plt.savefig('area_vs_latency_comparison.svg', format='svg')
     plt.show()
     # Plot energy vs latency for both DPIMC and Samsung Compiler
-    plt.figure(figsize=(10, 6))
 
-    # Plot the first dataset
-    plt.scatter(model_energy_ls, model_latency_compare, label='DPIMC', color='blue', alpha=0.7, edgecolors='k')
-
-    # Plot the second dataset
-    plt.scatter(samsung_energy_ls, samsung_latency_compare, label='Samsung Compiler', color='red', alpha=0.7, edgecolors='k')
-
-    # Add labels, title, and legend
-    plt.title('Energy vs Latency Comparison')
-    plt.xlabel('Energy (nJ)')
-    plt.ylabel('Latency (Cycles)')
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.legend()
-    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
-
-    # Save and show the plot
-    plt.savefig('energy_vs_latency_comparison.svg', format='svg')
-
-    model_perf = [lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)]
-    samsung_perf = [lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)]
-    percentage_differences = [
-        ((-samsung + model) / samsung) * 100 if samsung != 0 else 0
-        for samsung, model in zip(samsung_perf, model_perf)
-    ]
-
-    # Calculate average, max, and min percentage differences
-    avg_difference = sum(percentage_differences) / len(percentage_differences) if percentage_differences else 0
-    max_difference = max(percentage_differences, default=0)
-    min_difference = min(percentage_differences, default=0)
-
-    print(f"Average Difference Perf: {avg_difference:.2f}%")
-    print(f"Max Difference Perf: {max_difference:.2f}%")
-    print(f"Min Difference Perf: {min_difference:.2f}%")
-
-
-
-
-    plt.show() 
-
-    plt.figure(figsize=(10, 6))
-
-    # Plot the first dataset
-    plt.plot([lat / energy for lat, energy in zip(model_latency_compare, model_energy_ls)], label='DPIMC', marker='o', markersize=4)
-
-    # Plot the second dataset
-    plt.plot([lat / energy for lat, energy in zip(samsung_latency_compare, samsung_energy_ls)], label='Samsung Compiler', marker='x', markersize=4)
-
-
-    # Add labels, title, and legend
-    plt.title('Performance Comparison')
-    plt.xlabel('Configuration')
-    plt.ylabel('Perfromance')
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.legend()
-    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
-
-    # Save and show the plot
-    plt.savefig('performance_comparison_hbm.svg', format='svg')
-    plt.show()
 
 
 def arch_explore_sk():
@@ -728,6 +729,31 @@ def arch_explore_sk():
         for samsung, model in zip(samsung_latency_ls, model_latency_ls)
     ]
 
+
+    plt.figure(figsize=(10, 6), dpi=100)
+
+    # Plot the first dataset
+    plt.scatter(model_energy_ls, model_latency_compare, label='DPC', color='blue', alpha=0.7, edgecolors='k', s=150)
+
+    # Plot the second dataset
+    plt.scatter(samsung_energy_ls, samsung_latency_compare, label='SK Hynix', color='red', alpha=0.7, edgecolors='k', s=150)
+
+    # Add labels, title, and legend
+    plt.title('Energy vs Latency across DDR Configurations of DPC vs SK Hynix', fontsize=40)
+    plt.xlabel('Energy (nJ)', fontsize=40)
+    plt.ylabel('Latency (Cycles)', fontsize=40)
+    plt.xticks(fontsize=30)  # Increase font size of x ticks
+    plt.yticks(fontsize=30)  # Increase font size of y ticks
+    #plt.xscale('log')
+    #plt.yscale('log')
+    plt.legend(fontsize=30)
+    plt.grid(True, which="both", linestyle='--', linewidth=0.5)
+
+    # Save and show the plot
+    plt.savefig('energy_vs_latency_comparison.svg', format='svg')
+    plt.show()
+
+
     # Print negative differences along with corresponding elements in samsung and model lists
     for diff, samsung, model in zip(percentage_differences, samsung_latency_ls, model_latency_ls):
         if diff < 0:
@@ -744,16 +770,16 @@ def arch_explore_sk():
 
     # Plot the sorted latency lists
     plt.figure(figsize=(10, 6))
-    plt.plot(model_latency_ls, label='DPIMC', marker='o', markersize=4)
+    plt.plot(model_latency_ls, label='DPC', marker='o', markersize=4)
     plt.plot(samsung_latency_ls, label='SK Hynix Compiler', marker='x', markersize=4)
-    plt.title('Average Latency for DDR')
-    plt.xlabel('Architecture Configuration')
-    plt.ylabel('Cycles')
-    plt.yscale('log')
+    plt.title('Average Latency across DDR Configurations of DPC vs SK Hynix', fontsize=40)
+    plt.xlabel('Architecture Configuration', fontsize=40)
+    plt.ylabel('Cycles', fontsize=40)
+    #plt.yscale('log')
     plt.xticks([])  # Remove the labels on the x-axis
     y_ticks = [10**i for i in range(10, 13)]  # Set y-ticks from 10^10 to 10^12
-    plt.yticks(ticks=y_ticks, labels=[f"$10^{{{i}}}$" for i in range(10, 13)])  # Use 10^x format for y-axis labels
-    plt.legend()
+    plt.yticks(ticks=y_ticks, labels=[f"$10^{{{i}}}$" for i in range(10, 13)], fontsize=17)  # Use 10^x format for y-axis labels
+    plt.legend(fontsize=30)
     plt.grid(True, which="both", linestyle='--', linewidth=0.5)
     plt.savefig('latency_compare_ddr.svg', format='svg')
     plt.show()
@@ -772,7 +798,7 @@ def arch_explore_sk():
     max_difference_power = max(percentage_differences_power, default=0)
     min_difference_power = min(percentage_differences_power, default=0)
 
-    print(f"Average Power Difference: {avg_difference_power:.2f}%")
+    print(f"Average Power Difference DDR: {avg_difference_power:.2f}%")
     print(f"Max Power Difference: {max_difference_power:.2f}%")
     print(f"Min Power Difference: {min_difference_power:.2f}%")
 
@@ -976,4 +1002,4 @@ def test():
 #print(y[(32,1024.0)][0]*2.0)
 
 arch_explore_samsung()
-arch_explore_sk()
+#arch_explore_sk()

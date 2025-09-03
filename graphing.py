@@ -7,13 +7,76 @@ model_samsung_costs = [8679049315.38889, 3927628206.0, 303158768.0, 5069068104.0
 sk_costs = [11536395680.64865, 4303087308.0, 315368920.0, 5726719160.0, 556789896.0, 309459234111.60394, 10871790104.0]
 model_sk_costs = [9977858163.135136, 4279107852.0, 314744760.0, 5324345974.0, 434604936.0, 308775239583.5999, 1324763224.0]
 
+
+
+#samsung_costs =[9833448380.0, 16409802744.0, 1275242300, 20770952316, 1507360028, 1171381247818.0, 36307479376.0]
+#model_samsung_costs = [8679049315.38889, 15999479208.0, 303158768.0, 5069068104.0, 571486008.0, 546456999610.0, 1298433680.5]
+
+#sk_costs = [11536395680.64865, 17024544216.0, 315368920.0, 5726719160.0, 556789896.0, 612234808974.0, 10871790104.0]
+#model_sk_costs = [9977858163.135136, 16778603736.0, 314744760.0, 5324345974.0, 434604936.0, 605582074374.0, 1324763224.0]
+
+
 # X-axis labels
 models = ['DORN', 'GPT2', 'LSTM', 'RNN', 'StarGAN', 'ViT', 'ResNet']
 x = np.arange(len(models))  # X-axis positions
 
+
+
+
+# Calculate the percent improvement of model_samsung_costs over samsung_costs
+percent_improvement = [
+    ((samsung - model) / samsung) * 100 for samsung, model in zip(samsung_costs, model_samsung_costs)
+]
+
+width = 0.35  # Width of the bars
+fig, ax = plt.subplots(figsize=(10, 6))
+bars = ax.bar(x, percent_improvement, width, label='DPC Improvement', color='blue')
+
+# Customizations
+ax.set_xlabel('Models', fontsize=40)
+ax.set_ylabel('Improvement (%)',fontsize=40)
+ax.set_title('Percent Latency Improvement of DPC over Samsung', fontsize=40)
+ax.set_xticks(x)
+ax.set_xticklabels(models,fontsize=30)
+ax.tick_params(axis='y', labelsize=30)  # Set font size for y-axis ticks
+ax.legend(fontsize=30)
+
+# Save and display the plot
+plt.tight_layout()
+plt.savefig('percent_improvement_comparison.svg', dpi=300)  # Save the figure in high resolution
+plt.show()
+
+
+
+# Calculate the percent improvement of model_samsung_costs over samsung_costs
+percent_improvement = [
+    ((sk - model) / sk) * 100 for sk, model in zip(sk_costs, model_sk_costs)
+]
+
+width = 0.35  # Width of the bars
+fig, ax = plt.subplots(figsize=(10, 6))
+bars = ax.bar(x, percent_improvement, width, label='DPC Improvement', color='blue')
+
+# Customizations
+ax.set_xlabel('Models', fontsize=40)
+ax.set_ylabel('Improvement (%)', fontsize=40)
+ax.set_title('Percent Latency Improvement of DPC over SK Hynix', fontsize=40)
+ax.set_xticks(x)
+ax.set_xticklabels(models, fontsize=30)
+ax.tick_params(axis='y', labelsize=30)  # Set font size for y-axis ticks
+ax.legend(fontsize=30)
+
+# Save and display the plot
+plt.tight_layout()
+plt.savefig('percent_improvement_comparisonSK.svg', dpi=300)  # Save the figure in high resolution
+plt.show()
+
+
+
+
 # Bar width
 bar_width = 0.2
-
+'''
 # Plotting
 plt.figure(figsize=(12, 6))
 plt.bar(x - 1.5 * bar_width, samsung_costs, width=bar_width, label='SAMSUNG COSTS')
@@ -33,3 +96,5 @@ plt.legend()
 # Show the plot
 plt.tight_layout()
 plt.show()
+
+'''
