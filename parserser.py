@@ -1,6 +1,101 @@
 import os
 import matplotlib.pyplot as plt
 import math
+
+
+def _style_plot_axis(
+    ax,
+    title,
+    xlabel,
+    ylabel,
+    *,
+    title_fontsize=30,
+    label_fontsize=30,
+    tick_fontsize=28,
+    legend_fontsize=22,
+    offset_fontsize=28,
+    title_pad=6,
+    xscale=None,
+    yscale=None,
+    hide_xticks=False,
+    yticks=None,
+    yticklabels=None,
+):
+    ax.set_title(title, fontsize=title_fontsize, pad=title_pad)
+    ax.set_xlabel(xlabel, fontsize=label_fontsize)
+    ax.set_ylabel(ylabel, fontsize=label_fontsize)
+    if xscale:
+        ax.set_xscale(xscale)
+    if yscale:
+        ax.set_yscale(yscale)
+    ax.tick_params(axis='both', labelsize=tick_fontsize, pad=10)
+    if hide_xticks:
+        ax.set_xticks([])
+    if yticks is not None:
+        ax.set_yticks(yticks)
+        if yticklabels is not None:
+            ax.set_yticklabels(yticklabels, fontsize=tick_fontsize)
+    ax.xaxis.get_offset_text().set_fontsize(offset_fontsize)
+    ax.yaxis.get_offset_text().set_fontsize(offset_fontsize)
+    ax.legend(fontsize=legend_fontsize)
+    ax.grid(True, which="both", linestyle='--', linewidth=0.5)
+
+
+def _plot_energy_vs_latency_axis(ax, plot_data):
+    ax.scatter(
+        plot_data["model_energy_ls"],
+        plot_data["model_latency_compare"],
+        label='DPC',
+        color='blue',
+        alpha=0.7,
+        edgecolors='k',
+        s=220,
+    )
+    ax.scatter(
+        plot_data["vendor_energy_ls"],
+        plot_data["vendor_latency_compare"],
+        label=plot_data["vendor_energy_label"],
+        color='red',
+        alpha=0.7,
+        edgecolors='k',
+        s=220,
+    )
+    _style_plot_axis(
+        ax,
+        plot_data["energy_latency_title"],
+        'Energy (nJ)',
+        'Latency (Cycles)',
+    )
+
+
+def _plot_average_latency_axis(ax, plot_data):
+    ax.plot(
+        plot_data["model_latency_ls"],
+        label='DPC',
+        marker='o',
+        markersize=8,
+        linewidth=2.8,
+    )
+    ax.plot(
+        plot_data["vendor_latency_ls"],
+        label=plot_data["vendor_latency_label"],
+        marker='x',
+        markersize=8,
+        linewidth=2.8,
+    )
+    _style_plot_axis(
+        ax,
+        plot_data["latency_title"],
+        'Architecture Configuration',
+        'Cycles',
+        title_pad=22,
+        yscale=plot_data["latency_yscale"],
+        hide_xticks=plot_data["latency_hide_xticks"],
+        yticks=plot_data["latency_yticks"],
+        yticklabels=plot_data["latency_yticklabels"],
+    )
+
+
 def read_model(file_path):
     command_ls = []
 
@@ -194,7 +289,7 @@ def read_DDR_vals():
     return ddr_area_dict, ddr_energy_dict
 
 
-def arch_explore_samsung():
+def arch_explore_samsung(return_data_only=False):
     directory_path = "Arch_explore/Samsung/"
     files = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
     channel = 1
@@ -382,6 +477,26 @@ def arch_explore_samsung():
     samsung_latency_compare = [samsung_latency_compare[i] for i in sorted_indices2]
     model_latency_compare = [model_latency_compare[i] for i in sorted_indices2]
 
+    plot_data = {
+        "model_energy_ls": model_energy_ls,
+        "vendor_energy_ls": samsung_energy_ls,
+        "model_latency_compare": model_latency_compare,
+        "vendor_latency_compare": samsung_latency_compare,
+        "model_latency_ls": model_latency_ls,
+        "vendor_latency_ls": samsung_latency_ls,
+        "vendor_energy_label": 'Samsung',
+        "vendor_latency_label": 'Samsung Compiler',
+        "energy_latency_title": 'Energy vs Latency across HBM Configurations of DPC vs Samsung',
+        "latency_title": 'Average Latency across HBM Configurations of DPC vs Samsung',
+        "latency_yscale": 'log',
+        "latency_hide_xticks": True,
+        "latency_yticks": [10**i for i in range(10, 13)],
+        "latency_yticklabels": [f"$10^{{{i}}}$" for i in range(10, 13)],
+    }
+
+    if return_data_only:
+        return plot_data
+
     plt.figure(figsize=(10, 6), dpi=100)
 
     # Plot the first dataset
@@ -537,10 +652,11 @@ def arch_explore_samsung():
     plt.savefig('area_vs_latency_comparison.svg', format='svg')
     plt.show()
     # Plot energy vs latency for both DPIMC and Samsung Compiler
+    return plot_data
 
 
 
-def arch_explore_sk():
+def arch_explore_sk(return_data_only=False):
     directory_path = "Arch_explore/SK/"
     files = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, f))]
     channel = 1
@@ -723,6 +839,26 @@ def arch_explore_sk():
     samsung_energy_ls = [samsung_energy_ls[i] for i in sorted_indices2]
     samsung_latency_compare = [samsung_latency_compare[i] for i in sorted_indices2]
     model_latency_compare = [model_latency_compare[i] for i in sorted_indices2]
+
+    plot_data = {
+        "model_energy_ls": model_energy_ls,
+        "vendor_energy_ls": samsung_energy_ls,
+        "model_latency_compare": model_latency_compare,
+        "vendor_latency_compare": samsung_latency_compare,
+        "model_latency_ls": model_latency_ls,
+        "vendor_latency_ls": samsung_latency_ls,
+        "vendor_energy_label": 'SK Hynix',
+        "vendor_latency_label": 'SK Hynix Compiler',
+        "energy_latency_title": 'Energy vs Latency across DDR Configurations of DPC vs SK Hynix',
+        "latency_title": 'Average Latency across DDR Configurations of DPC vs SK Hynix',
+        "latency_yscale": None,
+        "latency_hide_xticks": True,
+        "latency_yticks": [10**i for i in range(10, 13)],
+        "latency_yticklabels": [f"$10^{{{i}}}$" for i in range(10, 13)],
+    }
+
+    if return_data_only:
+        return plot_data
     # Calculate the differences in percentage
     percentage_differences = [
         ((samsung - model) / samsung) * 100 if samsung != 0 else 0
@@ -904,6 +1040,26 @@ def arch_explore_sk():
     # Save and show the plot
     plt.savefig('performance_comparison_ddr.svg', format='svg')
     plt.show()
+    return plot_data
+
+
+def create_side_by_side_comparison_plots():
+    samsung_data = arch_explore_samsung(return_data_only=True)
+    sk_data = arch_explore_sk(return_data_only=True)
+
+    fig, axes = plt.subplots(1, 2, figsize=(28, 12), dpi=300, constrained_layout=True)
+    _plot_energy_vs_latency_axis(axes[0], samsung_data)
+    _plot_energy_vs_latency_axis(axes[1], sk_data)
+    fig.savefig('side_by_side_energy_vsLatency.png', format='png', dpi=300, bbox_inches='tight')
+    plt.close(fig)
+
+    fig, axes = plt.subplots(1, 2, figsize=(28, 12), dpi=300, constrained_layout=True)
+    _plot_average_latency_axis(axes[0], samsung_data)
+    _plot_average_latency_axis(axes[1], sk_data)
+    fig.savefig('side_by_side_latency_across_configurations.png', format='png', dpi=300, bbox_inches='tight')
+    plt.close(fig)
+
+
 def read_cache_vals():
 
     directory_path = "power_vals/Cache/"
@@ -1001,5 +1157,5 @@ def test():
 #print(y)
 #print(y[(32,1024.0)][0]*2.0)
 
-arch_explore_samsung()
-#arch_explore_sk()
+if __name__ == "__main__":
+    create_side_by_side_comparison_plots()
